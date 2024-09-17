@@ -1,6 +1,8 @@
-from setting import  *
-from pytmx.util_pygame import load_pygame # pip install pytmx
+from setting import *
+from pytmx.util_pygame import load_pygame  # pip install pytmx
 from os.path import join
+from data import *
+from sprites import *
 
 
 class Main:
@@ -20,8 +22,7 @@ class Main:
 
                 pygame.display.update()
 
+
 if __name__ == "__main__":
     main = Main()
     main.run()
-
-
