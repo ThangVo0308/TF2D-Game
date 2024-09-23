@@ -12,6 +12,16 @@ class Main:
         pygame.display.set_caption('TF2D World')
         self.clock_tick = pygame.time.Clock()
 
+
+    def import_assets(self):
+        self.audio_files = {
+            'coin': pygame.mixer.Sound(join('..', 'audio', 'coin.wav')),
+            'attack': pygame.mixer.Sound(join('..', 'audio', 'attack.wav')),
+            'damage': pygame.mixer.Sound(join('..', 'audio', 'damage.wav')),
+            'hit': pygame.mixer.Sound(join('..', 'audio', 'hit.wav')),
+            'jump': pygame.mixer.Sound(join('..', 'audio', 'jump.wav')),
+            'bg_music': pygame.mixer.Sound(join('..', 'audio', 'starlight_city.mp3'))
+        }
     def run(self):
         while True:
             dt = self.clock_tick.tick(60) / 100
