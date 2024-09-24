@@ -78,3 +78,15 @@ class movingSprite(AnimatedSprite):
         self.animate(dt)
         if self.flip:
             self.image = pygame.transform.flip(self.image, self.reverse['x'], self.reverse['y'])
+
+class ParticleEffectSprite(AnimatedSprite):
+    def __init__(self, pos, frames, groups):
+        super().__init__(pos, frames, groups)
+        self.rect.center = pos
+
+    def animate(self, dt):
+        self.frames_index += self.animation_speed * dt
+        if self.frames_index < len(self.frames):
+            self.image = self.frames[int(self.frames_index)]
+        else: # destroy
+            self.kill()
