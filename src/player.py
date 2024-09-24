@@ -17,7 +17,7 @@ class Player(pygame.sprite.Sprite):
 
         # image
         self.frames, self.frames_index = frames, 0
-        self.state, self.facing_right = 'idle', True
+        self.state, self.facing_right = 'Idle', True
         self.image = self.frames[self.state][self.frames_index]
         # rect
         self.rect = self.image.get_rect(topleft=pos)
@@ -32,6 +32,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_height = 15
         self.jump = False
         self.attacking = False
+        self.attack_damage = 1
 
         # collision
         self.collision_sprites = collision_sprites
@@ -193,22 +194,22 @@ class Player(pygame.sprite.Sprite):
     def get_state(self):
         if self.on_surface['floor']:
             if self.attacking:
-                self.state = 'attack'
+                self.state = 'Attack'
             else:
-                self.state = 'idle' if self.direction.x == 0 else 'run'
+                self.state = 'Idle' if self.direction.x == 0 else 'Run'
         else:
             if self.attacking:
-                self.state = 'air_attack'
+                self.state = 'Attack_Extra'
             else:
                 if any((self.on_surface['left'], self.on_surface['right'])):
-                    self.state = 'wall'
+                    self.state = 'Push'
                 else:
-                    self.state = 'jump' if self.direction.y < 0 else 'idle'
+                    self.state = 'Jump' if self.direction.y < 0 else 'Idle'
 
     def animate(self, dt):
         self.frames_index += ANIMATION_SPEED * dt
-        if self.state == 'attack' and self.frames_index >= len(self.frames[self.state]):
-            self.state = 'idle'
+        if self.state == 'Attack' and self.frames_index >= len(self.frames[self.state]):
+            self.state = 'Idle'
         self.image = self.frames[self.state][int(self.frames_index % len(self.frames[self.state]))]
         self.image = self.image if self.facing_right else pygame.transform.flip(self.image, True, False)
 
@@ -222,7 +223,7 @@ class Player(pygame.sprite.Sprite):
             self.timers['delay enemy damage'].activate()
 
     def flicker(self): # animation when player get hit
-        if self.timers['delay tooth damage'].active and sin(pygame.time.get_ticks() * 100) >= 0: # *100: faster responding flicker
+        if self.timers['delay enemy damage'].active and sin(pygame.time.get_ticks() * 100) >= 0: # *100: faster responding flicker
             white_mask = pygame.mask.from_surface(self.image)
             white_surface = white_mask.to_surface() # Convert to surface which will display by white pixel
             white_surface.set_colorkey('black') # remove black image around player

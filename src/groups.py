@@ -16,12 +16,20 @@ class AllSprite(pygame.sprite.Group):
         }
 
     def camera_constrain(self):  # camera logic
-        self.offset.x = self.offset.x if self.offset.x < self.borders['left'] else self.borders[
-            'left']  # camera will block when player is reaching the left side of the map
-        self.offset.x = self.offset.x if self.offset.x > self.borders['right'] else self.borders[
-            'right']  # camera will block when player is reaching the right side of the map
-        self.offset.y = self.offset.y if self.offset.y > self.borders['bottom'] else self.borders['bottom']
-        self.offset.y = self.offset.y if self.offset.y < self.borders['top'] else self.borders['top']
+        self.offset.x = self.offset.x if self.offset.x < float(self.borders['left']) else float(self.borders['left'])
+        self.offset.x = self.offset.x if self.offset.x > float(self.borders['right']) else float(self.borders['right'])
+        self.offset.y = self.offset.y if self.offset.y > float(self.borders['bottom']) else float(self.borders['bottom'])
+        self.offset.y = self.offset.y if self.offset.y < float(self.borders['top']) else float(self.borders['top'])
+
+    def draw(self, target_pos, dt):
+        self.offset.x = -(target_pos[0] - WINDOW_WIDTH / 2)
+        self.offset.y = -(target_pos[1] - WINDOW_HEIGHT / 2)
+        self.camera_constrain()
+
+        for sprite in sorted(self, key=lambda
+                sprite: sprite.z):  # self return all of the sprites in the group, sorted: sort by priority in setting.py
+            offset_pos = sprite.rect.topleft + self.offset
+            self.display_surface.blit(sprite.image, offset_pos)
 
 
 

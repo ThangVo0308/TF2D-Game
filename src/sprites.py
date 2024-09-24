@@ -1,9 +1,9 @@
 from setting import *
-
 import pygame.sprite
+import threading
 
 class Sprite(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, z, surface=pygame.Surface((TILE_SIZE, TILE_SIZE))):
+    def __init__(self, pos, surface=pygame.Surface((TILE_SIZE, TILE_SIZE)), groups=None, z=Z_LAYERS['main']):
         super().__init__(groups)
 
         # Terrain
@@ -16,9 +16,12 @@ class Sprite(pygame.sprite.Sprite):
 
 
 class AnimatedSprite(Sprite):
-    def __init__(self, pos, frames, groups, z, animation_speed=ANIMATION_SPEED):
+    def __init__(self, pos, frames, groups, z=Z_LAYERS['main'], animation_speed=ANIMATION_SPEED):
+        if isinstance(frames, pygame.Surface):
+            frames = [frames]
+
         self.frames, self.frames_index = frames, 0
-        super().__init__(pos, groups, z, self.frames[self.frames_index])
+        super().__init__(pos, self.frames[self.frames_index], groups, z)
         self.animation_speed = animation_speed
 
     def animate(self, dt):
@@ -72,7 +75,7 @@ class movingSprite(AnimatedSprite):
 
     def update(self, dt):
         self.old_rect = self.rect.copy()
-        self.rect.topleft += self.direction * self.speed * dt
+        self.rect.topleft += self.direction * int(self.speed) * dt
         self.check_border()
 
         self.animate(dt)
@@ -90,3 +93,45 @@ class ParticleEffectSprite(AnimatedSprite):
             self.image = self.frames[int(self.frames_index)]
         else: # destroy
             self.kill()
+
+class Item(AnimatedSprite):
+    def __init__(self, item_type, pos, frames, groups, data, player, visible=False):
+        super().__init__(pos, frames, groups)
+        self.rect.center = pos
+        self.item_type = item_type
+        self.data = data
+        self.player = player
+        self.visible = visible
+
+    def activate(self):
+        if self.item_type == 'key':
+            self.data.keys += 1
+            if self.data.keys == 3:
+                print('finish')
+
+        elif self.item_type == 'buff':
+            self.player.jump_height += 5
+            threading.Timer(10, self.reset_jump_height).start()
+
+        elif self.item_type == 'dame':
+            self.player.attack_damage += 1
+            threading.Timer(10, self.reset_attack_damage).start()
+
+        elif self.item_type == 'hp_animate' or self.item_type == 'hp':
+            self.data.health += 1
+
+        elif self.item_type == 'boom':
+            self.data.health -= 2
+
+    def reset_jump_height(self):
+        self.player.jump_height -= 5
+
+    def reset_attack_damage(self):
+        self.player.attack_damage -= 1
+
+    def update(self, dt):
+        if self.item_type == 'boom':
+            if self.visible and self.player.rect.colliderect(self.rect):
+                self.activate()
+
+

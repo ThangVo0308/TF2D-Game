@@ -1,9 +1,10 @@
 # from UI import UI
 class Data:
-    def __init__(self, ui):
+    def __init__(self):
         # self.ui = ui
         self._coins = 0
         self._health = 5 # private attribute
+        self._keys = 0 # private attribute
 
         # self.ui.create_heart(self._health)
 
@@ -20,6 +21,14 @@ class Data:
         # self.ui.create_heart(value)
 
     @property # getter
+    def keys(self):
+        return self._keys
+
+    @keys.setter # setter
+    def keys(self, value):
+        self._keys = value
+
+    @property # getter
     def coins(self):
         return self._coins
 
@@ -31,4 +40,3 @@ class Data:
             self.health += 1
         # self.ui.show_coins(self.coins)
 
-    print("hello")
