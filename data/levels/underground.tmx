@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="22" nextobjectid="164">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="22" nextobjectid="170">
  <tileset firstgid="1" source="../tilesets/background/bg_underground.tsx"/>
  <tileset firstgid="257" source="../tilesets/terrain/terrain_background.tsx"/>
  <tileset firstgid="305" source="../tilesets/items.tsx"/>
@@ -98,11 +98,7 @@
   <object id="135" name="static_chain" gid="326" x="357.667" y="484.333" width="29" height="70"/>
   <object id="137" name="static_chain" gid="326" x="357.667" y="518.333" width="29" height="70"/>
  </objectgroup>
- <objectgroup id="21" name="Traps">
-  <object id="122" name="bear" gid="337" x="3646" y="208" width="125" height="88"/>
-  <object id="123" name="bear" gid="337" x="1592.67" y="270.667" width="125" height="88"/>
-  <object id="124" name="bear" gid="337" x="1378" y="589.333" width="125" height="88"/>
- </objectgroup>
+ <objectgroup id="21" name="Traps"/>
  <objectgroup id="11" name="Players">
   <object id="69" name="player" gid="319" x="34.6667" y="321" width="61" height="59"/>
  </objectgroup>
@@ -112,6 +108,9 @@
   <object id="115" name="tooth" gid="331" x="2828.33" y="576" width="67" height="64"/>
   <object id="116" name="tooth" gid="331" x="3544.33" y="192" width="67" height="64"/>
   <object id="117" name="skeleton" gid="330" x="3613.33" y="519" width="64" height="78"/>
+  <object id="167" name="bear" gid="337" x="3641.2" y="204.727" width="125" height="88"/>
+  <object id="168" name="bear" gid="337" x="1572.72" y="267.394" width="125" height="88"/>
+  <object id="169" name="bear" gid="337" x="1394.41" y="589.091" width="125" height="88"/>
  </objectgroup>
  <objectgroup id="10" name="Items">
   <object id="68" name="boom" gid="314" x="1769.33" y="258.667" width="64" height="64"/>
@@ -123,12 +122,11 @@
   <object id="86" name="hp" gid="311" x="3349" y="495" width="18" height="30"/>
   <object id="118" name="buff" gid="315" x="2950.67" y="572.333" width="24" height="30"/>
   <object id="119" name="buff" gid="315" x="1333.33" y="508.333" width="24" height="30"/>
+  <object id="164" name="key" gid="309" x="1489.03" y="460.758" width="64" height="64"/>
+  <object id="165" name="key" gid="309" x="3752.3" y="163.242" width="64" height="64"/>
+  <object id="166" name="key" gid="309" x="583.333" y="251.727" width="64" height="64"/>
  </objectgroup>
- <objectgroup id="15" name="Keys">
-  <object id="82" name="key" gid="309" x="1490" y="468" width="64" height="64"/>
-  <object id="83" name="key" gid="309" x="526" y="222" width="64" height="64"/>
-  <object id="84" name="key" gid="309" x="3754" y="162" width="64" height="64"/>
- </objectgroup>
+ <objectgroup id="15" name="Keys"/>
  <objectgroup id="14" name="Data">
   <object id="26" x="0" y="0" width="64" height="64">
    <properties>
