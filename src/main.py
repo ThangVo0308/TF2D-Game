@@ -5,6 +5,7 @@ from data import *
 from sprites import *
 from level import Level
 from folderHandle import *
+import os
 
 
 class Main:
@@ -16,9 +17,11 @@ class Main:
         self.import_assets()
 
         self.data = Data()
+        base_path = os.path.dirname(__file__)
+
 
         self.tmx_maps = {
-            0: load_pygame(join('..', 'data', 'levels', 'underground.tmx')),
+            0: load_pygame(join(base_path,'..', 'data', 'levels', 'underground.tmx')),
         }
 
         self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, self.audio_files, self.data, self.switch_map)
@@ -28,42 +31,43 @@ class Main:
 
 
     def import_assets(self):
+        base_path = os.path.dirname(__file__)
         self.level_frames = {
             'items': {
-                'hp': import_image(join('..', 'graphics', 'items', 'apple')),
-                'dame': import_image(join('..', 'graphics', 'items', 'dame')),
-                'key': import_image(join('..', 'graphics', 'items', 'key')),
-                'protect': import_image(join('..', 'graphics', 'items', 'protect')),
-                'boom': import_folder(join('..', 'graphics', 'items', 'boom')),
-                'buff': import_folder(join('..', 'graphics', 'items', 'buff')),
-                'hp_animate': import_folder(join('..', 'graphics', 'items', 'hp')),
+                'hp': import_image(join(base_path,'..', 'graphics', 'items', 'apple')),
+                'dame': import_image(join(base_path,'..', 'graphics', 'items', 'dame')),
+                'key': import_image(join(base_path,'..', 'graphics', 'items', 'key')),
+                'protect': import_image(join(base_path,'..', 'graphics', 'items', 'protect')),
+                'boom': import_folder(join(base_path,'..', 'graphics', 'items', 'boom')),
+                'buff': import_folder(join(base_path,'..', 'graphics', 'items', 'buff')),
+                'hp_animate': import_folder(join(base_path,'..', 'graphics', 'items', 'hp')),
             },
-            'skeleton': import_folder(join('..', 'graphics', 'enemies', 'skeleton', 'run')),
-            'thorn': import_folder(join('..', 'graphics', 'enemies', 'thorn')),
-            'tooth': import_folder(join('..', 'graphics', 'enemies', 'tooth', 'run')),
-            'snake': import_folder(join('..', 'graphics', 'enemies', 'snake')),
-            'bear_trap': import_folder(join('..', 'graphics', 'objects', 'bear_trap')),
-            'moving_chain': import_folder(join('..', 'graphics', 'objects', 'chain_moving')),
-            'flag': import_folder(join('..', 'graphics', 'objects', 'flag')),
-            'floor_spike': import_folder(join('..', 'graphics', 'objects', 'floor_spikes')),
-            'helicopter': import_folder(join('..', 'graphics', 'objects', 'helicopter')),
-            'vine': import_folder(join('..', 'graphics', 'objects', 'vines')),
-            'chain': import_image(join('..', 'graphics', 'objects', 'chain')),
-            'cord': import_image(join('..', 'graphics', 'objects', 'cord')),
-            'particle': import_folder(join('..', 'graphics', 'effects', 'particle')),
-            'player_knight': import_sub_folders(join('..', 'graphics', 'player','knight')),
+            'skeleton': import_folder(join(base_path,'..', 'graphics', 'enemies', 'skeleton', 'run')),
+            'thorn': import_folder(join(base_path,'..', 'graphics', 'enemies', 'thorn')),
+            'tooth': import_folder(join(base_path,'..', 'graphics', 'enemies', 'tooth', 'run')),
+            'snake': import_folder(join(base_path,'..', 'graphics', 'enemies', 'snake')),
+            'bear_trap': import_folder(join(base_path,'..', 'graphics', 'objects', 'bear_trap')),
+            'moving_chain': import_folder(join(base_path,'..', 'graphics', 'objects', 'chain_moving')),
+            'flag': import_folder(join(base_path,'..', 'graphics', 'objects', 'flag')),
+            'floor_spike': import_folder(join(base_path,'..', 'graphics', 'objects', 'floor_spikes')),
+            'helicopter': import_folder(join(base_path,'..', 'graphics', 'objects', 'helicopter')),
+            'vine': import_folder(join(base_path,'..', 'graphics', 'objects', 'vines')),
+            'chain': import_image(join(base_path,'..', 'graphics', 'objects', 'chain')),
+            'cord': import_image(join(base_path,'..', 'graphics', 'objects', 'cord')),
+            'particle': import_folder(join(base_path,'..', 'graphics', 'effects', 'particle')),
+            'player_knight': import_sub_folders(join(base_path,'..', 'graphics', 'player','knight')),
             # 'player_mage': import_sub_folders(join('..', 'graphics', 'player','mage')),
             # 'player_rogue': import_sub_folders(join('..', 'graphics', 'player','Rogue')),
         }
 
 
         self.audio_files = {
-            'coin': pygame.mixer.Sound(join('..', 'audio', 'coin.wav')),
-            'attack': pygame.mixer.Sound(join('..', 'audio', 'attack.wav')),
-            'damage': pygame.mixer.Sound(join('..', 'audio', 'damage.wav')),
-            'hit': pygame.mixer.Sound(join('..', 'audio', 'hit.wav')),
-            'jump': pygame.mixer.Sound(join('..', 'audio', 'jump.wav')),
-            'bg_music': pygame.mixer.Sound(join('..', 'audio', 'starlight_city.mp3'))
+            'coin': pygame.mixer.Sound(join(base_path,'..', 'audio', 'coin.wav')),
+            'attack': pygame.mixer.Sound(join(base_path,'..', 'audio', 'attack.wav')),
+            'damage': pygame.mixer.Sound(join(base_path,'..', 'audio', 'damage.wav')),
+            'hit': pygame.mixer.Sound(join(base_path,'..', 'audio', 'hit.wav')),
+            'jump': pygame.mixer.Sound(join(base_path,'..', 'audio', 'jump.wav')),
+            'bg_music': pygame.mixer.Sound(join(base_path,'..', 'audio', 'starlight_city.mp3'))
         }
 
     def switch_map(self, target, level=0):
