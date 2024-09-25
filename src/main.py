@@ -41,12 +41,12 @@ class Main:
             'skeleton': import_folder(join('..', 'graphics', 'enemies', 'skeleton', 'run')),
             'thorn': import_folder(join('..', 'graphics', 'enemies', 'thorn')),
             'tooth': import_folder(join('..', 'graphics', 'enemies', 'tooth', 'run')),
+            'snake': import_folder(join('..', 'graphics', 'enemies', 'snake')),
             'bear_trap': import_folder(join('..', 'graphics', 'objects', 'bear_trap')),
             'moving_chain': import_folder(join('..', 'graphics', 'objects', 'chain_moving')),
             'flag': import_folder(join('..', 'graphics', 'objects', 'flag')),
             'floor_spike': import_folder(join('..', 'graphics', 'objects', 'floor_spikes')),
             'helicopter': import_folder(join('..', 'graphics', 'objects', 'helicopter')),
-            'snake': import_folder(join('..', 'graphics', 'objects', 'snake')),
             'vine': import_folder(join('..', 'graphics', 'objects', 'vines')),
             'chain': import_image(join('..', 'graphics', 'objects', 'chain')),
             'cord': import_image(join('..', 'graphics', 'objects', 'cord')),
@@ -74,6 +74,7 @@ class Main:
         if self.data.health <= 0:
             pygame.quit()
             sys.exit()
+
     def run(self):
         while True:
             dt = self.clock_tick.tick(60) / 100
@@ -82,10 +83,10 @@ class Main:
                     pygame.quit()
                     sys.exit()
 
-                self.check_game_over()
-                self.current_stage.run(dt)
+            self.check_game_over()
+            self.current_stage.run(dt)
 
-                pygame.display.update()
+            pygame.display.update()
 
 
 if __name__ == "__main__":

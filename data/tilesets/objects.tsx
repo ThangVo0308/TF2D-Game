@@ -5,7 +5,7 @@
   <image source="../../graphics/objects/vines/0.png" width="224" height="128"/>
  </tile>
  <tile id="2">
-  <image source="../../graphics/objects/snake/0.png" width="85" height="64"/>
+  <image source="../../graphics/enemies/snake/0.png" width="85" height="64"/>
  </tile>
  <tile id="4">
   <image source="../../graphics/objects/chain.png" width="29" height="70"/>

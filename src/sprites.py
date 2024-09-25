@@ -28,7 +28,7 @@ class AnimatedSprite(Sprite):
         self.frames_index += self.animation_speed * dt
         self.image = self.frames[int(self.frames_index % len(self.frames))]
 
-    def run(self, dt):
+    def update(self, dt):
         self.animate(dt)
 
 class movingSprite(AnimatedSprite):
@@ -75,7 +75,7 @@ class movingSprite(AnimatedSprite):
 
     def update(self, dt):
         self.old_rect = self.rect.copy()
-        self.rect.topleft += self.direction * int(self.speed) * dt
+        self.rect.topleft += self.direction * float(self.speed) * dt
         self.check_border()
 
         self.animate(dt)
@@ -95,13 +95,16 @@ class ParticleEffectSprite(AnimatedSprite):
             self.kill()
 
 class Item(AnimatedSprite):
-    def __init__(self, item_type, pos, frames, groups, data, player, visible=False):
+    def __init__(self, item_type, pos, frames, groups, data, player, visible=True):
+        animated = item_type in ['boom', 'buff', 'hp_animate', 'hp']
+
         super().__init__(pos, frames, groups)
         self.rect.center = pos
         self.item_type = item_type
         self.data = data
         self.player = player
         self.visible = visible
+
 
     def activate(self):
         if self.item_type == 'key':
@@ -123,6 +126,15 @@ class Item(AnimatedSprite):
         elif self.item_type == 'boom':
             self.data.health -= 2
 
+        if not self.visible:
+            print(self.item_type)
+            self.hide()
+
+    def hide(self):
+        for group in self.groups():
+            group.remove(self)
+        self.visible = False
+
     def reset_jump_height(self):
         self.player.jump_height -= 5
 
@@ -130,8 +142,10 @@ class Item(AnimatedSprite):
         self.player.attack_damage -= 1
 
     def update(self, dt):
-        if self.item_type == 'boom':
-            if self.visible and self.player.rect.colliderect(self.rect):
-                self.activate()
+        if hasattr(self, 'animate'):
+            super().update(dt)
+        self.activate()
+        # if self.item_type == 'boom':
+        #     if self.visible and self.player.rect.colliderect(self.rect):
 
 

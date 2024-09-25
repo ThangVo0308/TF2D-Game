@@ -7,8 +7,7 @@ from setting import *
 from sprites import Sprite, movingSprite, AnimatedSprite, ParticleEffectSprite, Item
 from player import Player
 from groups import AllSprite
-from enemies import Tooth
-
+from enemies import Tooth, Snake, Bear
 
 class Level:
     def __init__(self, tmx_map, level_frames, audio_files, data, switch_map):
@@ -40,6 +39,7 @@ class Level:
         self.item_sprites = pygame.sprite.Group()
         self.invisible_sprites = pygame.sprite.Group()
         self.tooth_sprites = pygame.sprite.Group()
+        self.snake_sprites = pygame.sprite.Group()
 
         self.setup(tmx_map, level_frames)
 
@@ -61,9 +61,13 @@ class Level:
                 if layer == 'Terrain': group_sprites.append(self.collision_sprites)
                 # if layer == 'Platforms': group_sprites.append(self.semi_collision_sprites)
                 z_layer = {
+                    'FG': Z_LAYERS['bg tiles'],
                     'Background': Z_LAYERS['bg tiles'],
-                    'FG': Z_LAYERS['bg tiles']
                 }
+                tile_width = surf.get_width()
+                tile_height = surf.get_height()
+
+                print(f'Layer: {layer}, Tile position: ({x}, {y}), Tile size: ({tile_width}x{tile_height})')
                 z = z_layer.get(layer, Z_LAYERS['main'])
                 Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, group_sprites, z)
 
@@ -72,7 +76,7 @@ class Level:
             if obj.name == 'flag':
                 self.finish_rect = pygame.Rect((obj.x, obj.y), (obj.width, obj.height))
             if obj.name == 'player':
-                self.player = Player(pos=(obj.x, obj.y),
+                self.player = Player(pos=(obj.x, obj.y - 100),
                                      groups=self.all_sprites,
                                      collision_sprites=self.collision_sprites,
                                      semi_collision_sprites=self.semi_collision_sprites,
@@ -86,6 +90,7 @@ class Level:
         # Moving Objects
         for obj in tmx_map.get_layer_by_name('Moving Object'):
             if obj.name == 'moving_chain':
+                print(level_frames[obj.name])
                 AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED)
             else:
                 frames = level_frames[obj.name]
@@ -105,12 +110,22 @@ class Level:
         # Enemies
         for obj in tmx_map.get_layer_by_name('Enemies'):
             if obj.name == 'tooth':
-                Tooth((obj.x, obj.y), level_frames['tooth'], (self.all_sprites, self.damage_sprites, self.tooth_sprites), self.collision_sprites, obj.properties['health'])
+                Tooth((obj.x, obj.y), level_frames['tooth'],
+                      (self.all_sprites, self.damage_sprites, self.tooth_sprites), self.collision_sprites, obj.properties['health'])
+            elif obj.name == 'snake':
+                Snake((obj.x, obj.y), level_frames['snake'], (self.all_sprites, self.damage_sprites, self.snake_sprites), obj.properties['health'])
+            elif obj.name == 'bear':
+                Bear((obj.x, obj.y), level_frames['bear_trap'], (self.all_sprites, self.damage_sprites, self.snake_sprites))
 
         # Items
         for obj in tmx_map.get_layer_by_name('Items'):
+            print(obj.name)
+            is_visible = True
+            if obj.name == 'boom' or obj.name == 'dame':
+                is_visible = False
+
             Item(obj.name, (obj.x + TILE_SIZE / 2, obj.y + TILE_SIZE / 2), level_frames['items'][obj.name],
-                 (self.all_sprites, self.item_sprites), self.data, self.player)
+                 (self.all_sprites, self.item_sprites), self.data, self.player, is_visible)
 
     def hit_collision(self):
         for sprite in self.damage_sprites:
@@ -171,5 +186,6 @@ class Level:
         self.hit_collision()
 
         self.item_collision()
+        self.attack_collision()
 
         self.all_sprites.draw(self.player.hitbox_rect.center, dt)
