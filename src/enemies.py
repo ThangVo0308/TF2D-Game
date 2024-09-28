@@ -14,10 +14,11 @@ class Tooth(pygame.sprite.Sprite):
 
         self.direction = choice((-1, 1))
         self.collision_rects = [sprite.rect for sprite in collision_sprites]
-        self.speed = 200
+        self.speed = 20
         self.health = health
 
         self.hit_timer = Timer(250)
+        self.on_ground = False  # Biến để theo dõi trạng thái chạm terrain
 
     def reverse(self):
         if not self.hit_timer.active:
@@ -31,34 +32,31 @@ class Tooth(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frames_index % len(self.frames))]
         self.image = pygame.transform.flip(self.image, True, False) if self.direction < 0 else self.image
 
-        # movement
+        # Movement
         self.rect.x += self.direction * self.speed * dt
 
-        # reverse direction
-        floor_rect_right = pygame.Rect(self.rect.bottomright, (5, 5))
-        floor_rect_left = pygame.Rect(self.rect.bottomright, (-5, 5))
-
-        wall_rect = pygame.Rect(self.rect.topleft, (self.rect.width, 5))
-
-        if floor_rect_right.collidelist(self.collision_rects) and self.direction > 0 or\
-                floor_rect_left.collidelist(self.collision_rects) and self.direction < 0 or\
-                wall_rect.collidelist(self.collision_rects) != -1:
+        # Kiểm tra xem có terrain dưới chân hay không
+        if self.is_on_terrain() == False:
             self.direction *= -1
 
-class Snake(pygame.sprite.Sprite):
-    def __init__(self, pos, frames, groups, health):
-        super().__init__(groups)
-        self.frames, self.frames_index = frames, 0
-        self.image = self.frames[self.frames_index]
-        self.rect = self.image.get_rect(topleft=pos)
-        self.z = Z_LAYERS['main']
+    def is_on_terrain(self):
+        for rect in self.collision_rects:
+            if(self.direction == 1):
+                left_rect = self.rect.move(self.rect.width / 2, self.rect.height)
+            else: 
+                left_rect = self.rect.move(-self.rect.width / 2, self.rect.height)
+                
+            if left_rect.colliderect(rect):
+                return True 
 
-        self.health = health
+        # Nếu không có va chạm nào, trả về False (không tiếp xúc với terrain)
+        return False
 
-    def update(self, dt):
-        self.frames_index += ANIMATION_SPEED * dt
-        self.image = self.frames[int(self.frames_index % len(self.frames))]
 
+
+
+            
+        
 class Bear(pygame.sprite.Sprite):
     def __init__(self, pos, frames, groups):
         super().__init__(groups)

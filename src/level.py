@@ -7,7 +7,7 @@ from setting import *
 from sprites import Sprite, movingSprite, AnimatedSprite, ParticleEffectSprite, Item
 from player import Player
 from groups import AllSprite
-from enemies import Tooth, Snake, Bear
+from enemies import Tooth, Bear
 
 class Level:
     def __init__(self, tmx_map, level_frames, audio_files, data, switch_map):
@@ -33,10 +33,10 @@ class Level:
             bg_tile=bg_tile,
             top_limit=tmx_level_properties['top_limit'],
         )
-        self.collision_sprites = pygame.sprite.Group()
-        self.semi_collision_sprites = pygame.sprite.Group()
-        self.damage_sprites = pygame.sprite.Group()
-        self.item_sprites = pygame.sprite.Group()
+        self.collision_sprites = pygame.sprite.Group()              #các sprite có khả năng va chạm với các đối tượng khác
+        self.semi_collision_sprites = pygame.sprite.Group()         #có va chạm một phần hoặc một số loại va chạm khác biệt, như nền tảng mà nhân vật chỉ va chạm từ phía trên nhưng có thể đi qua từ phía dưới.
+        self.damage_sprites = pygame.sprite.Group()                 #Khi va chạm với các sprite này, người chơi có thể bị trừ máu hoặc bị loại khỏi màn chơi
+        self.item_sprites = pygame.sprite.Group()                   #vật phẩm mà người chơi có thể thu thập, chẳng hạn như tiền, vũ khí, hoặc vật phẩm tăng sức mạnh.
         self.invisible_sprites = pygame.sprite.Group()
         self.tooth_sprites = pygame.sprite.Group()
         self.snake_sprites = pygame.sprite.Group()
