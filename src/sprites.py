@@ -1,6 +1,6 @@
 from setting import *
 import pygame.sprite
-import threading
+import threading, time
 
 class Sprite(pygame.sprite.Sprite):
     def __init__(self, pos, surface=pygame.Surface((TILE_SIZE, TILE_SIZE)), groups=None, z=Z_LAYERS['main']):
@@ -95,57 +95,93 @@ class ParticleEffectSprite(AnimatedSprite):
             self.kill()
 
 class Item(AnimatedSprite):
-    def __init__(self, item_type, pos, frames, groups, data, player, visible=True):
-        animated = item_type in ['boom', 'buff', 'hp_animate', 'hp']
-
+    def __init__(self, item_type, pos, frames, groups, data, player, visible=False):
+        animated = item_type in ['boom', 'buff', 'hp_animate']
         super().__init__(pos, frames, groups)
+
         self.rect.center = pos
         self.item_type = item_type
         self.data = data
         self.player = player
         self.visible = visible
 
+        # Item properties
+        self.is_picked_up = False
+        self.item_expiration_time = 10  # Duration item effect
+
+    def animate(self, dt):
+        if self.item_type == 'boom':
+            self.frames_index += self.animation_speed * dt
+
+            if self.frames_index < len(self.frames):
+                self.image = self.frames[int(self.frames_index)]
+            else:  # destroy
+                # Kiểm tra nếu hitbox của player va chạm với vùng của item
+                if self.player.hitbox_rect.colliderect(self.rect.inflate(TILE_SIZE, TILE_SIZE)):
+                    print(self.data.health)
+                    self.data.health -= 2
+
+                self.kill()  # Xóa item
+
 
     def activate(self):
-        if self.item_type == 'key':
-            self.data.keys += 1
-            if self.data.keys == 3:
-                print('finish')
+        if not self.is_picked_up:
+            if self.item_type == 'key':
+                self.data.keys += 1
+                if self.data.keys == 3:
+                    print("ok")
 
-        elif self.item_type == 'buff':
+            elif self.item_type == 'buff':
+                self.apply_buff()
+
+            elif self.item_type == 'dame':
+                self.apply_damage_buff()
+
+            elif self.item_type in ['hp_animate', 'hp']:
+                self.data.health += 1
+
+            if not self.visible:
+                self.hide()
+
+    def apply_buff(self):
+        if not self.is_picked_up:
             self.player.jump_height += 5
-            threading.Timer(10, self.reset_jump_height).start()
+            self.is_picked_up = True
+            threading.Thread(target=self.start_timer).start()  # Create threads for timer
 
-        elif self.item_type == 'dame':
+    def apply_damage_buff(self):
+        if not self.is_picked_up:
             self.player.attack_damage += 1
-            threading.Timer(10, self.reset_attack_damage).start()
+            self.is_picked_up = True
+            threading.Thread(target=self.start_timer).start() # Create threads for timer
 
-        elif self.item_type == 'hp_animate' or self.item_type == 'hp':
-            self.data.health += 1
+    def start_timer(self):
+        time.sleep(self.item_expiration_time)  # Wait for expire(10s)
+        self.reset()
 
-        elif self.item_type == 'boom':
-            self.data.health -= 2
+    def reset(self):
+        if self.is_picked_up:
+            if self.item_type == 'buff':
+                self.player.jump_height -= 5
+            elif self.item_type == 'dame':
+                self.player.attack_damage -= 1
+            self.is_picked_up = False
 
-        if not self.visible:
-            print(self.item_type)
-            self.hide()
+    def pick_up(self):
+        if not self.is_picked_up:
+            self.activate()
 
     def hide(self):
         for group in self.groups():
             group.remove(self)
         self.visible = False
 
-    def reset_jump_height(self):
-        self.player.jump_height -= 5
-
-    def reset_attack_damage(self):
-        self.player.attack_damage -= 1
-
     def update(self, dt):
-        if hasattr(self, 'animate'):
-            super().update(dt)
-        self.activate()
-        # if self.item_type == 'boom':
-        #     if self.visible and self.player.rect.colliderect(self.rect):
+        self.animate(dt)
+        if not self.visible:
+            self.hide()
+
+
+
 
 

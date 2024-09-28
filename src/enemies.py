@@ -15,7 +15,7 @@ class Tooth(pygame.sprite.Sprite):
         self.direction = choice((-1, 1))
         self.collision_rects = [sprite.rect for sprite in collision_sprites]
         self.speed = 20
-        self.health = health
+        self.health = int(health)
 
         self.hit_timer = Timer(250)
         self.on_ground = False  # Biến để theo dõi trạng thái chạm terrain
@@ -43,20 +43,16 @@ class Tooth(pygame.sprite.Sprite):
         for rect in self.collision_rects:
             if(self.direction == 1):
                 left_rect = self.rect.move(self.rect.width / 2, self.rect.height)
-            else: 
+            else:
                 left_rect = self.rect.move(-self.rect.width / 2, self.rect.height)
-                
+
             if left_rect.colliderect(rect):
-                return True 
+                return True
 
         # Nếu không có va chạm nào, trả về False (không tiếp xúc với terrain)
         return False
 
 
-
-
-            
-        
 class Bear(pygame.sprite.Sprite):
     def __init__(self, pos, frames, groups):
         super().__init__(groups)

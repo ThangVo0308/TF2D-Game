@@ -3,7 +3,7 @@ class Data:
     def __init__(self):
         # self.ui = ui
         self._coins = 0
-        self._health = 5 # private attribute
+        self._health = 20 # private attribute
         self._keys = 0 # private attribute
 
         # self.ui.create_heart(self._health)

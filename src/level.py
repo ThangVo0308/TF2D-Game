@@ -40,6 +40,7 @@ class Level:
         self.invisible_sprites = pygame.sprite.Group()
         self.tooth_sprites = pygame.sprite.Group()
         self.snake_sprites = pygame.sprite.Group()
+        self.boom_sprites = pygame.sprite.Group()
 
         self.setup(tmx_map, level_frames)
 
@@ -50,7 +51,10 @@ class Level:
 
         # audio
         self.damage_sound = audio_files['damage']
+        self.coin_sound = audio_files['coin']
         self.hit_sound = audio_files['hit']
+
+        self.damage_sound.set_volume(0.3)
 
     def setup(self, tmx_map, level_frames):
         # tiles
@@ -67,7 +71,7 @@ class Level:
                 tile_width = surf.get_width()
                 tile_height = surf.get_height()
 
-                print(f'Layer: {layer}, Tile position: ({x}, {y}), Tile size: ({tile_width}x{tile_height})')
+                # print(f'Layer: {layer}, Tile position: ({x}, {y}), Tile size: ({tile_width}x{tile_height})')
                 z = z_layer.get(layer, Z_LAYERS['main'])
                 Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, group_sprites, z)
 
@@ -90,7 +94,7 @@ class Level:
         # Moving Objects
         for obj in tmx_map.get_layer_by_name('Moving Object'):
             if obj.name == 'moving_chain':
-                print(level_frames[obj.name])
+                # print(level_frames[obj.name])
                 AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED)
             else:
                 frames = level_frames[obj.name]
@@ -112,14 +116,13 @@ class Level:
             if obj.name == 'tooth':
                 Tooth((obj.x, obj.y), level_frames['tooth'],
                       (self.all_sprites, self.damage_sprites, self.tooth_sprites), self.collision_sprites, obj.properties['health'])
-            elif obj.name == 'snake':
-                Snake((obj.x, obj.y), level_frames['snake'], (self.all_sprites, self.damage_sprites, self.snake_sprites), obj.properties['health'])
+            # elif obj.name == 'snake':
+            #     Snake((obj.x, obj.y), level_frames['snake'], (self.all_sprites, self.damage_sprites, self.snake_sprites), obj.properties['health'])
             elif obj.name == 'bear':
                 Bear((obj.x, obj.y), level_frames['bear_trap'], (self.all_sprites, self.damage_sprites, self.snake_sprites))
 
         # Items
         for obj in tmx_map.get_layer_by_name('Items'):
-            print(obj.name)
             is_visible = True
             if obj.name == 'boom' or obj.name == 'dame':
                 is_visible = False
@@ -142,9 +145,10 @@ class Level:
             facing_target = self.player.rect.centerx < target.rect.centerx and self.player.facing_right or\
                             self.player.rect.centerx > target.rect.centerx and not self.player.facing_right
 
-            if target.rect.colliderect(self.player.rect) and self.player.attacking and facing_target:
-                target.health -= 1
+            if target.rect.colliderect(self.player.hitbox_rect) and self.player.attacking and facing_target:
+                target.health -= self.player.attack_damage
                 self.hit_sound.play()
+                self.player.attacking = True
 
                 if target.health <= 0:
                     item_type = random.choice(['boom', 'dame'])
@@ -153,7 +157,7 @@ class Level:
                         Item(item_type=item_type,
                              pos=target.rect.center,
                              frames=self.boom_frames,
-                             groups=(self.all_sprites, self.damage_sprites),
+                             groups=(self.all_sprites, self.boom_sprites),
                              data=self.data,
                              player=self.player,
                              visible=True)
@@ -161,7 +165,7 @@ class Level:
                         Item(item_type=item_type,
                              pos=target.rect.center,
                              frames=self.sword,
-                             groups=(self.all_sprites, self.damage_sprites),
+                             groups=(self.all_sprites, self.item_sprites),
                              data=self.data,
                              player=self.player,
                              visible=True)
@@ -172,12 +176,14 @@ class Level:
 
     def item_collision(self):
         if self.item_sprites:
-            item_sprites = pygame.sprite.spritecollide(self.player, self.item_sprites,
-                                                       True)  # destroy items when player collects
-            if item_sprites:
-                item_sprites[0].activate()
-                ParticleEffectSprite((item_sprites[0].rect.center), self.particle_frames, self.all_sprites)
-                # self.coin_sound.play()
+            collided_items = pygame.sprite.spritecollide(self.player, self.item_sprites, True)
+            for item in collided_items:
+                if self.player.hitbox_rect.colliderect(item.rect):
+                    item.pick_up()
+                    item.activate()
+                    ParticleEffectSprite(item.rect.center, self.particle_frames, self.all_sprites)
+                    self.coin_sound.play()
+
 
     def run(self, dt):
         self.display_surface.fill('black')

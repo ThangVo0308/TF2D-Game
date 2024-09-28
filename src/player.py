@@ -9,28 +9,28 @@ from math import sin
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, groups, frames, collision_sprites, semi_collision_sprites, sound, data):
         super().__init__(groups)
-
+        
         self.z = Z_LAYERS['main']
 
         # data
         self.data = data
 
-        # image
-        self.frames, self.frames_index = frames, 0
+        # image(handle when player moves)
+        self.frames, self.frame_index = frames, 0
         self.state, self.facing_right = 'Idle', True
-        self.image = self.frames[self.state][self.frames_index]
-        # rect
+        self.image = self.frames[self.state][self.frame_index]
+        # rects
         self.rect = self.image.get_rect(topleft=pos)
         self.hitbox_rect = self.rect.inflate(10, 0)
-        self.old_rect = self.rect.copy()
+        self.old_rect = self.hitbox_rect.copy()
         self.hitbox_rect.topleft = self.rect.topleft
 
-        # movement setup
+        # movement
         self.direction = vector()
         self.speed = 10
         self.gravity = 30
-        self.jump_height = 30
         self.jump = False
+        self.jump_height = 10
         self.attacking = False
         self.attack_damage = 1
 
@@ -39,12 +39,13 @@ class Player(pygame.sprite.Sprite):
         self.semi_collision_sprites = semi_collision_sprites
         self.on_surface = {'floor': False}
         self.platform = None
+        self.display_surface = pygame.display.get_surface()
 
         # Timer
         self.timers = {
             'wall jump': Timer(250),
-            'wall slide block': Timer(200),
-            'platform skip': Timer(300),  # for moving down when clicking down button
+            'jump': Timer(300),
+            'platform skip': Timer(300),
             'attack block': Timer(500),
             'delay enemy damage': Timer(400)
         }
@@ -72,7 +73,6 @@ class Player(pygame.sprite.Sprite):
 
         if keys[pygame.K_SPACE]:
             self.jump = True
-            self.timers['wall jump'].activate()
         if keys[pygame.K_DOWN]:
             self.timers['platform skip'].activate()
 
@@ -86,34 +86,34 @@ class Player(pygame.sprite.Sprite):
     def attack(self):
         if not self.timers['attack block'].active:
             self.attacking = True
-
-            self.frames_index = 0
+            # Fix the player attacking when standing on the floor and can't attack(refresh frame_index)
+            self.frame_index = 0
             self.timers['attack block'].activate()
             self.attack_sound.play()
 
     def move(self, dt):
-        # horizontal move
+        # horizontal
         self.hitbox_rect.x += self.direction.x * self.speed * dt
         self.collision('horizontal')
 
-        # vertical move
-        if not self.on_surface['floor'] and not self.timers['wall slide block'].active:
-            self.direction.y += self.gravity / 10 * dt  # calculate
-            self.hitbox_rect.y += self.direction.y  # move
+        # vertical
+        if not self.on_surface['floor']:
+            self.direction.y += self.gravity / 10 * dt  # result of direction.y calculation
+            self.hitbox_rect.y += self.direction.y  # move direction.y
         else:
-            self.direction.y = 0
+            self.direction.y += self.gravity / 2 * dt
+            self.hitbox_rect.y += self.direction.y
+            self.direction.y += self.gravity / 2 * dt
 
         if self.jump:
             if self.on_surface['floor']:
                 self.direction.y = -self.jump_height
-                self.timers['wall slide block'].activate()
-                self.hitbox_rect.bottom -= 10  # fix error when player jump up and down in moving object, player can't move
+                self.timers['jump'].activate()
+                self.hitbox_rect.bottom -= 10  # fix the error that when player try to jump in up and down moving object, the player can't jump
                 self.jump_sound.play()
-
 
         self.jump = False
 
-        # Check vertical collision
         self.collision('vertical')
         self.semi_collision()
         self.rect.center = self.hitbox_rect.center
@@ -190,7 +190,6 @@ class Player(pygame.sprite.Sprite):
     # ----------------------------------------------------------
     # PLAYER
     def get_state(self):
-        # print(self.on_surface)
         if self.on_surface['floor']:
             if self.attacking:
                 self.state = 'Attack'
@@ -200,20 +199,20 @@ class Player(pygame.sprite.Sprite):
             if self.attacking:
                 self.state = 'Attack_Extra'
             else:
-                # if any((self.on_surface['left'], self.on_surface['right'])):
-                #     self.state = 'Wall'
-                # else:
-                self.state = 'Jump' if self.direction.y < 0 else 'Idle'
+                if self.direction.y < 0:
+                    self.state = 'Jump'
+                elif self.direction.y > 0:
+                    self.state = 'Fall'
 
     def animate(self, dt):
-        self.frames_index += ANIMATION_SPEED * dt
-        if self.state == 'Attack' and self.frames_index >= len(self.frames[self.state]):
+        self.frame_index += ANIMATION_SPEED * dt
+        if self.state == 'Attack' and self.frame_index >= len(self.frames[self.state]):
             self.state = 'Idle'
-        self.image = self.frames[self.state][int(self.frames_index % len(self.frames[self.state]))]
+        self.image = self.frames[self.state][int(self.frame_index % len(self.frames[self.state]))]
         self.image = self.image if self.facing_right else pygame.transform.flip(self.image, True, False)
 
         # Fix when jump > the player auto attack
-        if self.attacking and self.frames_index > len(self.frames[self.state]):
+        if self.attacking and self.frame_index > len(self.frames[self.state]):
             self.attacking = False
 
     def get_damage(self):
@@ -224,7 +223,6 @@ class Player(pygame.sprite.Sprite):
     def flicker(self):  # animation when player gets hit
         self.original_image = self.image.copy()
         if self.timers['delay enemy damage'].active and sin(pygame.time.get_ticks() * 100) >= 0:
-            # Tạo mask và surface cho flicker
             white_mask = pygame.mask.from_surface(self.image)
             white_surface = white_mask.to_surface()  # Convert to surface which will display white pixel
             white_surface.set_colorkey('black')  # Remove black image around player
