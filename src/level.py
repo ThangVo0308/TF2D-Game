@@ -151,7 +151,7 @@ class Level:
                 self.player.attacking = True
 
                 if target.health <= 0:
-                    item_type = random.choice(['boom', 'dame'])
+                    item_type = random.choice(['boom', 'dame', 'none'])
 
                     if item_type == 'boom':
                         Item(item_type=item_type,
