@@ -5,18 +5,22 @@ from data import *
 from sprites import *
 from level import Level
 from folderHandle import *
+from display import display
 import os
 
 
 class Main:
-    def __init__(self):
+    def __init__(self, ):
         pygame.init()
         self.display_surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         pygame.display.set_caption('TF2D World')
         self.clock_tick = pygame.time.Clock()
         self.import_assets()
 
-        self.data = Data()
+        self.display = display(self.font, self.ui_frames)
+
+        self.data = Data(self.display)
+
         base_path = os.path.dirname(__file__)
 
         self.tmx_maps = {
@@ -68,6 +72,14 @@ class Main:
             'bg_music': pygame.mixer.Sound(join(base_path,'..', 'audio', 'starlight_city.mp3'))
         }
 
+        self.font = pygame.font.Font(join('..','graphics','ui','runescape_uf.ttf'), 40)
+
+        self.ui_frames = {
+            'heart': import_folder(join('..', 'graphics', 'ui', 'heart')),
+            'sword': import_folder(join('..', 'graphics', 'ui', 'heart'))
+        }
+
+
     def switch_map(self, target, level=0):
         if target == 'level': # when player is inside a level map
             self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames,  self.audio_files,self.data, self.switch_map)
@@ -87,6 +99,7 @@ class Main:
 
             self.check_game_over()
             self.current_stage.run(dt)
+            self.display.update(dt)
 
             pygame.display.update()
 

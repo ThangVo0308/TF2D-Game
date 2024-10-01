@@ -149,7 +149,7 @@ class Level:
                             self.player.rect.centerx > target.rect.centerx and not self.player.facing_right
 
             if target.rect.colliderect(self.player.hitbox_rect) and self.player.attacking and facing_target:
-                target.health -= self.player.attack_damage
+                target.health -= self.data.damage
                 self.hit_sound.play()
                 self.player.attacking = True
 

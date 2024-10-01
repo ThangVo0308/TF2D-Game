@@ -140,6 +140,7 @@ class Item(AnimatedSprite):
 
             elif self.item_type in ['hp_animate', 'hp']:
                 self.data.health += 1
+                self.is_picked_up = True
 
             if not self.visible:
                 self.hide()
@@ -152,7 +153,7 @@ class Item(AnimatedSprite):
 
     def apply_damage_buff(self):
         if not self.is_picked_up:
-            self.player.attack_damage += 1
+            self.data.damage += 1
             self.is_picked_up = True
             threading.Thread(target=self.start_timer).start() # Create threads for timer
 

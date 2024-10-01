@@ -1,12 +1,13 @@
-# from UI import UI
-class Data:
-    def __init__(self):
-        # self.ui = ui
-        self._coins = 0
-        self._health = 20 # private attribute
-        self._keys = 0 # private attribute
+from display import display
 
-        # self.ui.create_heart(self._health)
+class Data:
+    def __init__(self, display):
+        self.display = display
+        self._health = 5 # private attribute
+        self._keys = 0 # private attribute
+        self._damage = 1
+
+        self.update_display()
 
         self.unlocked_level = 0
         self.current_level = 0
@@ -18,7 +19,7 @@ class Data:
     @health.setter # setter
     def health(self, value):
         self._health = value
-        # self.ui.create_heart(value)
+        self.update_display()
 
     @property # getter
     def keys(self):
@@ -29,14 +30,16 @@ class Data:
         self._keys = value
 
     @property # getter
-    def coins(self):
-        return self._coins
+    def damage(self):
+        return self._damage
 
-    @coins.setter # setter
-    def coins(self, value):
-        self._coins = value
-        if self.coins >= 100:
-            self.coins -= 100
-            self.health += 1
-        # self.ui.show_coins(self.coins)
+    @damage.setter # setter
+    def damage(self, value):
+        self._damage = value
+        self.update_display()
+
+    def update_display(self):
+        self.display.create_heart(self._health)
+        self.display.create_sword(self._damage)
+
 

@@ -21,18 +21,17 @@ class Player(pygame.sprite.Sprite):
         self.image = self.frames[self.state][self.frame_index]
         # rects
         self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox_rect = self.rect.inflate(-40, 0)
+        self.hitbox_rect = self.rect.inflate(0, 0)
         self.old_rect = self.hitbox_rect.copy()
         self.hitbox_rect.topleft = self.rect.topleft
 
         # movement
         self.direction = vector()
-        self.speed = 10
+        self.speed = 30
         self.gravity = 30
         self.jump = False
         self.jump_height = 15
         self.attacking = False
-        self.attack_damage = 1
 
         # collision
         self.collision_sprites = collision_sprites
@@ -155,7 +154,7 @@ class Player(pygame.sprite.Sprite):
 
     def platform_move(self, dt):
         if self.platform:  # if player is standing on the platform > moving the player by the direction of the platform at current frame rate
-            self.hitbox_rect.topleft += self.platform.direction * self.platform.speed * dt
+            self.hitbox_rect.topleft += self.platform.direction * int(self.platform.speed) * dt
 
     def check_contact(self):
         # floor check
@@ -185,6 +184,7 @@ class Player(pygame.sprite.Sprite):
 
         for sprite in [sprite for sprite in sprites if hasattr(sprite, 'moving')]:
             if sprite.rect.colliderect(floor_rect):
+                print("cham")
                 self.platform = sprite
     # ----------------------------------------------------------
     # PLAYER
@@ -229,7 +229,7 @@ class Player(pygame.sprite.Sprite):
 
     def flicker(self):  # animation when player gets hit
         self.original_image = self.image.copy()
-        if self.timers['delay enemy damage'].active and sin(pygame.time.get_ticks() * 100) >= 0:
+        if self.timers['delay enemy damage'].active and sin(pygame.time.get_ticks() * 35) >= 0:
             white_mask = pygame.mask.from_surface(self.image)
             white_surface = white_mask.to_surface()  # Convert to surface which will display white pixel
             white_surface.set_colorkey('black')  # Remove black image around player
@@ -247,9 +247,8 @@ class Player(pygame.sprite.Sprite):
 
         self.input()
         self.move(dt)
-        # self.platform_move(dt)
+        self.platform_move(dt)
         self.check_contact()
-        # print(self.on_surface)
 
         # player
         self.get_state()
