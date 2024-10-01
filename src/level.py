@@ -77,7 +77,8 @@ class Level:
 
         # Object
         for obj in tmx_map.get_layer_by_name('Object'):
-            
+            if obj.name == 'flag':
+                self.finish_rect = pygame.Rect((obj.x, obj.y), (obj.width, obj.height))
             if obj.name == 'player':
                 self.player = Player(pos=(obj.x, obj.y - 100),
                                      groups=self.all_sprites,
@@ -92,13 +93,9 @@ class Level:
 
         # Moving Objects
         for obj in tmx_map.get_layer_by_name('Moving Object'):
-            
             if obj.name == 'moving_chain':
                 # print(level_frames[obj.name])
                 AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED)
-            elif obj.name == 'flag':
-                self.finish_rect = pygame.Rect((obj.x, obj.y), (obj.width, obj.height))
-                AnimatedSprite((obj.x, obj.y), level_frames['flag'], self.all_sprites, Z_LAYERS['main'], ANIMATION_SPEED)
             else:
                 frames = level_frames[obj.name]
                 groups = (self.all_sprites, self.semi_collision_sprites) if obj.properties['platform'] \
@@ -188,13 +185,6 @@ class Level:
                     self.coin_sound.play()
 
 
-    #next to map
-    
-    def next_level(self):
-        for sprite in self.damage_sprites:
-            if sprite.rect.colliderect(self.player.hitbox_rect):
-                print('dame')
-
     def run(self, dt):
         self.display_surface.fill('black')
 
@@ -203,6 +193,5 @@ class Level:
 
         self.item_collision()
         self.attack_collision()
-        self.next_level()
 
         self.all_sprites.draw(self.player.hitbox_rect.center, dt)
