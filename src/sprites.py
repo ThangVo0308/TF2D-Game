@@ -16,11 +16,12 @@ class Sprite(pygame.sprite.Sprite):
 
 
 class AnimatedSprite(Sprite):
-    def __init__(self, pos, frames, groups, z=Z_LAYERS['main'], animation_speed=ANIMATION_SPEED):
+    def __init__(self, pos, frames, groups, item_type, z=Z_LAYERS['main'], animation_speed=ANIMATION_SPEED):
         if isinstance(frames, pygame.Surface):
             frames = [frames]
 
         self.frames, self.frames_index = frames, 0
+        self.item_type = item_type
         super().__init__(pos, self.frames[self.frames_index], groups, z)
         self.animation_speed = animation_speed
 
@@ -32,8 +33,8 @@ class AnimatedSprite(Sprite):
         self.animate(dt)
 
 class movingSprite(AnimatedSprite):
-    def __init__(self, frames, groups, start_pos, end_pos, move_direction, speed, flip=False):
-        super().__init__(start_pos, frames, groups)
+    def __init__(self, frames, groups, start_pos, end_pos, item_type, move_direction, speed, flip=False):
+        super().__init__(start_pos, frames, groups, item_type)
         if move_direction == 'x':
             self.rect.midleft = start_pos
         else:
@@ -97,7 +98,7 @@ class ParticleEffectSprite(AnimatedSprite):
 class Item(AnimatedSprite):
     def __init__(self, item_type, pos, frames, groups, data, player, visible=False):
         animated = item_type in ['boom', 'buff', 'hp_animate']
-        super().__init__(pos, frames, groups)
+        super().__init__(pos, frames, groups, item_type)
 
         self.rect.center = pos
         self.item_type = item_type

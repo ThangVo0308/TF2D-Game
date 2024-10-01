@@ -95,10 +95,10 @@ class Level:
             
             if obj.name == 'moving_chain':
                 # print(level_frames[obj.name])
-                AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED)
+                AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, obj.name, Z_LAYERS['bg tiles'], ANIMATION_SPEED)
             elif obj.name == 'flag':
                 self.finish_rect = pygame.Rect((obj.x, obj.y), (obj.width, obj.height))
-                AnimatedSprite((obj.x, obj.y), level_frames['flag'], self.all_sprites, Z_LAYERS['main'], ANIMATION_SPEED)
+                AnimatedSprite((obj.x, obj.y), level_frames['flag'], (self.all_sprites, self.collision_sprites),obj.name, Z_LAYERS['main'], ANIMATION_SPEED)
             else:
                 frames = level_frames[obj.name]
                 groups = (self.all_sprites, self.semi_collision_sprites) if obj.properties['platform'] \
@@ -112,7 +112,7 @@ class Level:
                     start_pos = (obj.x + obj.width / 2, obj.y)
                     end_pos = (obj.x + obj.width / 2, obj.y + obj.height)
                 speed = obj.properties['speed']
-                movingSprite(frames, groups, start_pos, end_pos, move_direction, speed, obj.properties['flip'])
+                movingSprite(frames, groups, start_pos, end_pos, obj.name, move_direction, speed, obj.properties['flip'])
 
         # Enemies
         for obj in tmx_map.get_layer_by_name('Enemies'):
@@ -191,9 +191,16 @@ class Level:
     #next to map
     
     def next_level(self):
-        for sprite in self.damage_sprites:
+        for sprite in self.collision_sprites:
             if sprite.rect.colliderect(self.player.hitbox_rect):
-                print('dame')
+                if sprite.item_type == 'flag':
+                    if self.data.keys == 3:
+                        print('Next')
+                        return
+                    else:
+                        print('Collect more keys')
+                        return
+
 
     def run(self, dt):
         self.display_surface.fill('black')
