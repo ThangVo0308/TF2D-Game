@@ -16,25 +16,30 @@ class Sprite(pygame.sprite.Sprite):
 
 
 class AnimatedSprite(Sprite):
-    def __init__(self, pos, frames, groups, item_type, z=Z_LAYERS['main'], animation_speed=ANIMATION_SPEED):
+    def __init__(self, pos, frames, groups, z=Z_LAYERS['main'], animation_speed=ANIMATION_SPEED, reverse=False):
         if isinstance(frames, pygame.Surface):
             frames = [frames]
 
         self.frames, self.frames_index = frames, 0
-        self.item_type = item_type
         super().__init__(pos, self.frames[self.frames_index], groups, z)
         self.animation_speed = animation_speed
+        self.reverse = reverse
 
     def animate(self, dt):
         self.frames_index += self.animation_speed * dt
-        self.image = self.frames[int(self.frames_index % len(self.frames))]
+        current_frame = self.frames[int(self.frames_index % len(self.frames))]
+
+        if not self.reverse:
+            current_frame = pygame.transform.flip(current_frame, True, False)
+
+        self.image = current_frame
 
     def update(self, dt):
         self.animate(dt)
 
 class movingSprite(AnimatedSprite):
-    def __init__(self, frames, groups, start_pos, end_pos, item_type, move_direction, speed, flip=False):
-        super().__init__(start_pos, frames, groups, item_type)
+    def __init__(self, frames, groups, start_pos, end_pos, move_direction, speed, flip=False):
+        super().__init__(start_pos, frames, groups)
         if move_direction == 'x':
             self.rect.midleft = start_pos
         else:
@@ -129,8 +134,6 @@ class Item(AnimatedSprite):
         if not self.is_picked_up:
             if self.item_type == 'key':
                 self.data.keys += 1
-                if self.data.keys == 3:
-                    print("ok")
 
             elif self.item_type == 'buff':
                 self.apply_buff()
@@ -140,7 +143,8 @@ class Item(AnimatedSprite):
 
             elif self.item_type in ['hp_animate', 'hp']:
                 self.data.health += 1
-                self.is_picked_up = True
+
+            self.is_picked_up = True
 
             if not self.visible:
                 self.hide()

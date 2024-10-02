@@ -26,6 +26,9 @@ class Level:
             bg_tile = level_frames['bg_tiles'][tmx_level_properties['bg']]
         else:
             bg_tile = None
+
+        self.flag_rect = 70
+
         # groups
         self.all_sprites = AllSprite(
             width=tmx_map.width,
@@ -77,7 +80,6 @@ class Level:
 
         # Object
         for obj in tmx_map.get_layer_by_name('Object'):
-            
             if obj.name == 'player':
                 self.player = Player(pos=(obj.x, obj.y - 100),
                                      groups=self.all_sprites,
@@ -92,13 +94,11 @@ class Level:
 
         # Moving Objects
         for obj in tmx_map.get_layer_by_name('Moving Object'):
-            
             if obj.name == 'moving_chain':
-                # print(level_frames[obj.name])
-                AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, obj.name, Z_LAYERS['bg tiles'], ANIMATION_SPEED)
+                AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED)
             elif obj.name == 'flag':
-                self.finish_rect = pygame.Rect((obj.x, obj.y), (obj.width, obj.height))
-                AnimatedSprite((obj.x, obj.y), level_frames['flag'], (self.all_sprites, self.collision_sprites),obj.name, Z_LAYERS['main'], ANIMATION_SPEED)
+                self.finish_rect = pygame.Rect((obj.x + self.flag_rect, obj.y), (obj.width, obj.height))
+                AnimatedSprite((obj.x, obj.y), level_frames['flag'], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED)
             else:
                 frames = level_frames[obj.name]
                 groups = (self.all_sprites, self.semi_collision_sprites) if obj.properties['platform'] \
@@ -112,7 +112,7 @@ class Level:
                     start_pos = (obj.x + obj.width / 2, obj.y)
                     end_pos = (obj.x + obj.width / 2, obj.y + obj.height)
                 speed = obj.properties['speed']
-                movingSprite(frames, groups, start_pos, end_pos, obj.name, move_direction, speed, obj.properties['flip'])
+                movingSprite(frames, groups, start_pos, end_pos, move_direction, speed, obj.properties['flip'])
 
         # Enemies
         for obj in tmx_map.get_layer_by_name('Enemies'):
@@ -175,8 +175,6 @@ class Level:
 
                     target.kill()
 
-
-
     def item_collision(self):
         if self.item_sprites:
             collided_items = pygame.sprite.spritecollide(self.player, self.item_sprites, True)
@@ -187,20 +185,23 @@ class Level:
                     ParticleEffectSprite(item.rect.center, self.particle_frames, self.all_sprites)
                     self.coin_sound.play()
 
-
     #next to map
-    
     def next_level(self):
-        for sprite in self.collision_sprites:
-            if sprite.rect.colliderect(self.player.hitbox_rect):
-                if sprite.item_type == 'flag':
-                    if self.data.keys == 3:
-                        print('Next')
-                        return
-                    else:
-                        print('Collect more keys')
-                        return
+        if self.player.hitbox_rect.colliderect(self.finish_rect):
+            if self.data.keys == 3:
+                print('Next')
+                return
+            else:
+                print('Collect more keys')
+                return
 
+    def map_check(self):
+        if self.player.hitbox_rect.left < 0:
+            self.player.hitbox_rect.left = 0
+        elif self.player.hitbox_rect.top < 0:
+            self.player.hitbox_rect.top = 0
+        elif self.player.hitbox_rect.right > self.level_width:
+            self.player.hitbox_rect.right = self.level_width
 
     def run(self, dt):
         self.display_surface.fill('black')
@@ -211,5 +212,6 @@ class Level:
         self.item_collision()
         self.attack_collision()
         self.next_level()
+        self.map_check()
 
         self.all_sprites.draw(self.player.hitbox_rect.center, dt)

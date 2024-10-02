@@ -27,9 +27,8 @@ class AllSprite(pygame.sprite.Group):
         self.camera_constrain()
 
         for sprite in sorted(self, key=lambda
-                sprite: sprite.z):  # self return all of the sprites in the group, sorted: sort by priority in setting.py
+                sprite: int(sprite.z) if str(sprite.z).isdigit() else float('inf')): # check type sprite.z
             offset_pos = sprite.rect.topleft + self.offset
             self.display_surface.blit(sprite.image, offset_pos)
-
 
 

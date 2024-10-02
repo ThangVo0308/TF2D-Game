@@ -9,7 +9,7 @@ from math import sin
 class Player(pygame.sprite.Sprite):
     def __init__(self, pos, groups, frames, collision_sprites, semi_collision_sprites, sound, data):
         super().__init__(groups)
-        
+
         self.z = Z_LAYERS['main']
 
         # data
@@ -171,7 +171,7 @@ class Player(pygame.sprite.Sprite):
         right_rect = pygame.Rect(self.hitbox_rect.topright + vector(0, self.hitbox_rect.height / 4),
                                  (2, self.hitbox_rect.height / 2))
         self.on_surface['right'] = True if right_rect.collidelist(collide_rects) >= 0 else False
-        
+
         # # left check
         left_rect = pygame.Rect(self.hitbox_rect.topleft + vector(-2, self.hitbox_rect.height / 4),
                                 (2, self.hitbox_rect.height / 2))
@@ -184,7 +184,6 @@ class Player(pygame.sprite.Sprite):
 
         for sprite in [sprite for sprite in sprites if hasattr(sprite, 'moving')]:
             if sprite.rect.colliderect(floor_rect):
-                print("cham")
                 self.platform = sprite
     # ----------------------------------------------------------
     # PLAYER
@@ -205,7 +204,7 @@ class Player(pygame.sprite.Sprite):
 
     def animate(self, dt):
         previous_image_width = self.image.get_width()
-        
+
         self.frame_index += ANIMATION_SPEED * dt
         if self.state == 'Attack' and self.frame_index >= len(self.frames[self.state]):
             self.state = 'Idle'
@@ -215,13 +214,13 @@ class Player(pygame.sprite.Sprite):
         # Fix when jump > the player auto attack
         if self.attacking and self.frame_index > len(self.frames[self.state]):
             self.attacking = False
-                
+
         current_image_width = self.image.get_width()
         width_diff = current_image_width - previous_image_width
-        
+
         if self.facing_right:
             self.rect.x -= width_diff
-        
+
     def get_damage(self):
         if not self.timers['delay enemy damage'].active:
             self.data.health -= 1
@@ -239,7 +238,6 @@ class Player(pygame.sprite.Sprite):
         else:
             # return to original image
             self.image = self.original_image
-
 
     def update(self, dt):
         self.old_rect = self.rect.copy()

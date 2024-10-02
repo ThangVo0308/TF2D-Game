@@ -25,6 +25,7 @@ class Main:
 
         self.tmx_maps = {
             0: load_pygame(join(base_path,'..', 'data', 'levels', 'underground.tmx')),
+            1: load_pygame(join(base_path,'..', 'data', 'levels', 'outsite.tmx')),
         }
 
         self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, self.audio_files, self.data, self.switch_map)
@@ -72,11 +73,11 @@ class Main:
             'bg_music': pygame.mixer.Sound(join(base_path,'..', 'audio', 'starlight_city.mp3'))
         }
 
-        self.font = pygame.font.Font(join('..','graphics','ui','runescape_uf.ttf'), 40)
+        self.font = pygame.font.Font(join(base_path,'..','graphics','ui','runescape_uf.ttf'), 40)
 
         self.ui_frames = {
-            'heart': import_folder(join('..', 'graphics', 'ui', 'heart')),
-            'sword': import_folder(join('..', 'graphics', 'ui', 'heart'))
+            'heart': import_folder(join(base_path,'..', 'graphics', 'ui', 'heart')),
+            'sword': import_folder(join(base_path,'..', 'graphics', 'ui', 'heart'))
         }
 
 
