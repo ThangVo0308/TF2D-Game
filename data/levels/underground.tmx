@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="25" nextobjectid="191">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="25" nextobjectid="194">
  <tileset firstgid="1" source="../tilesets/background/bg_underground.tsx"/>
  <tileset firstgid="257" source="../tilesets/terrain/terrain_background.tsx"/>
  <tileset firstgid="305" source="../tilesets/items.tsx"/>
@@ -29,8 +29,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3221225733,1073742083,1073742083,1073742083,1073742083,1073742084,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073742083,1073742083,1073742083,1073742083,1073742084,0,0,0,0,0,0,0,0,0,3758096644,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2147483909,259,259,259,259,259,
-1073742083,1073742084,1073742085,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3758096643,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073742083,1073742083,1073742083,1073742083,1073742084,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2147483909,259,259,259,259,259,
+1073742083,1073742084,1073742085,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 1073742089,257,1073742083,1073742084,1073742083,1073742084,1073742083,1073742085,0,0,0,0,0,0,0,0,0,0,0,0,1073742083,1073742083,1073742083,0,0,0,0,0,0,0,0,3221225733,1073742083,1073742083,1073742083,1073742083,1073742083,1073742084,1073742085,0,0,0,0,0,0,0,0,0,0,0,0,1073742083,1073742084,0,0,0,0,0,0,0,
 1073742081,257,257,257,257,257,257,1610612995,0,0,0,1073742083,1073742083,1073742083,1073742083,1073742083,1073742084,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3758096644,257,257,257,257,257,257,1610612996,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 257,257,3221225733,1073742084,1073742083,1073742085,257,1610612995,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073742083,0,0,3758096644,265,257,257,257,257,265,1610612996,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3758096645,1073742084,1073742083,1073742084,
@@ -121,7 +121,7 @@
     <property name="speed" value="10"/>
    </properties>
   </object>
-  <object id="157" name="helicopter" x="3196" y="562.667" width="384" height="28">
+  <object id="157" name="helicopter" x="3196" y="562.667" width="304" height="28">
    <properties>
     <property name="flip" type="bool" value="false"/>
     <property name="platform" type="bool" value="true"/>
@@ -130,7 +130,7 @@
   </object>
   <object id="190" name="flag" gid="2147483977" x="3759.33" y="527" width="68" height="186">
    <properties>
-    <property name="platform" type="bool" value="false"/>
+    <property name="reverse" type="bool" value="true"/>
    </properties>
   </object>
  </objectgroup>
@@ -148,7 +148,7 @@
   <object id="134" name="static_chain" gid="326" x="130" y="517" width="29" height="70"/>
   <object id="135" name="static_chain" gid="326" x="357.667" y="484.333" width="29" height="70"/>
   <object id="137" name="static_chain" gid="326" x="357.667" y="518.333" width="29" height="70"/>
-  <object id="179" name="player" gid="319" x="2217.08" y="349.299" width="62" height="64"/>
+  <object id="179" name="player" gid="319" x="89.08" y="317.965" width="62" height="64"/>
  </objectgroup>
  <objectgroup id="21" name="Traps"/>
  <objectgroup id="11" name="Players"/>
@@ -175,9 +175,9 @@
   <object id="79" name="hp" gid="310" x="308" y="394" width="64" height="64"/>
   <object id="80" name="hp" gid="307" x="1792.38" y="511.875" width="64" height="64"/>
   <object id="81" name="hp" gid="307" x="1282" y="398" width="64" height="64"/>
-  <object id="85" name="hp_animate" gid="311" x="3815.67" y="187.667" width="18" height="30"/>
+  <object id="85" name="hp_animate" gid="311" x="3695.67" y="99.667" width="18" height="30"/>
   <object id="86" name="hp_animate" gid="311" x="3349" y="495" width="18" height="30"/>
-  <object id="118" name="buff" gid="315" x="2950.67" y="572.333" width="24" height="30"/>
+  <object id="118" name="buff" gid="315" x="2950.67" y="540.333" width="24" height="30"/>
   <object id="119" name="buff" gid="315" x="1360.33" y="498.333" width="24" height="30"/>
   <object id="164" name="key" gid="309" x="1489.03" y="460.758" width="64" height="64"/>
   <object id="165" name="key" gid="309" x="3752.3" y="163.242" width="64" height="64"/>
