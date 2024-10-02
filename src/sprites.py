@@ -29,7 +29,7 @@ class AnimatedSprite(Sprite):
         self.frames_index += self.animation_speed * dt
         current_frame = self.frames[int(self.frames_index % len(self.frames))]
 
-        if not self.reverse:
+        if self.reverse:
             current_frame = pygame.transform.flip(current_frame, True, False)
 
         self.image = current_frame
