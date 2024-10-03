@@ -9,7 +9,6 @@ class Data:
 
         self.update_display()
 
-        self.unlocked_level = 0
         self.current_level = 0
 
     @property # getter

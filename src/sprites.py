@@ -134,6 +134,7 @@ class Item(AnimatedSprite):
         if not self.is_picked_up:
             if self.item_type == 'key':
                 self.data.keys += 1
+                print(self.data.keys)
 
             elif self.item_type == 'buff':
                 self.apply_buff()
@@ -170,7 +171,7 @@ class Item(AnimatedSprite):
             if self.item_type == 'buff':
                 self.player.jump_height -= 5
             elif self.item_type == 'dame':
-                self.player.attack_damage -= 1
+                self.data.damage -= 1
             self.is_picked_up = False
 
     def pick_up(self):

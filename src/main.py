@@ -51,6 +51,7 @@ class Main:
             'tooth': import_folder(join(base_path,'..', 'graphics', 'enemies', 'tooth', 'run')),
             'bear_trap': import_folder(join(base_path,'..', 'graphics', 'objects', 'bear_trap')),
             'moving_chain': import_folder(join(base_path,'..', 'graphics', 'objects', 'chain_moving')),
+            'snake': import_folder(join(base_path,'..', 'graphics', 'objects', 'snake')),
             'flag': import_folder(join(base_path,'..', 'graphics', 'objects', 'flag')),
             'floor_spike': import_folder(join(base_path,'..', 'graphics', 'objects', 'floor_spikes')),
             'helicopter': import_folder(join(base_path,'..', 'graphics', 'objects', 'helicopter')),
