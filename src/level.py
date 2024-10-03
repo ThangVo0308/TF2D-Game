@@ -80,7 +80,7 @@ class Level:
                 Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, group_sprites, z)
 
         # Object
-        for obj in tmx_map.get_layer_by_name('Object'):
+        for obj in tmx_map.get_layer_by_name('Objects'):
             Sprite((obj.x, obj.y), obj.image, (self.all_sprites, self.collision_sprites))
 
         # Player
@@ -94,7 +94,7 @@ class Level:
                                  data=self.data)
 
         # Moving Objects
-        for obj in tmx_map.get_layer_by_name('Moving Object'):
+        for obj in tmx_map.get_layer_by_name('Moving Objects'):
             if obj.name == 'moving_chain':
                 AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED, reverse=False)
             elif obj.name == 'flag':

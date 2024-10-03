@@ -24,7 +24,7 @@ class Main:
         base_path = os.path.dirname(__file__)
 
         self.tmx_maps = {
-            0: load_pygame(join(base_path,'..', 'data', 'levels', 'underground.tmx')),
+            0: load_pygame(join(base_path,'..', 'data', 'levels', 'skyland.tmx')),
             1: load_pygame(join(base_path,'..', 'data', 'levels', 'outsite.tmx')),
         }
 
