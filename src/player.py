@@ -7,31 +7,34 @@ from os.path import join
 from math import sin
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, pos, groups, frames, collision_sprites, semi_collision_sprites, sound, data):
+    def __init__(self, pos, groups, frames, collision_sprites, semi_collision_sprites, sound, data, visible=False):
         super().__init__(groups)
 
         self.z = Z_LAYERS['main']
 
+        self.visible = visible
+
         # data
         self.data = data
 
-        # image(handle when player moves)
-        self.frames, self.frame_index = frames, 0
-        self.state, self.facing_right = 'Idle', True
-        self.image = self.frames[self.state][self.frame_index]
-        # rects
-        self.rect = self.image.get_rect(topleft=pos)
-        self.hitbox_rect = self.rect.inflate(0, 0)
-        self.old_rect = self.hitbox_rect.copy()
-        self.hitbox_rect.topleft = self.rect.topleft
+        if self.visible:
+            # image(handle when player moves)
+            self.frames, self.frame_index = frames, 0
+            self.state, self.facing_right = 'Idle', True
+            self.image = self.frames[self.state][self.frame_index]
+            # rects
+            self.rect = self.image.get_rect(topleft=pos)
+            self.hitbox_rect = self.rect.inflate(0, 0)
+            self.old_rect = self.hitbox_rect.copy()
+            self.hitbox_rect.topleft = self.rect.topleft
 
-        # movement
-        self.direction = vector()
-        self.speed = 30
-        self.gravity = 30
-        self.jump = False
-        self.jump_height = 15
-        self.attacking = False
+            # movement
+            self.direction = vector()
+            self.speed = 30
+            self.gravity = 30
+            self.jump = False
+            self.jump_height = 15
+            self.attacking = False
 
         # collision
         self.collision_sprites = collision_sprites
