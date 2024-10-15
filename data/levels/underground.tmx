@@ -107,9 +107,9 @@
   <object id="137" name="static_chain" gid="326" x="357.667" y="518.333" width="29" height="70"/>
  </objectgroup>
  <objectgroup id="11" name="Players">
-  <object id="197" name="player" gid="319" x="55.6667" y="320" width="62" height="64"/>
-  <object id="198" name="player" gid="320" x="62.5" y="320.167" width="50" height="58"/>
-  <object id="199" name="player" gid="321" x="59.5" y="321.167" width="46" height="50"/>
+  <object id="197" name="player" gid="319" x="55.6667" y="320" width="62" height="64" visible="0"/>
+  <object id="198" name="player" gid="320" x="62.5" y="320.167" width="50" height="58" visible="0"/>
+  <object id="199" name="player" gid="321" x="59.5" y="321.167" width="46" height="50" visible="0"/>
  </objectgroup>
  <objectgroup id="16" name="Enemies">
   <object id="114" name="skeleton" gid="353" x="3028" y="581.667" width="64" height="78">
