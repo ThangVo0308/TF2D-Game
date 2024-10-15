@@ -3,7 +3,7 @@ from random import randint
 from setting import *
 from timer import Timer
 
-class display:
+class display: 
     def __init__(self, font, frames):
         self.display_surface = pygame.display.get_surface()  # draw on display surface
         self.sprites = pygame.sprite.Group()
