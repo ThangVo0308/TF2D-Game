@@ -30,7 +30,5 @@ class Button():
 		else:
 			self.text = self.font.render(self.text_input, True, self.base_color)
 			
-	def selectSound(self, project_root):		
-		sound_effect = pygame.mixer.Sound(os.path.join(project_root, 'audio', 'click_button.mp3'))  
-		sound_effect.play()  
+ 
         

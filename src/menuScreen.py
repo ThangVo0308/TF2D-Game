@@ -1,4 +1,4 @@
-"""import pygame, sys, os
+import pygame, sys, os
 from button import Button
 
 
@@ -10,9 +10,10 @@ pygame.display.set_caption("TF2D World")
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 BG = pygame.image.load(os.path.join(project_root, 'graphics', 'map', 'background', 'bg_underwatermap.png'))
 
-pygame.mixer.music.load(os.path.join(project_root, 'audio', 'starlight_city.mp3'))
-pygame.mixer.music.set_volume(0.5)  # Đặt âm lượng (từ 0.0 đến 1.0)
-pygame.mixer.music.play(-1)  # Phát nhạc nền liên tục (-1 để phát lại vô hạn)
+if not pygame.mixer.music.get_busy():
+    pygame.mixer.music.load(os.path.join(project_root, 'audio', 'starlight_city.mp3'))
+    pygame.mixer.music.set_volume(1.0) # Đặt âm lượng (từ 0.0 đến 1.0)
+    pygame.mixer.music.play(-1)  # Phát nhạc nền liên tục (-1 để phát lại vô hạn)
 
 def get_font(size): 
     return pygame.font.Font(os.path.join(project_root, 'graphics', 'font', 'start_menu_font.ttf'), size)
@@ -108,12 +109,12 @@ def main_menu():
         pygame.display.update()
 
 main_menu()
-"""
 
 
-import pygame, sys, os
+
+"""import pygame, sys, os
 from button import Button
-from setting import *
+from setting import *"""
 
 
 #pygame.init()
@@ -230,10 +231,7 @@ from setting import *
 
 
 
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
-def get_font(size): 
-    return pygame.font.Font(os.path.join(project_root, 'graphics', 'font', 'start_menu_font.ttf'), size)
 
 # def play(SCREEN):
 #     while True:

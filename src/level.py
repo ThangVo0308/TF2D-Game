@@ -9,16 +9,14 @@ from player import Player
 from groups import AllSprite
 from enemies import Tooth, Bear, Skeleton
 from main import Main
-
 class Level:
-    def __init__(self, tmx_map, level_frames, audio_files, data, switch_map):
+    def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player):
         self.display_surface = pygame.display.get_surface()
         self.data = data
         self.audio_files = audio_files
         self.switch_map = switch_map
-
-        self.selected_player = Main.select()
-        print(self.selected_player)
+        self.selected_player = selected_player
+        
         # level data
         self.level_width = tmx_map.width * TILE_SIZE
         self.level_height = tmx_map.height * TILE_SIZE
