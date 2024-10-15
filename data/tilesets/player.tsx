@@ -5,9 +5,9 @@
   <image source="../../graphics/player/knight/Idle/1.png" width="52" height="96"/>
  </tile>
  <tile id="4">
-  <image source="../../graphics/player/mage/Idle/idle1.png" width="50" height="58"/>
+  <image source="../../graphics/player/mage/Idle/1.png" width="50" height="58"/>
  </tile>
  <tile id="5">
-  <image source="../../graphics/player/Rogue/Idle/idle1.png" width="46" height="50"/>
+  <image source="../../graphics/player/Rogue/Idle/1.png" width="46" height="50"/>
  </tile>
 </tileset>

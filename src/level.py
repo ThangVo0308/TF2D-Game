@@ -8,6 +8,7 @@ from sprites import Sprite, movingSprite, AnimatedSprite, ParticleEffectSprite, 
 from player import Player
 from groups import AllSprite
 from enemies import Tooth, Bear, Skeleton
+from main import Main
 
 class Level:
     def __init__(self, tmx_map, level_frames, audio_files, data, switch_map):
@@ -16,6 +17,8 @@ class Level:
         self.audio_files = audio_files
         self.switch_map = switch_map
 
+        self.selected_player = Main.select()
+        print(self.selected_player)
         # level data
         self.level_width = tmx_map.width * TILE_SIZE
         self.level_height = tmx_map.height * TILE_SIZE
@@ -89,9 +92,10 @@ class Level:
                                  groups=self.all_sprites,
                                  collision_sprites=self.collision_sprites,
                                  semi_collision_sprites=self.semi_collision_sprites,
-                                 frames=level_frames['player_knight'],
+                                 frames=level_frames[self.selected_player],
                                  sound=self.audio_files,
-                                 data=self.data)
+                                 data=self.data,
+                                 visible=True)
 
         # Moving Objects
         for obj in tmx_map.get_layer_by_name('Moving Objects'):
@@ -228,3 +232,4 @@ class Level:
         self.map_check()
 
         self.all_sprites.draw(self.player.hitbox_rect.center, dt)
+
