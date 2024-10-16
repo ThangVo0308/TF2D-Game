@@ -8,7 +8,7 @@ from sprites import Sprite, movingSprite, AnimatedSprite, ParticleEffectSprite, 
 from player import Player
 from groups import AllSprite
 from enemies import Tooth, Bear, Skeleton
-from main import Main
+
 class Level:
     def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player):
         self.display_surface = pygame.display.get_surface()
@@ -29,6 +29,9 @@ class Level:
             bg_tile = None
 
         self.flag_rect = 70
+
+        # init player
+        self.player_init = False
 
         # groups
         self.all_sprites = AllSprite(
@@ -86,14 +89,16 @@ class Level:
 
         # Player
         for obj in tmx_map.get_layer_by_name('Players'):
-            self.player = Player(pos=(obj.x, obj.y - 100),
-                                 groups=self.all_sprites,
-                                 collision_sprites=self.collision_sprites,
-                                 semi_collision_sprites=self.semi_collision_sprites,
-                                 frames=level_frames[self.selected_player],
-                                 sound=self.audio_files,
-                                 data=self.data,
-                                 visible=True)
+            if not self.player_init:
+                self.player = Player(pos=(obj.x, obj.y - 100),
+                                     groups=self.all_sprites,
+                                     collision_sprites=self.collision_sprites,
+                                     semi_collision_sprites=self.semi_collision_sprites,
+                                     frames=level_frames[self.selected_player],
+                                     sound=self.audio_files,
+                                     data=self.data,
+                                     visible=True)
+                self.player_init = True
 
         # Moving Objects
         for obj in tmx_map.get_layer_by_name('Moving Objects'):
