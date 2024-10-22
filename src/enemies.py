@@ -6,6 +6,7 @@ from timer import Timer
 
 class Tooth(pygame.sprite.Sprite):
     def __init__(self, pos, frames, groups, collision_sprites, health):
+        print(f"Initial position for Tooth: {pos}")
         super().__init__(groups)
         self.frames, self.frames_index = frames, 0
         self.image = self.frames[self.frames_index]
@@ -14,7 +15,7 @@ class Tooth(pygame.sprite.Sprite):
 
         self.direction = choice((-1, 1))
         self.collision_rects = [sprite.rect for sprite in collision_sprites]
-        self.speed = 12
+        self.speed = 10
         self.health = int(health)
 
         self.hit_timer = Timer(250)
@@ -54,6 +55,7 @@ class Tooth(pygame.sprite.Sprite):
 
 class Skeleton(pygame.sprite.Sprite):
     def __init__(self, pos, frames, groups, collision_sprites, health):
+        print(f"Initial position for Skeleton: {pos}")
         super().__init__(groups)
         self.frames, self.frames_index = frames, 0
         self.image = self.frames[self.frames_index]

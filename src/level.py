@@ -224,6 +224,8 @@ class Level:
             self.player.hitbox_rect.top = 0
         elif self.player.hitbox_rect.right > self.level_width:
             self.player.hitbox_rect.right = self.level_width
+        elif self.player.hitbox_rect.top < 0:
+            self.player.hitbox_rect.top = 0
 
     def run(self, dt):
         self.display_surface.fill('black')
