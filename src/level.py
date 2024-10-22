@@ -206,7 +206,7 @@ class Level:
     #next to map
     def next_level(self):
         if self.player.hitbox_rect.colliderect(self.finish_rect):
-            if self.data.keys == 3:
+            if self.data.keys == 0:
                 self.data.current_level += 1
                 self.switch_map('level', level=self.data.current_level)
                 print('Next')

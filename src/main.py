@@ -22,6 +22,7 @@ class Main:
         self.data = Data(self.display)
 
         base_path = os.path.dirname(__file__)
+        self.selectedPlayer = "player_knight"
 
         self.tmx_maps = {
             0: load_pygame(join(base_path, '..', 'data', 'levels', 'underground.tmx')),
@@ -31,7 +32,7 @@ class Main:
         #self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
         #                           self.audio_files, self.data, self.switch_map)
 
-        self.audio_files['bg_music'].play()
+        self.audio_files['bg_music'].play(-1)
         self.audio_files['bg_music'].set_volume(0.9)
 
     def import_assets(self):
@@ -87,7 +88,7 @@ class Main:
     def switch_map(self, target, level=0):
         if target == 'level':
             self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
-                                       self.audio_files, self.data, self.switch_map)
+                                       self.audio_files, self.data, self.switch_map, self.selectedPlayer)
 
     def check_game_over(self):
         if self.data.health <= 0:
@@ -221,16 +222,19 @@ class Main:
                         self.audio_files['click_button'].play()
                         self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
                                    self.audio_files, self.data, self.switch_map, 'player_knight')
+                        self.selectedPlayer = "player_knight"
                         self.run()
                     if SELECT_PLAYER_MAGE.checkForInput(SELECT_MOUSE_POS):
                         self.audio_files['click_button'].play()
                         self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
                                    self.audio_files, self.data, self.switch_map, 'player_mage')
+                        self.selectedPlayer = "player_mage"
                         self.run()                        
                     if SELECT_PLAYER_ROGUE.checkForInput(SELECT_MOUSE_POS):
                         self.audio_files['click_button'].play()
                         self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
                                    self.audio_files, self.data, self.switch_map, 'player_rogue')
+                        self.selectedPlayer = "player_rogue"
                         self.run()
                     if SELECT_BACK.checkForInput(SELECT_MOUSE_POS):
                         self.audio_files['click_button'].play()
