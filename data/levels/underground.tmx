@@ -84,7 +84,7 @@
     <property name="speed" value="10"/>
    </properties>
   </object>
-  <object id="190" name="flag" gid="2147483977" x="3759.33" y="527" width="68" height="186">
+  <object id="190" name="flag" gid="2147483977" x="3727.33" y="528.333" width="68" height="186">
    <properties>
     <property name="reverse" type="bool" value="true"/>
    </properties>
@@ -138,7 +138,7 @@
     <property name="health" value="36"/>
    </properties>
   </object>
-  <object id="196" name="tooth" gid="355" x="910.5" y="445.333" width="67" height="64">
+  <object id="196" name="tooth" gid="355" x="893.167" y="445.333" width="67" height="64">
    <properties>
     <property name="health" value="12"/>
    </properties>
