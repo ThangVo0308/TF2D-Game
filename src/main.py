@@ -33,7 +33,7 @@ class Main:
         #                           self.audio_files, self.data, self.switch_map)
 
         self.audio_files['bg_music'].play(-1)
-        self.audio_files['bg_music'].set_volume(0.9)
+        self.audio_files['bg_music'].set_volume(1.0)
 
     def import_assets(self):
         base_path = os.path.dirname(__file__)
@@ -155,34 +155,102 @@ class Main:
     def get_font(self, size): 
         return pygame.font.Font(os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), 
                                              'graphics', 'font', 'start_menu_font.ttf'), size)        
-        
+
     def options(self):
         SCREEN = self.display_surface
+        volume_music = self.audio_files['bg_music'].get_volume()
+        volume_effects = self.audio_files['click_button'].get_volume()
+
         while True:
             OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
+            SCREEN.fill("white")    
 
-            SCREEN.fill("white")
-
-            OPTIONS_TEXT = self.get_font(45).render("This is the OPTIONS screen.", True, "Black")
-            OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 260))
-            SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
-
-            OPTIONS_BACK = Button(image=None, pos=(640, 460), 
-                                    text_input="BACK", font=self.get_font(75), base_color="Black", hovering_color="Green")
+            # Back button
+            OPTIONS_BACK = Button(image=None, pos=(640, 600), 
+                                text_input="BACK", font=self.get_font(55), base_color="Black", hovering_color="Green")
 
             OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
             OPTIONS_BACK.update(SCREEN)
+
+            # Volume control title
+            VOLUME_TEXT = self.get_font(45).render("Adjust Volume", True, "Black")
+            VOLUME_RECT = VOLUME_TEXT.get_rect(center=(640, 150))
+            SCREEN.blit(VOLUME_TEXT, VOLUME_RECT)
+
+            # Render "Music Volume:" text separately
+            MUSIC_VOL_LABEL = self.get_font(30).render("Music Volume: ", True, "Black")
+            MUSIC_VOL_LABEL_RECT = MUSIC_VOL_LABEL.get_rect(center=(580, 280))  # Fix the position
+            SCREEN.blit(MUSIC_VOL_LABEL, MUSIC_VOL_LABEL_RECT)
+
+            # Render the percentage value separately
+            MUSIC_VOL_VALUE = self.get_font(30).render(f"{int(volume_music * 100)}%", True, "Black")
+            MUSIC_VOL_VALUE_RECT = MUSIC_VOL_VALUE.get_rect(center=(880, 280))  # Position this next to the label
+            SCREEN.blit(MUSIC_VOL_VALUE, MUSIC_VOL_VALUE_RECT)
+
+
+            # Sound Effects Volume
+            EFFECTS_VOL_TEXT = self.get_font(30).render(f"Effects Volume:", True, "Black")
+            EFFECTS_VOL_RECT = EFFECTS_VOL_TEXT.get_rect(center=(540, 340))
+            SCREEN.blit(EFFECTS_VOL_TEXT, EFFECTS_VOL_RECT)
+
+            EFFECTS_VOL_VALUE = self.get_font(30).render(f"{int(volume_effects * 100)}%", True, "Black")
+            EFFECTS_VOL_VALUE_RECT = EFFECTS_VOL_VALUE.get_rect(center=(880, 340))  # Position this next to the label
+            SCREEN.blit(EFFECTS_VOL_VALUE, EFFECTS_VOL_VALUE_RECT)
+
+            # Volume control - Increase/Decrease buttons
+            MUSIC_UP_BUTTON = Button(image=None, pos=(960, 280), text_input="+", font=self.get_font(40), 
+                                     base_color="Black", hovering_color="Green")
+            MUSIC_DOWN_BUTTON = Button(image=None, pos=(790, 280), text_input="-", font=self.get_font(40), 
+                                       base_color="Black", hovering_color="Green")
+            EFFECTS_UP_BUTTON = Button(image=None, pos=(960, 340), text_input="+", font=self.get_font(40), 
+                                       base_color="Black", hovering_color="Green")
+            EFFECTS_DOWN_BUTTON = Button(image=None, pos=(790, 340), text_input="-", font=self.get_font(40), 
+                                         base_color="Black", hovering_color="Green")
+
+            MUSIC_UP_BUTTON.changeColor(OPTIONS_MOUSE_POS)
+            MUSIC_DOWN_BUTTON.changeColor(OPTIONS_MOUSE_POS)
+            EFFECTS_UP_BUTTON.changeColor(OPTIONS_MOUSE_POS)
+            EFFECTS_DOWN_BUTTON.changeColor(OPTIONS_MOUSE_POS)
+
+            MUSIC_UP_BUTTON.update(SCREEN)
+            MUSIC_DOWN_BUTTON.update(SCREEN)
+            EFFECTS_UP_BUTTON.update(SCREEN)
+            EFFECTS_DOWN_BUTTON.update(SCREEN)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.MOUSEBUTTONDOWN:
+                    # Handle Music Volume controls
+                    if MUSIC_UP_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
+                        volume_music = min(1.0, volume_music + 0.1)
+                        self.audio_files['bg_music'].set_volume(volume_music)
+                        self.audio_files['click_button'].play()
+                    if MUSIC_DOWN_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
+                        volume_music = max(0.0, volume_music - 0.1)
+                        self.audio_files['bg_music'].set_volume(volume_music)
+                        self.audio_files['click_button'].play()
+
+                    # Handle Effects Volume controls
+                    if EFFECTS_UP_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
+                        volume_effects = min(1.0, volume_effects + 0.1)
+                        for sound in self.audio_files.values():
+                            sound.set_volume(volume_effects)
+                        self.audio_files['click_button'].play()
+                    if EFFECTS_DOWN_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
+                        volume_effects = max(0.0, volume_effects - 0.1)
+                        for sound in self.audio_files.values():
+                            sound.set_volume(volume_effects)
+                        self.audio_files['click_button'].play()
+                        
+                    # Handle Back button click
                     if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
                         self.audio_files['click_button'].play()
                         self.menu()
 
             pygame.display.update()
+
 
     def select_character_menu(self):
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
