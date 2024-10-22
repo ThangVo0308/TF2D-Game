@@ -6,7 +6,6 @@ from timer import Timer
 
 class Tooth(pygame.sprite.Sprite):
     def __init__(self, pos, frames, groups, collision_sprites, health):
-        print(f"Initial position for Tooth: {pos}")
         super().__init__(groups)
         self.frames, self.frames_index = frames, 0
         self.image = self.frames[self.frames_index]
@@ -28,16 +27,20 @@ class Tooth(pygame.sprite.Sprite):
 
     def update(self, dt):
         self.hit_timer.update()
+        if dt > 0.5:
+            dt = 0.5
         # animation
         self.frames_index += ANIMATION_SPEED * dt
         self.image = self.frames[int(self.frames_index % len(self.frames))]
         self.image = pygame.transform.flip(self.image, True, False) if self.direction < 0 else self.image
 
         # Movement
-        self.rect.x += self.direction * self.speed * dt
+        print(f"{self.direction} : {self.speed} : {dt} : {self.rect.x}")
 
-        # Kiểm tra xem có terrain dưới chân hay không
-        if self.is_on_terrain() == False:
+        self.rect.x += self.direction * self.speed * dt
+        print(self.rect.x)
+
+        if not self.is_on_terrain():
             self.direction *= -1
 
     def is_on_terrain(self):
@@ -48,6 +51,7 @@ class Tooth(pygame.sprite.Sprite):
                 left_rect = self.rect.move(-self.rect.width / 2, self.rect.height)
 
             if left_rect.colliderect(rect):
+                print(f"Colliding with terrain at {rect.topleft}")
                 return True
 
         # Nếu không có va chạm nào, trả về False (không tiếp xúc với terrain)
@@ -55,7 +59,6 @@ class Tooth(pygame.sprite.Sprite):
 
 class Skeleton(pygame.sprite.Sprite):
     def __init__(self, pos, frames, groups, collision_sprites, health):
-        print(f"Initial position for Skeleton: {pos}")
         super().__init__(groups)
         self.frames, self.frames_index = frames, 0
         self.image = self.frames[self.frames_index]
@@ -64,7 +67,7 @@ class Skeleton(pygame.sprite.Sprite):
 
         self.direction = choice((-1, 1))
         self.collision_rects = [sprite.rect for sprite in collision_sprites]
-        self.speed = 10
+        self.speed = 7
         self.health = int(health)
 
         self.hit_timer = Timer(250)
@@ -77,6 +80,8 @@ class Skeleton(pygame.sprite.Sprite):
 
     def update(self, dt):
         self.hit_timer.update()
+        if dt > 0.5:
+            dt = 0.5
         # animation
         self.frames_index += ANIMATION_SPEED * dt
         self.image = self.frames[int(self.frames_index % len(self.frames))]

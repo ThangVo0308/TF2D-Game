@@ -107,38 +107,13 @@
   <object id="137" name="static_chain" gid="326" x="357.667" y="518.333" width="29" height="70"/>
  </objectgroup>
  <objectgroup id="11" name="Players">
-  <object id="197" name="player" gid="319" x="3296.61" y="380.576" width="62" height="64"/>
+  <object id="197" name="player" gid="319" x="77.3979" y="319.121" width="62" height="64"/>
  </objectgroup>
  <objectgroup id="16" name="Enemies">
-  <object id="114" name="skeleton" gid="354" x="2816.29" y="582.243" width="64" height="78">
-   <properties>
-    <property name="health" value="36"/>
-   </properties>
-  </object>
-  <object id="117" name="skeleton" gid="354" x="3713.33" y="519" width="64" height="78">
-   <properties>
-    <property name="health" value="36"/>
-   </properties>
-  </object>
   <object id="167" name="bear" gid="356" x="3641.2" y="204.727" width="125" height="88"/>
   <object id="168" name="bear" gid="356" x="1572.72" y="267.394" width="125" height="88"/>
   <object id="169" name="bear" gid="356" x="1394.41" y="589.091" width="125" height="88"/>
-  <object id="177" name="tooth" gid="355" x="1727.97" y="256.432" width="67" height="64">
-   <properties>
-    <property name="health" value="12"/>
-   </properties>
-  </object>
-  <object id="188" name="tooth" gid="355" x="2872.8" y="576.394" width="67" height="64">
-   <properties>
-    <property name="health" value="24"/>
-   </properties>
-  </object>
-  <object id="195" name="skeleton" gid="354" x="2326.67" y="389" width="64" height="78">
-   <properties>
-    <property name="health" value="36"/>
-   </properties>
-  </object>
-  <object id="196" name="tooth" gid="355" x="731.167" y="448.166" width="67" height="64">
+  <object id="196" name="tooth" gid="355" x="747.167" y="447.666" width="67" height="64">
    <properties>
     <property name="health" value="12"/>
    </properties>
