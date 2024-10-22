@@ -84,7 +84,7 @@
     <property name="speed" value="10"/>
    </properties>
   </object>
-  <object id="190" name="flag" gid="2147483977" x="3759.33" y="527" width="68" height="186">
+  <object id="190" name="flag" gid="2147483977" x="3708.66" y="527" width="68" height="186">
    <properties>
     <property name="reverse" type="bool" value="true"/>
    </properties>
