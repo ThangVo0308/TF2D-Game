@@ -10,7 +10,7 @@ class Tooth(pygame.sprite.Sprite):
         self.frames, self.frames_index = frames, 0
         self.image = self.frames[self.frames_index]
         self.rect = self.image.get_rect(topleft=pos)
-        self.z = Z_LAYERS['bg tiles']
+        self.z = Z_LAYERS['main']
 
         self.direction = choice((-1, 1))
         self.collision_rects = [sprite.rect for sprite in collision_sprites]
@@ -35,10 +35,8 @@ class Tooth(pygame.sprite.Sprite):
         self.image = pygame.transform.flip(self.image, True, False) if self.direction < 0 else self.image
 
         # Movement
-        print(f"{self.direction} : {self.speed} : {dt} : {self.rect.x}")
 
         self.rect.x += self.direction * self.speed * dt
-        print(self.rect.x)
 
         if not self.is_on_terrain():
             self.direction *= -1
@@ -51,7 +49,6 @@ class Tooth(pygame.sprite.Sprite):
                 left_rect = self.rect.move(-self.rect.width / 2, self.rect.height)
 
             if left_rect.colliderect(rect):
-                print(f"Colliding with terrain at {rect.topleft}")
                 return True
 
         # Nếu không có va chạm nào, trả về False (không tiếp xúc với terrain)
@@ -115,6 +112,18 @@ class Bear(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(topleft=pos)
         self.z = Z_LAYERS['main']
 
+
+    def update(self, dt):
+        self.frames_index += ANIMATION_SPEED * dt
+        self.image = self.frames[int(self.frames_index % len(self.frames))]
+
+class FloorSpike(pygame.sprite.Sprite):
+    def __init__(self, pos, frames, groups):
+        super().__init__(groups)
+        self.frames, self.frames_index = frames, 0
+        self.image = self.frames[self.frames_index]
+        self.rect = self.image.get_rect(topleft=pos)
+        self.z = Z_LAYERS['main']
 
     def update(self, dt):
         self.frames_index += ANIMATION_SPEED * dt

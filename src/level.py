@@ -7,10 +7,11 @@ from setting import *
 from sprites import Sprite, movingSprite, AnimatedSprite, ParticleEffectSprite, Item
 from player import Player
 from groups import AllSprite
-from enemies import Tooth, Bear, Skeleton
+from enemies import Tooth, Bear, Skeleton, FloorSpike
 
 class Level:
     def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player):
+        self.finish_rect = None
         self.display_surface = pygame.display.get_surface()
         self.data = data
         self.audio_files = audio_files
@@ -49,6 +50,7 @@ class Level:
         self.skeleton_sprites = pygame.sprite.Group()
         self.snake_sprites = pygame.sprite.Group()
         self.boom_sprites = pygame.sprite.Group()
+        self.floor_spikes = pygame.sprite.Group()
 
         self.setup(tmx_map, level_frames)
 
@@ -108,7 +110,6 @@ class Level:
                 self.finish_rect = pygame.Rect((obj.x + self.flag_rect, obj.y), (obj.width, obj.height))
                 AnimatedSprite((obj.x, obj.y), level_frames['flag'], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED, reverse=True)
             elif obj.name == 'snake':
-                print("ok")
                 AnimatedSprite((obj.x, obj.y), level_frames['snake'], self.all_sprites, Z_LAYERS['main'], ANIMATION_SPEED, reverse=False)
             elif obj.name == 'vine':
                 AnimatedSprite((obj.x, obj.y), level_frames['vine'], self.all_sprites, Z_LAYERS['main'], ANIMATION_SPEED, reverse=False)
@@ -127,6 +128,18 @@ class Level:
                 speed = obj.properties['speed']
                 movingSprite(frames, groups, start_pos, end_pos, move_direction, speed, obj.properties['flip'])
 
+                if obj.name == 'saw':
+                    if move_direction == 'x':
+                        y = start_pos[1] - level_frames['saw_chain'].get_height() / 2
+                        left, right = int(start_pos[0]), int(end_pos[0])
+                        for x in range(left, right, 20):
+                            Sprite((x, y), level_frames['saw_chain'], self.all_sprites, z=Z_LAYERS['bg details'])
+                    else:
+                        x = start_pos[0] - level_frames['saw_chain'].get_height() / 2
+                        top, bottom = int(start_pos[1]), int(end_pos[1])
+                        for y in range(top, bottom, 20):
+                            Sprite((x, y), level_frames['saw_chain'], self.all_sprites, z=Z_LAYERS['bg details'])
+
         # Enemies
         for obj in tmx_map.get_layer_by_name('Enemies'):
             if obj.name == 'tooth':
@@ -137,6 +150,10 @@ class Level:
             elif obj.name == 'skeleton':
                 Skeleton((obj.x, obj.y), level_frames['skeleton'],
                       (self.all_sprites, self.damage_sprites, self.skeleton_sprites), self.collision_sprites, obj.properties['health'])
+            elif obj.name == 'floor_spike':
+                FloorSpike((obj.x, obj.y), level_frames['floor_spike'],
+                           (self.all_sprites, self.damage_sprites, self.floor_spikes))
+
 
         # Items
         for obj in tmx_map.get_layer_by_name('Items'):
@@ -151,6 +168,21 @@ class Level:
             else:
                 Item(obj.name, (obj.x + TILE_SIZE / 2, obj.y + TILE_SIZE / 2), level_frames['items'][obj.name],
                  (self.all_sprites, self.item_sprites), self.data, self.player, is_visible)
+
+        # water
+        try:
+            for obj in tmx_map.get_layer_by_name('Water'):
+                rows = int(obj.height / TILE_SIZE)
+                columns = int(obj.width / TILE_SIZE)
+                for row in range(rows):
+                    for col in range(columns):
+                        x = obj.x + col * TILE_SIZE
+                        y = obj.y + row * TILE_SIZE
+                        AnimatedSprite((x, y), level_frames['water'], self.all_sprites, Z_LAYERS['water'])
+
+        except ValueError:
+            pass
+
 
     def hit_collision(self):
         for sprite in self.damage_sprites:
@@ -207,15 +239,17 @@ class Level:
 
     #next to map
     def next_level(self):
-        if self.player.hitbox_rect.colliderect(self.finish_rect):
-            if self.data.keys == 0:
-                self.data.current_level += 1
-                self.switch_map('level', level=self.data.current_level)
-                print('Next')
-                return
-            else:
-                print('Collect more keys')
-                return
+        if self.finish_rect is not None and isinstance(self.finish_rect, pygame.Rect):
+            if isinstance(self.player.hitbox_rect, pygame.Rect):
+                if self.player.hitbox_rect.colliderect(self.finish_rect):
+                    if self.data.keys == 0:
+                        self.data.current_level += 1
+                        self.switch_map('level', level=self.data.current_level)
+                        print('Next')
+                        return
+                    else:
+                        print('Collect more keys')
+                        return
 
     def map_check(self):
         if self.player.hitbox_rect.left < 0:

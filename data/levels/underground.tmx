@@ -107,7 +107,7 @@
   <object id="137" name="static_chain" gid="326" x="357.667" y="518.333" width="29" height="70"/>
  </objectgroup>
  <objectgroup id="11" name="Players">
-  <object id="197" name="player" gid="319" x="77.3979" y="319.121" width="62" height="64"/>
+  <object id="197" name="player" gid="319" x="3592.94" y="509.97" width="62" height="64"/>
  </objectgroup>
  <objectgroup id="16" name="Enemies">
   <object id="114" name="skeleton" gid="354" x="2816.29" y="582.243" width="64" height="78">

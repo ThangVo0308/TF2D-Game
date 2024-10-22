@@ -29,8 +29,8 @@ class Main:
             1: load_pygame(join(base_path, '..', 'data', 'levels', 'outsite.tmx')),
         }
 
-        #self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
-        #                           self.audio_files, self.data, self.switch_map)
+        self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames,
+                                  self.audio_files, self.data, self.switch_map, self.selectedPlayer)
 
         self.audio_files['bg_music'].play(-1)
         self.audio_files['bg_music'].set_volume(1.0)
@@ -51,6 +51,7 @@ class Main:
             'thorn': import_folder(join(base_path, '..', 'graphics', 'enemies', 'thorn')),
             'tooth': import_folder(join(base_path, '..', 'graphics', 'enemies', 'tooth', 'run')),
             'saw': import_folder(join('..', 'graphics', 'enemies', 'saw', 'animation')),
+            'saw_chain': import_image(join('..', 'graphics', 'enemies', 'saw', 'saw_chain')),
             'bear_trap': import_folder(join(base_path, '..', 'graphics', 'objects', 'bear_trap')),
             'moving_chain': import_folder(join(base_path, '..', 'graphics', 'objects', 'chain_moving')),
             'snake': import_folder(join(base_path, '..', 'graphics', 'objects', 'snake')),
@@ -64,6 +65,7 @@ class Main:
             'player_knight': import_sub_folders(join(base_path, '..', 'graphics', 'player', 'knight')),
             'player_mage': import_sub_folders(join(base_path,'..', 'graphics', 'player','mage')),
             'player_rogue': import_sub_folders(join(base_path,'..', 'graphics', 'player','Rogue')),
+            'water': import_folder(join('..', 'graphics', 'objects', 'water')),
         }
 
         self.audio_files = {
