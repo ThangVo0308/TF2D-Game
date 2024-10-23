@@ -255,6 +255,3 @@ class Player(pygame.sprite.Sprite):
         self.get_state()
         self.animate(dt)
         self.flicker()
-
-        print(self.state)
-
