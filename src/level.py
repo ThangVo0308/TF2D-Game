@@ -237,6 +237,7 @@ class Level:
                     ParticleEffectSprite(item.rect.center, self.particle_frames, self.all_sprites)
                     self.coin_sound.play()
 
+
     #next to map
     def next_level(self):
         if self.finish_rect is not None and isinstance(self.finish_rect, pygame.Rect):
