@@ -121,7 +121,7 @@
    </properties>
   </object>
   <object id="167" name="bear" gid="356" x="3641.2" y="204.727" width="125" height="88"/>
-  <object id="168" name="bear" gid="356" x="1572.72" y="267.394" width="125" height="88"/>
+  <object id="168" name="bear" gid="356" x="1618.05" y="268.727" width="125" height="88"/>
   <object id="169" name="bear" gid="356" x="1394.41" y="589.091" width="125" height="88"/>
   <object id="188" name="tooth" gid="355" x="2872.8" y="576.394" width="67" height="64">
    <properties>

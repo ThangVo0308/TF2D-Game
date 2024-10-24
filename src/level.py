@@ -229,13 +229,14 @@ class Level:
 
     def item_collision(self):
         if self.item_sprites:
-            collided_items = pygame.sprite.spritecollide(self.player, self.item_sprites, True)
+            collided_items = pygame.sprite.spritecollide(self.player, self.item_sprites, False)
             for item in collided_items:
                 if self.player.hitbox_rect.colliderect(item.rect):
                     item.pick_up()
                     item.activate()
                     ParticleEffectSprite(item.rect.center, self.particle_frames, self.all_sprites)
                     self.coin_sound.play()
+                    item.kill()
 
     #next to map
     def next_level(self):
@@ -272,4 +273,5 @@ class Level:
         self.map_check()
 
         self.all_sprites.draw(self.player.hitbox_rect.center, dt)
+
 
