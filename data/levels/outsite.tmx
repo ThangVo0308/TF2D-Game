@@ -169,7 +169,7 @@
   </object>
  </objectgroup>
  <objectgroup id="6" name="Players">
-  <object id="57" name="player" gid="520" x="3489" y="1089.12" width="61" height="59"/>
+  <object id="57" name="player" gid="520" x="73.6061" y="573.968" width="61" height="59"/>
  </objectgroup>
  <objectgroup id="7" name="Enemies">
   <object id="59" name="tooth" gid="524" x="1307" y="448" width="67" height="64">
