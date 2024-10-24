@@ -50,8 +50,8 @@ class Main:
             'skeleton': import_folder(join(base_path, '..', 'graphics', 'enemies', 'skeleton', 'run')),
             'thorn': import_folder(join(base_path, '..', 'graphics', 'enemies', 'thorn')),
             'tooth': import_folder(join(base_path, '..', 'graphics', 'enemies', 'tooth', 'run')),
-            'saw': import_folder(join('..', 'graphics', 'enemies', 'saw', 'animation')),
-            'saw_chain': import_image(join('..', 'graphics', 'enemies', 'saw', 'saw_chain')),
+            'saw': import_folder(join(base_path,'..', 'graphics', 'enemies', 'saw', 'animation')),
+            'saw_chain': import_image(join(base_path,'..', 'graphics', 'enemies', 'saw', 'saw_chain')),
             'bear_trap': import_folder(join(base_path, '..', 'graphics', 'objects', 'bear_trap')),
             'moving_chain': import_folder(join(base_path, '..', 'graphics', 'objects', 'chain_moving')),
             'snake': import_folder(join(base_path, '..', 'graphics', 'objects', 'snake')),
@@ -65,7 +65,7 @@ class Main:
             'player_knight': import_sub_folders(join(base_path, '..', 'graphics', 'player', 'knight')),
             'player_mage': import_sub_folders(join(base_path,'..', 'graphics', 'player','mage')),
             'player_rogue': import_sub_folders(join(base_path,'..', 'graphics', 'player','Rogue')),
-            'water': import_folder(join('..', 'graphics', 'objects', 'water')),
+            'water': import_folder(join(base_path,'..', 'graphics', 'objects', 'water')),
         }
 
         self.audio_files = {
