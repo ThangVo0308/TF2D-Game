@@ -122,19 +122,16 @@ class Item(AnimatedSprite):
             if self.frames_index < len(self.frames):
                 self.image = self.frames[int(self.frames_index)]
             else:  # destroy
-                # Kiểm tra nếu hitbox của player va chạm với vùng của item
                 if self.player.hitbox_rect.colliderect(self.rect.inflate(TILE_SIZE, TILE_SIZE)):
-                    print(self.data.health)
                     self.data.health -= 2
 
-                self.kill()  # Xóa item
+                self.kill()
 
 
     def activate(self):
         if not self.is_picked_up:
             if self.item_type == 'key':
                 self.data.keys += 1
-                print(self.data.keys)
 
             elif self.item_type == 'buff':
                 self.apply_buff()

@@ -24,13 +24,13 @@ class Player(pygame.sprite.Sprite):
             self.image = self.frames[self.state][self.frame_index]
             # rects
             self.rect = self.image.get_rect(topleft=pos)
-            self.hitbox_rect = self.rect.inflate(0, 0)
+            self.hitbox_rect = self.rect.inflate(5, 0)
             self.old_rect = self.hitbox_rect.copy()
             self.hitbox_rect.topleft = self.rect.topleft
 
             # movement
             self.direction = vector()
-            self.speed = 30
+            self.speed = 20
             self.gravity = 30
             self.jump = False
             self.jump_height = 15
@@ -209,6 +209,9 @@ class Player(pygame.sprite.Sprite):
         previous_image_width = self.image.get_width()
 
         self.frame_index += ANIMATION_SPEED * dt
+        if self.state == 'Hurt' and self.frame_index >= len(self.frames[self.state]):
+            self.state = 'Idle'  # Khi hoạt ảnh Hurt kết thúc, quay lại trạng thái Idle
+
         if self.state == 'Attack' and self.frame_index >= len(self.frames[self.state]):
             self.state = 'Idle'
         self.image = self.frames[self.state][int(self.frame_index % len(self.frames[self.state]))]
@@ -231,16 +234,13 @@ class Player(pygame.sprite.Sprite):
 
     def flicker(self):  # animation when player gets hit
         self.original_image = self.image.copy()
-        if self.timers['delay enemy damage'].active and sin(pygame.time.get_ticks() * 35) >= 0:
-            white_mask = pygame.mask.from_surface(self.image)
-            white_surface = white_mask.to_surface()  # Convert to surface which will display white pixel
-            white_surface.set_colorkey('black')  # Remove black image around player
 
-            self.image = self.original_image.copy()
-            self.image.blit(white_surface, (0, 0))
+        if self.timers['delay enemy damage'].active and sin(pygame.time.get_ticks() * 35) >= 0:
+            self.state = 'Hurt'
+            self.image = self.frames[self.state][int(self.frame_index % len(self.frames[self.state]))]
         else:
-            # return to original image
             self.image = self.original_image
+
 
     def update(self, dt):
         self.old_rect = self.rect.copy()
