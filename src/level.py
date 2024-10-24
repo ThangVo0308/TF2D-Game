@@ -8,9 +8,10 @@ from sprites import Sprite, movingSprite, AnimatedSprite, ParticleEffectSprite, 
 from player import Player
 from groups import AllSprite
 from enemies import Tooth, Bear, Skeleton
+from alert import Alert
 
 class Level:
-    def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player):
+    def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player, alert):
         self.display_surface = pygame.display.get_surface()
         self.data = data
         self.audio_files = audio_files
@@ -63,6 +64,9 @@ class Level:
         self.hit_sound = audio_files['hit']
 
         self.damage_sound.set_volume(0.3)
+
+        self.alert = alert
+        
 
     def setup(self, tmx_map, level_frames):
         # tiles
@@ -208,13 +212,13 @@ class Level:
     #next to map
     def next_level(self):
         if self.player.hitbox_rect.colliderect(self.finish_rect):
-            if self.data.keys == 0:
+            if self.data.keys == 1:
                 self.data.current_level += 1
                 self.switch_map('level', level=self.data.current_level)
                 print('Next')
                 return
-            else:
-                print('Collect more keys')
+            else:              
+                self.alert.display_alert("You have to collect more keys!", 2000)
                 return
 
     def map_check(self):
@@ -227,7 +231,6 @@ class Level:
 
     def run(self, dt):
         self.display_surface.fill('black')
-
         self.all_sprites.update(dt)
         self.hit_collision()
 
