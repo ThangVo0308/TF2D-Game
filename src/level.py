@@ -7,8 +7,7 @@ from setting import *
 from sprites import Sprite, movingSprite, AnimatedSprite, ParticleEffectSprite, Item
 from player import Player
 from groups import AllSprite
-from enemies import Tooth, Bear, Skeleton
-from alert import Alert
+from enemies import Tooth, Bear, Skeleton, FloorSpike
 
 class Level:
     def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player, alert):
@@ -247,7 +246,7 @@ class Level:
         if self.finish_rect is not None and isinstance(self.finish_rect, pygame.Rect):
             if isinstance(self.player.hitbox_rect, pygame.Rect):
                 if self.player.hitbox_rect.colliderect(self.finish_rect):
-                    if self.data.keys == 3:
+                    if self.data.keys == 2:
                         self.data.current_level += 1
                         self.switch_map('level', level=self.data.current_level)
                         print('Next')
