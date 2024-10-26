@@ -116,9 +116,10 @@ class Item(AnimatedSprite):
         self.item_expiration_time = 10  # Duration item effect
 
     def animate(self, dt):
-        if self.item_type == 'boom':
-            self.frames_index += self.animation_speed * dt
+        self.frames_index += self.animation_speed * dt
+        self.image = self.frames[int(self.frames_index % len(self.frames))]
 
+        if self.item_type == 'boom':
             if self.frames_index < len(self.frames):
                 self.image = self.frames[int(self.frames_index)]
             else:  # destroy
