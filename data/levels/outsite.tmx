@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="14" nextobjectid="179">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="14" nextobjectid="190">
  <tileset firstgid="1" source="../tilesets/background/bg_outsite.tsx"/>
  <tileset firstgid="421" source="../tilesets/terrain/terrain_outsite.tsx"/>
  <tileset firstgid="485" source="../tilesets/objects.tsx"/>
@@ -195,55 +195,21 @@
     <property name="health" value="24"/>
    </properties>
   </object>
-  <object id="147" name="floor_spike" gid="515" x="3266" y="705" width="64" height="64">
-   <properties>
-    <property name="inverted" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="148" name="floor_spike" gid="515" x="3388" y="705" width="64" height="64">
-   <properties>
-    <property name="inverted" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="149" name="floor_spike" gid="515" x="3520" y="705" width="64" height="64">
-   <properties>
-    <property name="inverted" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="150" name="floor_spike" gid="515" x="3404" y="1089" width="64" height="64">
-   <properties>
-    <property name="inverted" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="157" name="floor_spike" gid="515" x="1472" y="1154" width="64" height="64">
-   <properties>
-    <property name="inverted" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="158" name="floor_spike" gid="515" x="773" y="1155" width="64" height="64">
-   <properties>
-    <property name="inverted" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="160" name="floor_spike" gid="515" x="300" y="1153" width="64" height="64">
-   <properties>
-    <property name="inverted" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="163" name="floor_spike" gid="515" x="2881" y="259" width="64" height="64">
-   <properties>
-    <property name="inverted" type="bool" value="false"/>
-   </properties>
-  </object>
   <object id="166" name="tooth" gid="524" x="2503.5" y="1154" width="67" height="64">
    <properties>
     <property name="health" value="24"/>
    </properties>
   </object>
+  <object id="179" name="floor_spike" gid="515" x="1473" y="1152" width="64" height="32"/>
+  <object id="181" name="floor_spike" gid="515" x="3402" y="1088" width="64" height="32"/>
+  <object id="183" name="floor_spike" gid="515" x="3263" y="704" width="64" height="32"/>
+  <object id="184" name="floor_spike" gid="515" x="3518" y="705" width="64" height="32"/>
+  <object id="186" name="floor_spike" gid="515" x="2944.67" y="254.667" width="64" height="32"/>
+  <object id="187" name="floor_spike" gid="515" x="767.333" y="1152" width="64" height="32"/>
+  <object id="188" name="floor_spike" gid="515" x="298.333" y="1152.67" width="64" height="32"/>
  </objectgroup>
  <objectgroup id="8" name="Items">
   <object id="65" name="key" gid="529" x="3518" y="191.333" width="64" height="64"/>
-  <object id="66" name="key" gid="529" x="1165.33" y="129.333" width="64" height="64"/>
   <object id="67" name="key" gid="529" x="385.333" y="1024.67" width="64" height="64"/>
   <object id="68" name="hp" gid="527" x="2881.33" y="1022" width="64" height="64"/>
   <object id="69" name="hp" gid="527" x="1758" y="835.333" width="64" height="64"/>
@@ -251,8 +217,6 @@
   <object id="100" name="hp" gid="527" x="688" y="1112" width="64" height="64"/>
   <object id="101" name="buff" gid="535" x="3032" y="139" width="24" height="30"/>
   <object id="167" name="key" gid="529" x="3693" y="534" width="64" height="64"/>
-  <object id="168" name="key" gid="529" x="2432" y="1031" width="64" height="64"/>
-  <object id="169" name="key" gid="529" x="3236" y="984" width="64" height="64"/>
  </objectgroup>
  <objectgroup id="9" name="Data">
   <properties>
