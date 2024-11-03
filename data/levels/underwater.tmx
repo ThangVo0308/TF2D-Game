@@ -255,6 +255,15 @@
   <object id="136" name="buff" gid="911" x="2636" y="1681" width="24" height="30"/>
  </objectgroup>
  <objectgroup id="4" name="Data">
-  <object id="15" name="data" x="0" y="0" width="64" height="64"/>
+  <object id="15" name="data" x="0" y="0" width="64" height="64">
+   <properties>
+    <property name="bg" value=""/>
+    <property name="bottom_limit" value="200"/>
+    <property name="death_border_bottom" value="0"/>
+    <property name="horizon_line" value="600"/>
+    <property name="level_unlock" value="3"/>
+    <property name="top_limit" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
 </map>

@@ -246,7 +246,7 @@ class Level:
                     if self.data.keys == 3:
                         self.data.current_level += 1
                         self.switch_map('level', level=self.data.current_level)
-                        print('Next')
+                        self.data.keys = 0
                         return
                     else:
                         print('Collect more keys')
