@@ -17,6 +17,7 @@ class Level:
         self.audio_files = audio_files
         self.switch_map = switch_map
         self.selected_player = selected_player
+        self.key_quantity = 0
         
         # level data
         self.level_width = tmx_map.width * TILE_SIZE
@@ -237,20 +238,24 @@ class Level:
                     ParticleEffectSprite(item.rect.center, self.particle_frames, self.all_sprites)
                     self.coin_sound.play()
                     item.kill()
+                if item.item_type == 'key':
+                    self.key_quantity += 1
 
     #next to map
     def next_level(self):
         if self.finish_rect is not None and isinstance(self.finish_rect, pygame.Rect):
             if isinstance(self.player.hitbox_rect, pygame.Rect):
                 if self.player.hitbox_rect.colliderect(self.finish_rect):
-                    if self.data.keys == 3:
+                    if self.data.keys == self.key_quantity:
                         self.data.current_level += 1
                         self.switch_map('level', level=self.data.current_level)
                         self.data.keys = 0
+                        self.key_quantity = 0
                         return
                     else:
                         print('Collect more keys')
                         return
+
 
     def map_check(self):
         if self.player.hitbox_rect.left < 0:
