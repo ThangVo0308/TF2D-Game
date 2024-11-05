@@ -118,14 +118,29 @@ class Bear(pygame.sprite.Sprite):
         self.image = self.frames[int(self.frames_index % len(self.frames))]
 
 class FloorSpike(pygame.sprite.Sprite):
-    def __init__(self, pos, frames, groups):
+    def __init__(self, pos, frames, groups, flip_down=False, flip_left=False, flip_right=False):
         super().__init__(groups)
-        self.frames, self.frames_index = frames, 0
-        self.image = self.frames[self.frames_index]
+        self.frames = frames
+        self.frames_index = 0
+        self.flip_down = flip_down
+        self.flip_left = flip_left
+        self.flip_right = flip_right
+        self.image = self.get_image()
         self.rect = self.image.get_rect(topleft=pos)
         self.z = Z_LAYERS['main']
 
+    def get_image(self):
+        image = self.frames[int(self.frames_index % len(self.frames))]
+
+        if self.flip_down:
+            image = pygame.transform.flip(image, False, True)  # Lat xuong
+        elif self.flip_left:
+            image = pygame.transform.rotate(image, 90)  # Lat trai
+        elif self.flip_right:
+            image = pygame.transform.rotate(image, -90)  # Lat phai
+
+        return image
+
     def update(self, dt):
         self.frames_index += ANIMATION_SPEED * dt
-        self.image = self.frames[int(self.frames_index % len(self.frames))]
-
+        self.image = self.get_image()

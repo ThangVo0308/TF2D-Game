@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="155">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="11" nextobjectid="221">
  <tileset firstgid="1" source="../tilesets/background/bg_underwatermap.tsx"/>
  <tileset firstgid="721" source="../tilesets/terrain/terrain_underwatermap.tsx"/>
  <tileset firstgid="776" source="../tilesets/terrain/terrain_insiteunderwater.tsx"/>
@@ -25,12 +25,12 @@
 469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,489,490,491,492,493,494,495,496,737,737,737,737,737,737,737,733,733,733,733,733,469,470,471,472,473,474,475,476,477,478,479,480,481,482,483,484,485,486,487,488,
 505,506,507,508,509,510,511,512,513,514,515,516,517,518,519,520,521,522,737,737,737,737,737,737,737,737,737,737,737,737,737,737,737,737,737,733,733,733,733,733,505,506,507,508,509,510,511,512,513,514,515,516,517,518,519,520,521,522,523,524,
 541,542,543,544,545,546,547,548,549,550,551,552,553,554,555,556,557,558,737,737,737,737,737,737,737,737,737,737,737,737,737,737,737,737,737,733,733,733,733,733,541,542,543,544,545,546,547,548,549,550,551,552,553,554,555,556,557,558,559,560,
-577,578,579,580,581,582,583,584,585,586,587,588,589,590,591,592,593,594,737,737,597,598,599,600,601,602,603,604,605,606,607,608,609,610,611,612,577,578,579,580,577,578,579,580,581,582,583,584,585,586,587,588,589,590,591,592,593,594,595,596,
+577,578,579,580,581,582,583,584,585,586,587,588,589,590,591,592,593,594,737,737,597,598,599,600,601,602,603,604,605,606,733,733,733,610,611,612,577,578,579,580,577,578,579,580,581,582,583,584,585,586,587,588,589,590,591,592,593,594,595,596,
 613,614,615,616,617,618,619,620,621,622,623,624,625,626,627,628,629,630,737,737,633,634,635,636,637,638,639,640,641,642,643,644,645,646,647,648,613,614,615,616,613,614,615,616,617,618,619,620,621,622,623,624,625,626,627,628,629,630,631,632,
 649,650,651,652,653,654,655,656,657,658,659,660,661,662,663,737,737,737,737,737,737,737,737,672,673,674,675,676,677,678,679,680,681,682,683,684,649,650,651,652,649,650,651,652,653,654,655,656,657,658,659,660,661,662,663,664,665,666,667,668,
 685,686,687,688,689,690,691,692,693,694,695,696,697,698,699,737,737,737,737,737,737,737,737,708,709,710,711,712,713,714,715,716,717,718,719,720,685,686,687,688,685,686,687,688,689,690,691,692,693,694,695,696,697,698,699,700,701,702,703,704,
 704,705,706,707,708,709,710,711,693,694,695,696,697,698,699,737,737,702,703,704,705,737,737,708,709,710,711,712,693,694,695,696,697,698,699,700,701,702,703,704,621,622,623,624,625,626,627,628,629,733,733,733,733,733,733,733,733,733,733,733,
-693,694,695,696,697,698,699,700,701,702,703,704,705,706,707,737,737,710,693,694,695,737,737,698,699,700,701,702,703,704,705,706,707,708,709,710,711,693,694,695,657,658,659,660,661,662,663,664,665,733,733,733,733,733,733,733,733,733,733,733,
+693,694,695,696,697,698,699,700,701,702,703,704,705,706,707,737,737,710,693,694,695,737,737,698,699,700,701,702,703,704,733,706,707,708,709,710,711,693,694,695,657,658,659,660,661,662,663,664,665,733,733,733,733,733,733,733,733,733,733,733,
 703,704,705,706,707,708,709,710,711,712,703,704,705,706,707,737,737,710,711,693,694,737,737,737,737,737,737,737,737,737,704,705,706,707,708,709,693,694,695,696,621,622,623,622,623,624,625,626,627,733,733,733,733,733,733,733,733,733,733,733,
 695,696,697,698,699,700,701,702,703,704,705,706,707,708,709,737,737,693,694,695,696,737,737,737,737,737,737,737,737,737,706,693,694,695,696,697,698,699,700,701,657,658,659,658,659,660,661,662,663,733,733,733,733,733,733,733,733,733,733,733,
 694,695,696,697,698,699,700,701,702,703,704,705,706,707,708,737,737,737,737,737,737,737,737,737,737,737,737,737,737,737,704,705,706,707,708,709,710,711,693,694,621,622,623,624,625,626,627,628,629,630,631,632,633,634,635,636,637,638,639,640,
@@ -93,10 +93,10 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,793,794,782,811,811,811,811,811,811,811,811,811,812,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,793,794,795,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 776,777,777,778,0,0,0,0,0,0,0,0,0,0,0,793,794,795,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-793,788,789,795,0,0,0,0,0,0,0,0,0,0,0,793,794,795,0,0,776,777,777,777,777,777,777,777,777,777,737,737,777,777,777,777,777,777,777,778,0,0,0,0,0,0,0,0,0,776,777,777,777,777,777,777,777,777,777,778,
-793,805,806,795,0,0,0,0,0,0,0,776,777,777,778,810,811,812,0,0,810,811,811,2684355342,794,794,794,794,794,794,737,737,794,794,794,794,794,794,794,795,0,0,0,0,0,0,0,0,0,793,794,794,794,794,794,794,794,794,794,795,
-793,794,794,795,0,0,0,0,0,0,0,793,788,789,795,0,0,0,0,0,0,0,0,793,794,794,794,794,794,794,794,794,794,794,794,794,794,794,794,795,0,0,0,0,0,0,0,0,0,793,794,794,794,794,794,794,794,794,794,795,
-793,782,811,812,0,776,777,778,0,847,0,793,805,806,795,0,0,0,0,0,0,0,0,793,794,794,794,794,794,794,794,794,791,794,794,794,794,794,794,795,0,0,0,0,0,0,0,0,0,810,811,811,811,811,811,811,811,811,811,812,
+793,788,789,795,0,0,0,0,0,0,0,0,0,0,0,793,794,795,0,0,776,777,777,777,777,777,777,777,777,778,0,0,0,776,777,777,777,777,777,778,0,0,0,0,0,0,0,0,0,776,777,777,777,777,777,777,777,777,777,778,
+793,805,806,795,0,0,0,0,0,0,0,776,777,777,778,810,811,812,0,0,810,811,811,2684355342,794,794,794,794,794,795,794,794,776,802,794,794,794,794,794,795,0,0,0,0,0,0,0,0,0,793,794,794,794,794,794,794,794,794,794,795,
+793,794,794,795,0,0,0,0,0,0,0,793,788,789,795,0,0,0,0,0,0,0,0,793,794,794,794,794,794,1073742606,1073742635,1073742635,1073742627,3221226254,794,794,794,794,794,795,0,0,0,0,0,0,0,0,0,793,794,794,794,794,794,794,794,794,794,795,
+793,782,811,812,0,776,777,778,0,0,0,793,805,806,795,0,0,0,0,0,0,0,0,793,794,794,794,794,794,794,794,794,791,794,794,794,794,794,794,795,0,0,0,0,0,0,0,0,0,810,811,811,811,811,811,811,811,811,811,812,
 793,795,0,0,0,793,794,795,0,0,0,793,794,794,795,0,0,3221226284,1073742635,1073742635,1073742636,0,0,793,794,794,794,794,794,794,794,794,808,809,794,794,794,794,794,795,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 793,795,0,0,0,810,811,812,0,0,0,793,788,789,795,0,0,793,794,794,795,0,0,810,811,811,811,811,811,811,2147484430,794,794,794,794,794,794,794,794,795,0,0,0,844,845,846,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 793,795,0,0,0,0,0,0,0,0,0,793,805,806,795,0,0,793,794,794,795,0,0,0,0,0,0,0,0,0,793,794,794,794,794,794,794,794,794,795,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -140,7 +140,7 @@
     <property name="speed" value="20"/>
    </properties>
   </object>
-  <object id="148" name="saw" x="1130" y="41.3335" width="12" height="277.333">
+  <object id="148" name="saw" x="1130" y="41.3335" width="12" height="427.833">
    <properties>
     <property name="flip" type="bool" value="false"/>
     <property name="platform" type="bool" value="false"/>
@@ -149,24 +149,24 @@
   </object>
  </objectgroup>
  <objectgroup id="5" name="Players">
-  <object id="22" name="player" gid="896" x="76.2431" y="955.757" width="56" height="96"/>
+  <object id="22" name="player" gid="896" x="1278.41" y="1025.76" width="56" height="96"/>
  </objectgroup>
  <objectgroup id="9" name="Water">
-  <object id="142" name="water" x="1915.66" y="1034" width="124" height="124">
+  <object id="142" name="water" x="1919.66" y="1086.83" width="128" height="64.1667">
    <properties>
     <property name="flip" type="bool" value="false"/>
     <property name="platform" type="bool" value="false"/>
     <property name="speed" value="1"/>
    </properties>
   </object>
-  <object id="143" name="water" x="2169" y="1794" width="129.333" height="122.667">
+  <object id="143" name="water" x="2175.67" y="1794" width="128" height="122.667">
    <properties>
     <property name="flip" type="bool" value="false"/>
     <property name="platform" type="bool" value="false"/>
     <property name="speed" value="1"/>
    </properties>
   </object>
-  <object id="144" name="water" x="1151.66" y="1728.67" width="130.667" height="189.333">
+  <object id="144" name="water" x="1151.66" y="1728.67" width="130.667" height="128">
    <properties>
     <property name="flip" type="bool" value="false"/>
     <property name="platform" type="bool" value="false"/>
@@ -188,228 +188,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="6" name="Enemies" locked="1">
-  <object id="30" name="floor_spike" gid="891" x="1022" y="1728" width="64" height="64"/>
-  <object id="33" name="floor_spike" gid="891" x="3265.33" y="1534.67" width="64" height="64"/>
-  <object id="34" name="floor_spike" gid="891" x="3332" y="1537.33" width="64" height="64"/>
-  <object id="38" name="floor_spike" gid="891" x="1857.33" y="1025.33" width="64" height="64"/>
-  <object id="39" name="floor_spike" gid="891" x="3204" y="1024" width="64" height="64"/>
-  <object id="40" name="floor_spike" gid="891" x="3264" y="1022.67" width="64" height="64"/>
-  <object id="41" name="floor_spike" gid="891" x="1089.33" y="1280" width="64" height="64">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="45" name="floor_spike" gid="891" x="1343" y="1472.33" width="64" height="64" rotation="90">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="46" name="floor_spike" gid="891" x="1343" y="1407" width="64" height="64" rotation="90">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="47" name="floor_spike" gid="891" x="1344.33" y="1342.67" width="64" height="64" rotation="90">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="48" name="floor_spike" gid="891" x="1344" y="1280" width="64" height="64" rotation="90">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="49" name="floor_spike" gid="891" x="1088.67" y="1345.33" width="64" height="64" rotation="-90">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="50" name="floor_spike" gid="891" x="1087.33" y="1408" width="64" height="64" rotation="-90">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="51" name="floor_spike" gid="891" x="1088.67" y="1472" width="64" height="64" rotation="-90">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="52" name="floor_spike" gid="891" x="1086.67" y="1536.67" width="64" height="64" rotation="-90">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="53" name="floor_spike" gid="1073742715" x="1088.67" y="1600" width="64" height="64">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="55" name="floor_spike" gid="1073742715" x="1280" y="1600" width="64" height="64">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="57" name="floor_spike" gid="891" x="1280" y="1281.33" width="64" height="64">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="58" name="floor_spike" gid="891" x="1280.67" y="320.667" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="true"/>
-   </properties>
-  </object>
-  <object id="59" name="floor_spike" gid="891" x="1345.67" y="319.667" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="60" name="floor_spike" gid="891" x="1408.33" y="321.333" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="61" name="floor_spike" gid="891" x="1472.67" y="320.667" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="62" name="floor_spike" gid="891" x="1536.67" y="320.333" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="63" name="floor_spike" gid="891" x="1600.67" y="319.667" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="64" name="floor_spike" gid="891" x="1664" y="319.333" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="65" name="floor_spike" gid="891" x="959" y="384" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="66" name="floor_spike" gid="891" x="1021" y="383" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="67" name="floor_spike" gid="891" x="1085" y="384" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="68" name="floor_spike" gid="891" x="2170" y="450" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="69" name="floor_spike" gid="891" x="2107" y="446" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="70" name="floor_spike" gid="891" x="2238" y="448" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="71" name="floor_spike" gid="891" x="1341.5" y="895" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="72" name="floor_spike" gid="891" x="1407" y="895" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="73" name="floor_spike" gid="891" x="1471.5" y="895.5" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="74" name="floor_spike" gid="891" x="1537" y="896" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="75" name="floor_spike" gid="891" x="1601" y="895.5" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="76" name="floor_spike" gid="891" x="1665.5" y="894.5" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="77" name="floor_spike" gid="891" x="1729.5" y="896" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="78" name="floor_spike" gid="891" x="1792.5" y="896" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="79" name="floor_spike" gid="891" x="1985" y="1599" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="80" name="floor_spike" gid="891" x="2050" y="1600" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="81" name="floor_spike" gid="891" x="2115" y="1601" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="83" name="floor_spike" gid="891" x="2180" y="1601" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="84" name="floor_spike" gid="891" x="2367" y="1600" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="85" name="floor_spike" gid="891" x="2433" y="1598" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="86" name="floor_spike" gid="891" x="2497" y="1600" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="87" name="floor_spike" gid="891" x="2562" y="1598" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="88" name="floor_spike" gid="891" x="3328" y="1281.33" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
-  <object id="89" name="floor_spike" gid="891" x="3393.33" y="1281.33" width="64" height="64" rotation="180">
-   <properties>
-    <property name="flip" type="bool" value="false"/>
-   </properties>
-  </object>
+ <objectgroup id="6" name="Enemies">
   <object id="112" name="tooth" gid="900" x="2.5" y="196" width="67" height="64">
    <properties>
     <property name="health" value="24"/>
@@ -421,11 +200,6 @@
    </properties>
   </object>
   <object id="119" name="tooth" gid="900" x="2291.47" y="1022.36" width="67" height="64">
-   <properties>
-    <property name="health" value="24"/>
-   </properties>
-  </object>
-  <object id="120" name="tooth" gid="900" x="2011.95" y="549.818" width="67" height="64">
    <properties>
     <property name="health" value="24"/>
    </properties>
@@ -443,11 +217,6 @@
   <object id="123" name="tooth" gid="900" x="3582.5" y="1534" width="67" height="64">
    <properties>
     <property name="health" value="24"/>
-   </properties>
-  </object>
-  <object id="124" name="skeleton" gid="899" x="960" y="583" width="64" height="78">
-   <properties>
-    <property name="health" value="36"/>
    </properties>
   </object>
   <object id="125" name="skeleton" gid="899" x="400" y="1225" width="64" height="78">
@@ -470,15 +239,160 @@
     <property name="health" value="36"/>
    </properties>
   </object>
+  <object id="187" name="floor_spike" gid="2147484539" x="1344.17" y="351.5" width="64" height="32" rotation="180">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="189" name="floor_spike" gid="2147484539" x="1280" y="350.833" width="64" height="32" rotation="180">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="191" name="floor_spike" gid="2147484539" x="1408.5" y="351.5" width="64" height="32" rotation="180">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="192" name="floor_spike" gid="2147484539" x="1475" y="351.5" width="64" height="32" rotation="180">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="193" name="floor_spike" gid="2147484539" x="1537.5" y="351.5" width="64" height="32" rotation="180">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="194" name="floor_spike" gid="2147484539" x="1600.5" y="351.5" width="64" height="32" rotation="180">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="195" name="floor_spike" gid="2147484539" x="1217" y="351.5" width="64" height="32" rotation="180">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="199" name="floor_spike" gid="1073742715" x="1059.67" y="1308.83" width="64" height="32" rotation="90">
+   <properties>
+    <property name="flip_left" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="200" name="floor_spike" gid="1073742715" x="1058" y="1366.83" width="64" height="32" rotation="90">
+   <properties>
+    <property name="flip_left" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="201" name="floor_spike" gid="1073742715" x="1058.33" y="1429.17" width="64" height="32" rotation="90">
+   <properties>
+    <property name="flip_left" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="202" name="floor_spike" gid="1073742715" x="1056.17" y="1490" width="64" height="32" rotation="90">
+   <properties>
+    <property name="flip_left" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="203" name="floor_spike" gid="1073742715" x="1340.67" y="1308.08" width="64" height="32" rotation="-90">
+   <properties>
+    <property name="flip_right" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="204" name="floor_spike" gid="1073742715" x="1340.67" y="1380.42" width="64" height="32" rotation="-90">
+   <properties>
+    <property name="flip_right" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="205" name="floor_spike" gid="1073742715" x="1340.67" y="1441.58" width="64" height="32" rotation="-90">
+   <properties>
+    <property name="flip_right" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="206" name="floor_spike" gid="1073742715" x="1340.67" y="1504.25" width="64" height="32" rotation="-90">
+   <properties>
+    <property name="flip_right" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="207" name="floor_spike" gid="3221226363" x="1090" y="1569" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="208" name="floor_spike" gid="3221226363" x="1280" y="1567.5" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="209" name="floor_spike" gid="2147484539" x="3268" y="1536" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="210" name="floor_spike" gid="2147484539" x="3336" y="1536" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="211" name="floor_spike" gid="2147484539" x="3280" y="1024" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="212" name="floor_spike" gid="2147484539" x="3580" y="1024" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="false"/>
+   </properties>
+  </object>
+  <object id="213" name="floor_spike" gid="3221226363" x="1725.33" y="928" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="214" name="floor_spike" gid="3221226363" x="1662" y="927.333" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="215" name="floor_spike" gid="3221226363" x="1598.67" y="926.667" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="216" name="floor_spike" gid="3221226363" x="1535.33" y="925.333" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="217" name="floor_spike" gid="3221226363" x="1471.33" y="926" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="218" name="floor_spike" gid="3221226363" x="1408" y="926.667" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="219" name="floor_spike" gid="3221226363" x="1344" y="928" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="220" name="floor_spike" gid="3221226363" x="1280.67" y="928" width="64" height="32">
+   <properties>
+    <property name="flip" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="8" name="Items">
   <object id="131" name="hp" gid="903" x="1402" y="1030" width="64" height="64"/>
   <object id="132" name="hp" gid="903" x="1862" y="454" width="64" height="64"/>
   <object id="133" name="hp" gid="903" x="2210" y="1742" width="64" height="64"/>
   <object id="134" name="hp" gid="903" x="2824" y="1274" width="64" height="64"/>
-  <object id="135" name="buff" gid="911" x="1040" y="291" width="24" height="30"/>
-  <object id="136" name="buff" gid="911" x="2636" y="1681" width="24" height="30"/>
-  <object id="149" name="key" gid="905" x="1613.3" y="428.182" width="34" height="19"/>
+  <object id="135" name="buff" gid="911" x="966.5" y="205.5" width="24" height="30"/>
+  <object id="136" name="buff" gid="911" x="2654" y="1557.5" width="24" height="30"/>
+  <object id="149" name="key" gid="905" x="1549.8" y="392.182" width="34" height="19"/>
   <object id="150" name="key" gid="905" x="1207.24" y="1246.36" width="34" height="19"/>
   <object id="151" name="key" gid="905" x="3779.97" y="913.03" width="34" height="19"/>
   <object id="152" name="buff" gid="911" x="810" y="1016.33" width="24" height="30"/>

@@ -152,9 +152,13 @@ class Level:
                 Skeleton((obj.x, obj.y), level_frames['skeleton'],
                       (self.all_sprites, self.damage_sprites, self.skeleton_sprites), self.collision_sprites, obj.properties['health'])
             elif obj.name == 'floor_spike':
-                FloorSpike((obj.x, obj.y), level_frames['floor_spike'],
-                           (self.all_sprites, self.damage_sprites, self.floor_spikes))
+                flip_down = obj.properties.get('flip', False)
+                flip_left = obj.properties.get('flip_left', False)
+                flip_right = obj.properties.get('flip_right', False)
 
+                FloorSpike((obj.x, obj.y), level_frames['floor_spike'],
+                   (self.all_sprites, self.damage_sprites, self.floor_spikes),
+                          flip_down=flip_down, flip_left=flip_left, flip_right=flip_right)
 
         # Items
         for obj in tmx_map.get_layer_by_name('Items'):
