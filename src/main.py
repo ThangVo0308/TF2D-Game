@@ -84,7 +84,7 @@ class Main:
 
         self.ui_frames = {
             'heart': import_folder(join(base_path, '..', 'graphics', 'ui', 'heart')),
-            'sword': import_folder(join(base_path, '..', 'graphics', 'ui', 'heart'))
+            'sword': import_folder(join(base_path, '..', 'graphics', 'ui', 'sword'))
         }
 
         self.menu_background = pygame.image.load(os.path.join(base_path, '..', 'graphics', 'map', 
