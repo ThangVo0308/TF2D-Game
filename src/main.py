@@ -68,6 +68,8 @@ class Main:
             'player_mage': import_sub_folders(join(base_path,'..', 'graphics', 'player','mage')),
             'player_rogue': import_sub_folders(join(base_path,'..', 'graphics', 'player','Rogue')),
             'water': import_folder(join(base_path,'..', 'graphics', 'objects', 'water')),
+            'big_cloud': import_folder(join(base_path, '..', 'graphics', 'objects', 'cloud', 'big_cloud')),
+
         }
 
         self.audio_files = {
