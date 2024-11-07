@@ -67,7 +67,8 @@ class Main:
             'player_knight': import_sub_folders(join(base_path, '..', 'graphics', 'player', 'knight')),
             'player_mage': import_sub_folders(join(base_path,'..', 'graphics', 'player','mage')),
             'player_rogue': import_sub_folders(join(base_path,'..', 'graphics', 'player','Rogue')),
-            'water': import_folder(join(base_path,'..', 'graphics', 'objects', 'water')),
+            'water_top': import_folder(join('..', 'graphics', 'objects', 'water', 'top')),
+            'water_body': import_image(join('..', 'graphics', 'objects', 'water', 'body')),
             'big_cloud': import_folder(join(base_path, '..', 'graphics', 'objects', 'cloud', 'big_cloud')),
 
         }

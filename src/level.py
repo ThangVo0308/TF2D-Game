@@ -185,7 +185,10 @@ class Level:
                     for col in range(columns):
                         x = obj.x + col * TILE_SIZE
                         y = obj.y + row * TILE_SIZE
-                        AnimatedSprite((x, y), level_frames['water'], self.all_sprites, Z_LAYERS['water'])
+                        if row == 0:
+                            AnimatedSprite((x, y), level_frames['water_top'], self.all_sprites, Z_LAYERS['water'])
+                        else:
+                            Sprite((x, y), level_frames['water_body'], self.all_sprites, Z_LAYERS['water'])
 
         except ValueError:
             pass
