@@ -10,7 +10,7 @@ from groups import AllSprite
 from enemies import Tooth, Bear, Skeleton, FloorSpike
 
 class Level:
-    def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player):
+    def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player, alert):
         self.finish_rect = None
         self.display_surface = pygame.display.get_surface()
         self.data = data
@@ -18,7 +18,7 @@ class Level:
         self.switch_map = switch_map
         self.selected_player = selected_player
         self.key_quantity = 0
-        
+
         # level data
         self.level_width = tmx_map.width * TILE_SIZE
         self.level_height = tmx_map.height * TILE_SIZE
@@ -66,6 +66,9 @@ class Level:
         self.hit_sound = audio_files['hit']
 
         self.damage_sound.set_volume(0.3)
+
+        self.alert = alert
+
 
     def setup(self, tmx_map, level_frames):
         # tiles
@@ -262,9 +265,8 @@ class Level:
                         self.key_quantity = 0
                         return
                     else:
-                        print('Collect more keys')
+                        self.alert.display_alert("You have to collect more keys!", 2000)
                         return
-
 
     def map_check(self):
         if self.player.hitbox_rect.left < 0:

@@ -8,6 +8,7 @@ from folderHandle import *
 from display import display
 import os
 from button import Button
+from alert import Alert
 
 
 class Main:
@@ -31,11 +32,18 @@ class Main:
             3: load_pygame(join(base_path, '..', 'data', 'levels', 'skyland.tmx'))
         }
 
-        self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames,
-                                  self.audio_files, self.data, self.switch_map, self.selectedPlayer)
+        # self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames,
+        #                           self.audio_files, self.data, self.switch_map, self.selectedPlayer)
 
         self.audio_files['bg_music'].play(-1)
-        self.audio_files['bg_music'].set_volume(1.0)
+        self.audio_files['bg_music'].set_volume(0.5)
+        self.audio_files['click_button'].set_volume(0.5)
+
+        self.show_alert = False
+        self.alert_text = ""
+        self.alert_start_time = 0
+        self.alert_duration = 2000  # Thời gian hiển thị mặc định là 2 giây
+        self.alert = Alert()
 
     def import_assets(self):
         base_path = os.path.dirname(__file__)
@@ -96,12 +104,13 @@ class Main:
     def switch_map(self, target, level=0):
         if target == 'level':
             self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
-                                       self.audio_files, self.data, self.switch_map, self.selectedPlayer)
+                                       self.audio_files, self.data, self.switch_map, self.selectedPlayer, self.alert)
 
     def check_game_over(self):
         if self.data.health <= 0:
             pygame.quit()
             sys.exit()
+            #self.menu()
 
     def run(self):
         while True:
@@ -111,9 +120,11 @@ class Main:
                     pygame.quit()
                     sys.exit()
 
+            #self.update_alert()
             self.check_game_over()
             self.current_stage.run(dt)
             self.display.update(dt)
+            self.alert.update_alert()
 
             pygame.display.update()
 
@@ -122,6 +133,7 @@ class Main:
         
         SCREEN = self.display_surface
         while True:
+            self.alert.update_alert()
             SCREEN.blit(BG, (0, 0))
 
             MENU_MOUSE_POS = pygame.mouse.get_pos()
@@ -172,6 +184,8 @@ class Main:
         while True:
             OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
             SCREEN.fill("white")    
+            #self.update_alert()
+            self.alert.update_alert()
 
             # Back button
             OPTIONS_BACK = Button(image=None, pos=(640, 600), 
@@ -195,7 +209,6 @@ class Main:
             MUSIC_VOL_VALUE_RECT = MUSIC_VOL_VALUE.get_rect(center=(880, 280))  # Position this next to the label
             SCREEN.blit(MUSIC_VOL_VALUE, MUSIC_VOL_VALUE_RECT)
 
-
             # Sound Effects Volume
             EFFECTS_VOL_TEXT = self.get_font(30).render(f"Effects Volume:", True, "Black")
             EFFECTS_VOL_RECT = EFFECTS_VOL_TEXT.get_rect(center=(540, 340))
@@ -207,13 +220,13 @@ class Main:
 
             # Volume control - Increase/Decrease buttons
             MUSIC_UP_BUTTON = Button(image=None, pos=(960, 280), text_input="+", font=self.get_font(40), 
-                                     base_color="Black", hovering_color="Green")
+                                    base_color="Black", hovering_color="Green")
             MUSIC_DOWN_BUTTON = Button(image=None, pos=(790, 280), text_input="-", font=self.get_font(40), 
-                                       base_color="Black", hovering_color="Green")
+                                    base_color="Black", hovering_color="Green")
             EFFECTS_UP_BUTTON = Button(image=None, pos=(960, 340), text_input="+", font=self.get_font(40), 
-                                       base_color="Black", hovering_color="Green")
+                                    base_color="Black", hovering_color="Green")
             EFFECTS_DOWN_BUTTON = Button(image=None, pos=(790, 340), text_input="-", font=self.get_font(40), 
-                                         base_color="Black", hovering_color="Green")
+                                        base_color="Black", hovering_color="Green")
 
             MUSIC_UP_BUTTON.changeColor(OPTIONS_MOUSE_POS)
             MUSIC_DOWN_BUTTON.changeColor(OPTIONS_MOUSE_POS)
@@ -235,6 +248,9 @@ class Main:
                         volume_music = min(1.0, volume_music + 0.1)
                         self.audio_files['bg_music'].set_volume(volume_music)
                         self.audio_files['click_button'].play()
+                        self.alert.display_alert("Nobody got you the way i do. Whatever demons you fighting through. " +
+                        "When you need somebody to turn to. Nobody got you the way i do.", 2000)
+
                     if MUSIC_DOWN_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
                         volume_music = max(0.0, volume_music - 0.1)
                         self.audio_files['bg_music'].set_volume(volume_music)
@@ -243,51 +259,73 @@ class Main:
                     # Handle Effects Volume controls
                     if EFFECTS_UP_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
                         volume_effects = min(1.0, volume_effects + 0.1)
-                        for sound in self.audio_files.values():
-                            sound.set_volume(volume_effects)
+                        self.audio_files['click_button'].set_volume(volume_effects)
                         self.audio_files['click_button'].play()
+
                     if EFFECTS_DOWN_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
                         volume_effects = max(0.0, volume_effects - 0.1)
-                        for sound in self.audio_files.values():
-                            sound.set_volume(volume_effects)
+                        self.audio_files['click_button'].set_volume(volume_effects)
                         self.audio_files['click_button'].play()
-                        
+
                     # Handle Back button click
                     if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
                         self.audio_files['click_button'].play()
-                        self.menu()
-
-            pygame.display.update()
-
+                        self.menu()            
+            pygame.display.update()    
 
     def select_character_menu(self):
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-        SCREEN = self.display_surface
         while True:
             SELECT_MOUSE_POS = pygame.mouse.get_pos()
 
-            SCREEN.fill("white")
+            self.display_surface.fill("white")
 
             SELECT_TEXT = self.get_font(45).render("SELECT CHARACTER", True, "Black")
             SELECT_RECT = SELECT_TEXT.get_rect(center=(640, 50))
-            SCREEN.blit(SELECT_TEXT, SELECT_RECT)
+            self.display_surface.blit(SELECT_TEXT, SELECT_RECT)
 
             SELECT_PLAYER_KNIGHT = Button(image=pygame.image.load(os.path.join(project_root, 'graphics', 'player', 'knight', 'Idle', '5.png')), 
-                                   pos=(440, 250), text_input="", font=self.get_font(75), base_color="#d7fcd4", hovering_color="White")            
+                                        pos=(440, 250), text_input="", font=self.get_font(75), base_color="#d7fcd4", hovering_color="White")            
             SELECT_PLAYER_MAGE = Button(image=pygame.image.load(os.path.join(project_root, 'graphics', 'player', 'mage', 'Idle', '8.png')), 
-                                 pos=(640, 250), text_input="", font=self.get_font(75), base_color="#d7fcd4", hovering_color="White")
+                                        pos=(640, 250), text_input="", font=self.get_font(75), base_color="#d7fcd4", hovering_color="White")
             SELECT_PLAYER_ROGUE = Button(image=pygame.image.load(os.path.join(project_root, 'graphics', 'player', 'Rogue', 'Idle', '0.png')), 
-                                  pos=(840, 250), text_input="", font=self.get_font(75), base_color="#d7fcd4", hovering_color="White")
+                                        pos=(840, 250), text_input="", font=self.get_font(75), base_color="#d7fcd4", hovering_color="White")
 
+            hovered = False
             for player in [SELECT_PLAYER_KNIGHT, SELECT_PLAYER_MAGE, SELECT_PLAYER_ROGUE]:
                 player.changeColor(SELECT_MOUSE_POS)
-                player.update(SCREEN)
+                player.update(self.display_surface)
+                if player.checkForInput(SELECT_MOUSE_POS):
+                    # Lấy kích thước và vị trí của nhân vật
+                    rect = player.image.get_rect(center=player.rect.center)
+                    corner_length = 20  # Độ dài của mỗi đoạn ngắn ở góc
+
+                    # Vẽ các góc (trên trái, trên phải, dưới trái, dưới phải)
+                    pygame.draw.line(self.display_surface, "Green", (rect.left, rect.top), (rect.left + corner_length, rect.top), 5)  # Trên trái ngang
+                    pygame.draw.line(self.display_surface, "Green", (rect.left, rect.top), (rect.left, rect.top + corner_length), 5)  # Trên trái dọc
+
+                    pygame.draw.line(self.display_surface, "Green", (rect.right, rect.top), (rect.right - corner_length, rect.top), 5)  # Trên phải ngang
+                    pygame.draw.line(self.display_surface, "Green", (rect.right, rect.top), (rect.right, rect.top + corner_length), 5)  # Trên phải dọc
+
+                    pygame.draw.line(self.display_surface, "Green", (rect.left, rect.bottom), (rect.left + corner_length, rect.bottom), 5)  # Dưới trái ngang
+                    pygame.draw.line(self.display_surface, "Green", (rect.left, rect.bottom), (rect.left, rect.bottom - corner_length), 5)  # Dưới trái dọc
+
+                    pygame.draw.line(self.display_surface, "Green", (rect.right, rect.bottom), (rect.right - corner_length, rect.bottom), 5)  # Dưới phải ngang
+                    pygame.draw.line(self.display_surface, "Green", (rect.right, rect.bottom), (rect.right, rect.bottom - corner_length), 5)  # Dưới phải dọc
+
+                    hovered = True  # Con chuột đang hover vào nhân vật này
 
             SELECT_BACK = Button(image=None, pos=(640, 570), 
-                                    text_input="BACK", font=self.get_font(45), base_color="Black", hovering_color="Green")
+                                text_input="BACK", font=self.get_font(45), base_color="Black", hovering_color="Green")
 
             SELECT_BACK.changeColor(SELECT_MOUSE_POS)
-            SELECT_BACK.update(SCREEN)
+            SELECT_BACK.update(self.display_surface)
+
+            # Kiểm tra và thay đổi con trỏ chuột nếu đang hover vào nhân vật
+            if hovered:
+                pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)  # Đổi sang con trỏ dạng hover (bàn tay)
+            else:
+                pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)  # Đổi lại con trỏ mũi tên mặc định
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -297,25 +335,26 @@ class Main:
                     if SELECT_PLAYER_KNIGHT.checkForInput(SELECT_MOUSE_POS):
                         self.audio_files['click_button'].play()
                         self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
-                                   self.audio_files, self.data, self.switch_map, 'player_knight')
+                                                self.audio_files, self.data, self.switch_map, 'player_knight', self.alert)
                         self.selectedPlayer = "player_knight"
                         self.run()
                     if SELECT_PLAYER_MAGE.checkForInput(SELECT_MOUSE_POS):
                         self.audio_files['click_button'].play()
                         self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
-                                   self.audio_files, self.data, self.switch_map, 'player_mage')
+                                                self.audio_files, self.data, self.switch_map, 'player_mage', self.alert)
                         self.selectedPlayer = "player_mage"
                         self.run()                        
                     if SELECT_PLAYER_ROGUE.checkForInput(SELECT_MOUSE_POS):
                         self.audio_files['click_button'].play()
                         self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
-                                   self.audio_files, self.data, self.switch_map, 'player_rogue')
+                                                self.audio_files, self.data, self.switch_map, 'player_rogue', self.alert)
                         self.selectedPlayer = "player_rogue"
                         self.run()
                     if SELECT_BACK.checkForInput(SELECT_MOUSE_POS):
                         self.audio_files['click_button'].play()
                         self.menu()                        
             pygame.display.update()
+
 
 if __name__ == "__main__":    
     main = Main()
