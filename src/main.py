@@ -26,7 +26,7 @@ class Main:
         self.selectedPlayer = "player_knight"
 
         self.tmx_maps = {
-            0: load_pygame(join(base_path, '..', 'data', 'levels', 'underwater.tmx')),
+            0: load_pygame(join(base_path, '..', 'data', 'levels', 'underground.tmx')),
             1: load_pygame(join(base_path, '..', 'data', 'levels', 'outsite.tmx')),
             2: load_pygame(join(base_path, '..', 'data', 'levels', 'underwater.tmx')),
             3: load_pygame(join(base_path, '..', 'data', 'levels', 'skyland.tmx'))
