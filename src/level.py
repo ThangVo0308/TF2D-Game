@@ -250,11 +250,16 @@ class Level:
                     ParticleEffectSprite(item.rect.center, self.particle_frames, self.all_sprites)
                     self.coin_sound.play()
                     item.kill()
-                if item.item_type == 'key':
-                    self.key_quantity += 1
+
+    def count_keys(self):
+        self.key_quantity = 0
+        for item in self.item_sprites:
+            if item.item_type == 'key':
+                self.key_quantity += 1
 
     #next to map
     def next_level(self):
+        # print(self.key_quantity)
         if self.finish_rect is not None and isinstance(self.finish_rect, pygame.Rect):
             if isinstance(self.player.hitbox_rect, pygame.Rect):
                 if self.player.hitbox_rect.colliderect(self.finish_rect):
@@ -282,6 +287,8 @@ class Level:
 
         self.all_sprites.update(dt)
         self.hit_collision()
+
+        self.count_keys()
 
         self.item_collision()
         self.attack_collision()
