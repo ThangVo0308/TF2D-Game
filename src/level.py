@@ -91,7 +91,7 @@ class Level:
 
         # Object
         for obj in tmx_map.get_layer_by_name('Objects'):
-            Sprite((obj.x, obj.y), obj.image, (self.all_sprites, self.collision_sprites))
+            Sprite((obj.x, obj.y), obj.image, (self.all_sprites, self.all_sprites))
 
         # Player
         for obj in tmx_map.get_layer_by_name('Players'):

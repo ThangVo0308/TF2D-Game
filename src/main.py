@@ -26,7 +26,7 @@ class Main:
         self.selectedPlayer = "player_knight"
 
         self.tmx_maps = {
-            0: load_pygame(join(base_path, '..', 'data', 'levels', 'underground.tmx')),
+            0: load_pygame(join(base_path, '..', 'data', 'levels', 'skyland.tmx')),
             1: load_pygame(join(base_path, '..', 'data', 'levels', 'outsite.tmx')),
             2: load_pygame(join(base_path, '..', 'data', 'levels', 'underwater.tmx')),
             3: load_pygame(join(base_path, '..', 'data', 'levels', 'skyland.tmx'))
@@ -75,8 +75,10 @@ class Main:
             'player_knight': import_sub_folders(join(base_path, '..', 'graphics', 'player', 'knight')),
             'player_mage': import_sub_folders(join(base_path,'..', 'graphics', 'player','mage')),
             'player_rogue': import_sub_folders(join(base_path,'..', 'graphics', 'player','Rogue')),
-            'water_top': import_folder(join('..', 'graphics', 'objects', 'water', 'top')),
-            'water_body': import_image(join('..', 'graphics', 'objects', 'water', 'body')),
+            'tree_big': import_folder(join(base_path,'..', 'graphics', 'objects', 'tree_big')),
+            'tree_small': import_folder(join(base_path,'..', 'graphics', 'objects', 'tree_small')),
+            'water_top': import_folder(join(base_path,'..', 'graphics', 'objects', 'water', 'top')),
+            'water_body': import_image(join(base_path,'..', 'graphics', 'objects', 'water', 'body')),
             'big_cloud': import_folder(join(base_path, '..', 'graphics', 'objects', 'cloud', 'big_cloud')),
 
         }
