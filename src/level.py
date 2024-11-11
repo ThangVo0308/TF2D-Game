@@ -119,6 +119,13 @@ class Level:
                 AnimatedSprite((obj.x, obj.y), level_frames['vine'], self.all_sprites, Z_LAYERS['main'], ANIMATION_SPEED, reverse=False)
             elif obj.name == 'big_cloud':
                 AnimatedSprite((obj.x, obj.y), level_frames['big_cloud'], self.all_sprites, Z_LAYERS['main'], 0.3, reverse=False)
+            elif obj.name == 'small_fire':
+                AnimatedSprite((obj.x, obj.y), level_frames['small_fire'], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED, reverse=False)
+            elif obj.name == 'candle':
+                AnimatedSprite((obj.x, obj.y), level_frames['candle'], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED, reverse=False)
+            elif obj.name == 'red_flag':
+                AnimatedSprite((obj.x, obj.y), level_frames['red_flag'], self.all_sprites, Z_LAYERS['bg tiles'], 0.4, reverse=False)
+                
             else:
                 frames = level_frames[obj.name]
                 groups = (self.all_sprites, self.semi_collision_sprites) if obj.properties['platform'] \

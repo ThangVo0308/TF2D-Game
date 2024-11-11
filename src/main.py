@@ -80,6 +80,9 @@ class Main:
             'water_top': import_folder(join(base_path,'..', 'graphics', 'objects', 'water', 'top')),
             'water_body': import_image(join(base_path,'..', 'graphics', 'objects', 'water', 'body')),
             'big_cloud': import_folder(join(base_path, '..', 'graphics', 'objects', 'cloud', 'big_cloud')),
+            'small_fire': import_folder(join(base_path, '..', 'graphics', 'objects', 'small_fire')),
+            'candle': import_folder(join(base_path, '..', 'graphics', 'objects', 'candle')),
+            'red_flag': import_folder(join(base_path, '..', 'graphics', 'objects', 'red_flag')),
 
         }
 

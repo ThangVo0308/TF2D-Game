@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.0" name="objects" tilewidth="309" tileheight="576" tilecount="31" columns="0">
+<tileset version="1.10" tiledversion="1.11.0" name="objects" tilewidth="320" tileheight="576" tilecount="48" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="1">
   <image source="../../graphics/objects/vines/0.png" width="224" height="128"/>
@@ -93,5 +93,56 @@
  </tile>
  <tile id="37">
   <image source="../../graphics/objects/decor/30.png" width="64" height="64"/>
+ </tile>
+ <tile id="38">
+  <image source="../../graphics/objects/decor/28.png" width="64" height="123"/>
+ </tile>
+ <tile id="39">
+  <image source="../../graphics/objects/decor/29.png" width="47" height="90"/>
+ </tile>
+ <tile id="40">
+  <image source="../../graphics/objects/decor/31.png" width="244" height="245"/>
+ </tile>
+ <tile id="41">
+  <image source="../../graphics/objects/decor/32.png" width="244" height="238"/>
+ </tile>
+ <tile id="43">
+  <image source="../../graphics/objects/decor/33.png" width="95" height="160"/>
+ </tile>
+ <tile id="44">
+  <image source="../../graphics/objects/decor/34.png" width="38" height="79"/>
+ </tile>
+ <tile id="45">
+  <image source="../../graphics/objects/decor/35.png" width="320" height="122"/>
+ </tile>
+ <tile id="46">
+  <image source="../../graphics/objects/decor/36.png" width="31" height="53"/>
+ </tile>
+ <tile id="47">
+  <image source="../../graphics/objects/small_fire/0.png" width="37" height="64"/>
+ </tile>
+ <tile id="48">
+  <image source="../../graphics/objects/decor/37.png" width="170" height="124"/>
+ </tile>
+ <tile id="49">
+  <image source="../../graphics/objects/decor/38.png" width="103" height="110"/>
+ </tile>
+ <tile id="51">
+  <image source="../../graphics/objects/candle/0.png" width="7" height="30"/>
+ </tile>
+ <tile id="54">
+  <image source="../../graphics/objects/red_flag/0.png" width="70" height="40"/>
+ </tile>
+ <tile id="55">
+  <image source="../../graphics/objects/decor/39.png" width="29" height="160"/>
+ </tile>
+ <tile id="56">
+  <image source="../../graphics/objects/decor/40.png" width="85" height="85"/>
+ </tile>
+ <tile id="57">
+  <image source="../../graphics/objects/decor/41.png" width="43" height="92"/>
+ </tile>
+ <tile id="58">
+  <image source="../../graphics/objects/decor/42.png" width="72" height="52"/>
  </tile>
 </tileset>
