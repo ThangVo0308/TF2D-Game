@@ -196,7 +196,6 @@ class Level:
         except ValueError:
             pass
 
-
     def hit_collision(self):
         for sprite in self.damage_sprites:
             if sprite.rect.colliderect(self.player.hitbox_rect):
@@ -280,6 +279,9 @@ class Level:
             self.player.hitbox_rect.top = 0
         elif self.player.hitbox_rect.right > self.level_width:
             self.player.hitbox_rect.right = self.level_width
+
+    def player_is_off_screen(self):
+        return self.player.is_off_screen(self.all_sprites.height)
 
 
     def run(self, dt):

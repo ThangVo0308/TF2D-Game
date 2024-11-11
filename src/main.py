@@ -9,6 +9,7 @@ from display import display
 import os
 from button import Button
 from alert import Alert
+from gameOverMenu import GameOverMenu
 
 
 class Main:
@@ -44,6 +45,8 @@ class Main:
         self.alert_start_time = 0
         self.alert_duration = 2000  # Thời gian hiển thị mặc định là 2 giây
         self.alert = Alert()
+        self.game_over_menu = GameOverMenu(self.display_surface)
+        self.restart_menu_flag = False
 
     def import_assets(self):
         base_path = os.path.dirname(__file__)
@@ -108,28 +111,6 @@ class Main:
             self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
                                        self.audio_files, self.data, self.switch_map, self.selectedPlayer, self.alert)
 
-    def check_game_over(self):
-        if self.data.health <= 0:
-            pygame.quit()
-            sys.exit()
-            #self.menu()
-
-    def run(self):
-        while True:
-            dt = self.clock_tick.tick(60) / 100
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.quit()
-                    sys.exit()
-
-            #self.update_alert()
-            self.check_game_over()
-            self.current_stage.run(dt)
-            self.display.update(dt)
-            self.alert.update_alert()
-
-            pygame.display.update()
-
     def menu(self):     
         BG = self.menu_background
         
@@ -164,7 +145,6 @@ class Main:
                     if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):                        
                         self.audio_files['click_button'].play()
                         self.select_character_menu()
-                        #self.run()
                     if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                         self.audio_files['click_button'].play()
                         self.options()
@@ -277,6 +257,16 @@ class Main:
 
     def select_character_menu(self):
         project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        # Reset lại dữ liệu khi restart game
+        if (self.restart_menu_flag == True):
+            self.restart_menu_flag = False
+            self.data = Data(self.display)
+            dt = self.clock_tick.tick(60) / 100
+            self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
+                                                    self.audio_files, self.data, self.switch_map, self.selectedPlayer, self.alert)        
+            self.current_stage.run(dt)
+            self.display.update(dt)
+
         while True:
             SELECT_MOUSE_POS = pygame.mouse.get_pos()
 
@@ -357,6 +347,57 @@ class Main:
                         self.menu()                        
             pygame.display.update()
 
+    def check_game_over(self):
+        if self.data.health <= 0 or self.current_stage.player_is_off_screen():
+            return True
+        return False
+
+    def restart_game(self):
+        self.data = Data(self.display)
+        dt = self.clock_tick.tick(60) / 100
+        self.current_stage = Level(self.tmx_maps[self.data.current_level], self.level_frames, 
+                                                self.audio_files, self.data, self.switch_map, self.selectedPlayer, self.alert)        
+        self.current_stage.run(dt)
+        self.display.update(dt)
+
+    def run(self):
+        game_over = False
+
+        while True:
+            dt = self.clock_tick.tick(60) / 100
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+
+                if game_over:
+                    # Kiểm tra nếu người dùng nhấn nút restart
+                    if self.game_over_menu.check_restart_click(event):
+                        self.audio_files['bg_music'].play(-1)
+                        self.restart_game()
+                        game_over = False
+                    if self.game_over_menu.check_back_click(event):
+                        self.audio_files['bg_music'].play(-1)
+                        game_over = False
+                        self.restart_menu_flag = True
+                        self.menu()
+                else:
+                    # Xử lý các sự kiện game khác khi chưa game over
+                    pass
+
+            if game_over:
+                self.audio_files['bg_music'].stop()
+                self.game_over_menu.draw()
+            else:
+                # Cập nhật trạng thái game nếu chưa game over
+                self.current_stage.run(dt)
+                self.display.update(dt)
+                if self.check_game_over():
+                    game_over = True
+
+            self.alert.update_alert()
+            pygame.display.update()
 
 if __name__ == "__main__":    
     main = Main()
