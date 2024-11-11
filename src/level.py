@@ -201,19 +201,12 @@ class Level:
         for sprite in self.damage_sprites:
             if sprite.rect.colliderect(self.player.hitbox_rect):
                 self.damage_sound.play()
-                # print('player damage')
                 self.player.get_damage()
-                if hasattr(sprite, 'snake'):  # change later
-                    sprite.kill()
-                    ParticleEffectSprite((sprite.rect.center), self.particle_frames, self.all_sprites)
 
     def attack_collision(self):
         sprites = self.tooth_sprites.sprites() + self.skeleton_sprites.sprites()
         for target in sprites:
-            facing_target = self.player.rect.centerx < target.rect.centerx and self.player.facing_right or\
-                            self.player.rect.centerx > target.rect.centerx and not self.player.facing_right
-
-            if target.rect.colliderect(self.player.hitbox_rect) and self.player.attacking and facing_target:
+            if target.rect.colliderect(self.player.hitbox_rect) and self.player.attacking:
                 target.health -= self.data.damage
                 self.hit_sound.play()
                 self.player.attacking = True

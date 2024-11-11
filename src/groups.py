@@ -6,7 +6,9 @@ class AllSprite(pygame.sprite.Group):
         super().__init__()
         self.display_surface = pygame.display.get_surface()
         self.offset = vector()  # camera offset
-        self.width, self.height = width * TILE_SIZE, height * TILE_SIZE
+
+        self.increase_width = 30
+        self.width, self.height = width * TILE_SIZE + self.increase_width, height * TILE_SIZE
 
         self.borders = {
             'left': 0,
