@@ -157,7 +157,7 @@ class Player(pygame.sprite.Sprite):
 
     def platform_move(self, dt):
         if self.platform:  # if player is standing on the platform > moving the player by the direction of the platform at current frame rate
-            self.hitbox_rect.topleft += self.platform.direction * int(self.platform.speed) * dt
+            self.hitbox_rect.topleft += self.platform.direction * int(self.platform.speed) * dt        
 
     def check_contact(self):
         # floor check
@@ -241,6 +241,10 @@ class Player(pygame.sprite.Sprite):
         else:
             self.image = self.original_image
 
+    def is_off_screen(self, map_height):
+        if self.rect.bottom > map_height:
+            return True
+        return False
 
     def update(self, dt):
         self.old_rect = self.rect.copy()
