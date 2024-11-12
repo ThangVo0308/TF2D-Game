@@ -98,7 +98,6 @@ class Skeleton(pygame.sprite.Sprite):
         # Movement
         self.rect.x += self.direction * self.speed * dt
 
-        print(self.is_on_terrain())
         # Kiểm tra xem có terrain dưới chân hay không
         if self.is_on_terrain() or self.is_hit_wall():
             self.direction *= -1

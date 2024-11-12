@@ -9,6 +9,7 @@ from player import Player
 from groups import AllSprite
 from enemies import Tooth, Bear, Skeleton, FloorSpike
 
+
 class Level:
     def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player, alert):
         self.finish_rect = None
@@ -42,10 +43,10 @@ class Level:
             bg_tile=bg_tile,
             top_limit=tmx_level_properties['top_limit'],
         )
-        self.collision_sprites = pygame.sprite.Group()              #các sprite có khả năng va chạm với các đối tượng khác
-        self.semi_collision_sprites = pygame.sprite.Group()         #có va chạm một phần hoặc một số loại va chạm khác biệt, như nền tảng mà nhân vật chỉ va chạm từ phía trên nhưng có thể đi qua từ phía dưới.
-        self.damage_sprites = pygame.sprite.Group()                 #Khi va chạm với các sprite này, người chơi có thể bị trừ máu hoặc bị loại khỏi màn chơi
-        self.item_sprites = pygame.sprite.Group()                   #vật phẩm mà người chơi có thể thu thập, chẳng hạn như tiền, vũ khí, hoặc vật phẩm tăng sức mạnh.
+        self.collision_sprites = pygame.sprite.Group()  # các sprite có khả năng va chạm với các đối tượng khác
+        self.semi_collision_sprites = pygame.sprite.Group()  # có va chạm một phần hoặc một số loại va chạm khác biệt, như nền tảng mà nhân vật chỉ va chạm từ phía trên nhưng có thể đi qua từ phía dưới.
+        self.damage_sprites = pygame.sprite.Group()  # Khi va chạm với các sprite này, người chơi có thể bị trừ máu hoặc bị loại khỏi màn chơi
+        self.item_sprites = pygame.sprite.Group()  # vật phẩm mà người chơi có thể thu thập, chẳng hạn như tiền, vũ khí, hoặc vật phẩm tăng sức mạnh.
         self.invisible_sprites = pygame.sprite.Group()
         self.tooth_sprites = pygame.sprite.Group()
         self.skeleton_sprites = pygame.sprite.Group()
@@ -68,7 +69,7 @@ class Level:
         self.damage_sound.set_volume(0.3)
 
         self.alert = alert
-
+        self.flag = False
 
     def setup(self, tmx_map, level_frames):
         # tiles
@@ -104,32 +105,40 @@ class Level:
         # Moving Objects
         for obj in tmx_map.get_layer_by_name('Moving Objects'):
             if obj.name == 'moving_chain':
-                AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED, reverse=False)
+                AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'],
+                               ANIMATION_SPEED, reverse=False)
             elif obj.name == 'flag':
                 self.finish_rect = pygame.Rect((obj.x + self.flag_rect, obj.y), (obj.width, obj.height))
-                AnimatedSprite((obj.x, obj.y), level_frames['flag'], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED, reverse=True)
+                AnimatedSprite((obj.x, obj.y), level_frames['flag'], self.all_sprites, Z_LAYERS['bg tiles'],
+                               ANIMATION_SPEED, reverse=True)
             elif obj.name == 'snake':
-                AnimatedSprite((obj.x, obj.y), level_frames['snake'], self.all_sprites, Z_LAYERS['main'], ANIMATION_SPEED, reverse=False)
+                AnimatedSprite((obj.x, obj.y), level_frames['snake'], self.all_sprites, Z_LAYERS['main'],
+                               ANIMATION_SPEED, reverse=False)
             elif obj.name == 'vine':
-                AnimatedSprite((obj.x, obj.y), level_frames['vine'], self.all_sprites, Z_LAYERS['main'], ANIMATION_SPEED, reverse=False)
+                AnimatedSprite((obj.x, obj.y), level_frames['vine'], self.all_sprites, Z_LAYERS['main'],
+                               ANIMATION_SPEED, reverse=False)
             elif obj.name == 'big_cloud':
-                AnimatedSprite((obj.x, obj.y), level_frames['big_cloud'], self.all_sprites, Z_LAYERS['main'], 0.3, reverse=False)
+                AnimatedSprite((obj.x, obj.y), level_frames['big_cloud'], self.all_sprites, Z_LAYERS['main'], 0.3,
+                               reverse=False)
             elif obj.name == 'small_fire':
-                AnimatedSprite((obj.x, obj.y), level_frames['small_fire'], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED, reverse=False)
+                AnimatedSprite((obj.x, obj.y), level_frames['small_fire'], self.all_sprites, Z_LAYERS['bg tiles'],
+                               ANIMATION_SPEED, reverse=False)
             elif obj.name == 'candle':
-                AnimatedSprite((obj.x, obj.y), level_frames['candle'], self.all_sprites, Z_LAYERS['bg tiles'], ANIMATION_SPEED, reverse=False)
+                AnimatedSprite((obj.x, obj.y), level_frames['candle'], self.all_sprites, Z_LAYERS['bg tiles'],
+                               ANIMATION_SPEED, reverse=False)
             elif obj.name == 'red_flag':
-                AnimatedSprite((obj.x, obj.y), level_frames['red_flag'], self.all_sprites, Z_LAYERS['bg tiles'], 0.4, reverse=False)
-                
+                AnimatedSprite((obj.x, obj.y), level_frames['red_flag'], self.all_sprites, Z_LAYERS['bg tiles'], 0.4,
+                               reverse=False)
+
             else:
                 frames = level_frames[obj.name]
                 groups = (self.all_sprites, self.semi_collision_sprites) if obj.properties['platform'] \
-                            else (self.all_sprites, self.damage_sprites)
-                if obj.width > obj.height: # horizontal move
+                    else (self.all_sprites, self.damage_sprites)
+                if obj.width > obj.height:  # horizontal move
                     move_direction = 'x'
                     start_pos = (obj.x, obj.y + obj.height / 2)
                     end_pos = (obj.x + obj.width, obj.y + obj.height / 2)
-                else: # vertical move
+                else:  # vertical move
                     move_direction = 'y'
                     start_pos = (obj.x + obj.width / 2, obj.y)
                     end_pos = (obj.x + obj.width / 2, obj.y + obj.height)
@@ -152,20 +161,23 @@ class Level:
         for obj in tmx_map.get_layer_by_name('Enemies'):
             if obj.name == 'tooth':
                 Tooth((obj.x, obj.y), level_frames['tooth'],
-                      (self.all_sprites, self.damage_sprites, self.tooth_sprites), self.collision_sprites, obj.properties['health'])
+                      (self.all_sprites, self.damage_sprites, self.tooth_sprites), self.collision_sprites,
+                      obj.properties['health'])
             elif obj.name == 'bear':
-                Bear((obj.x, obj.y), level_frames['bear_trap'], (self.all_sprites, self.damage_sprites, self.snake_sprites))
+                Bear((obj.x, obj.y), level_frames['bear_trap'],
+                     (self.all_sprites, self.damage_sprites, self.snake_sprites))
             elif obj.name == 'skeleton':
                 Skeleton((obj.x, obj.y), level_frames['skeleton'],
-                      (self.all_sprites, self.damage_sprites, self.skeleton_sprites), self.collision_sprites, obj.properties['health'])
+                         (self.all_sprites, self.damage_sprites, self.skeleton_sprites), self.collision_sprites,
+                         obj.properties['health'])
             elif obj.name == 'floor_spike':
                 flip_down = obj.properties.get('flip', False)
                 flip_left = obj.properties.get('flip_left', False)
                 flip_right = obj.properties.get('flip_right', False)
 
                 FloorSpike((obj.x, obj.y), level_frames['floor_spike'],
-                   (self.all_sprites, self.damage_sprites, self.floor_spikes),
-                          flip_down=flip_down, flip_left=flip_left, flip_right=flip_right)
+                           (self.all_sprites, self.damage_sprites, self.floor_spikes),
+                           flip_down=flip_down, flip_left=flip_left, flip_right=flip_right)
 
         # Items
         for obj in tmx_map.get_layer_by_name('Items'):
@@ -175,11 +187,13 @@ class Level:
 
             if obj.name == 'key':
                 self.key_rect = 10
-                Item(obj.name, (obj.x + + self.key_rect + TILE_SIZE / 2, obj.y + TILE_SIZE / 2), level_frames['items'][obj.name],
+                self.key_quantity += 1
+                Item(obj.name, (obj.x + self.key_rect + TILE_SIZE / 2, obj.y + TILE_SIZE / 2),
+                     level_frames['items'][obj.name],
                      (self.all_sprites, self.item_sprites), self.data, self.player, is_visible)
             else:
                 Item(obj.name, (obj.x + TILE_SIZE / 2, obj.y + TILE_SIZE / 2), level_frames['items'][obj.name],
-                 (self.all_sprites, self.item_sprites), self.data, self.player, is_visible)
+                     (self.all_sprites, self.item_sprites), self.data, self.player, is_visible)
 
         # water
         try:
@@ -245,13 +259,7 @@ class Level:
                     self.coin_sound.play()
                     item.kill()
 
-    def count_keys(self):
-        self.key_quantity = 0
-        for item in self.item_sprites:
-            if item.item_type == 'key':
-                self.key_quantity += 1
-
-    #next to map
+    # next to map
     def next_level(self):
         # print(self.key_quantity)
         if self.finish_rect is not None and isinstance(self.finish_rect, pygame.Rect):
@@ -278,14 +286,11 @@ class Level:
     def player_is_off_screen(self):
         return self.player.is_off_screen(self.all_sprites.height)
 
-
     def run(self, dt):
         self.display_surface.fill('black')
 
         self.all_sprites.update(dt)
         self.hit_collision()
-
-        self.count_keys()
 
         self.item_collision()
         self.attack_collision()
@@ -293,5 +298,3 @@ class Level:
         self.map_check()
 
         self.all_sprites.draw(self.player.hitbox_rect.center, dt)
-
-
