@@ -92,7 +92,7 @@
   <object id="194" name="snake" gid="351" x="212.667" y="512" width="85" height="64"/>
  </objectgroup>
  <objectgroup id="11" name="Players">
-  <object id="197" name="player" gid="319" x="94.94" y="317.97" width="62" height="64"/>
+  <object id="197" name="player" gid="319" x="64.637" y="317.97" width="62" height="64"/>
  </objectgroup>
  <objectgroup id="16" name="Enemies">
   <object id="114" name="skeleton" gid="381" x="2816.29" y="582.243" width="64" height="78">

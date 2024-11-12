@@ -261,7 +261,7 @@
   <object id="210" name="hp" gid="424" x="1176" y="160" width="35" height="38"/>
  </objectgroup>
  <objectgroup id="3" name="Players">
-  <object id="1" name="1" gid="84" x="524.543" y="188.516" width="56" height="60"/>
+  <object id="1" name="1" gid="84" x="54.846" y="2358.21" width="56" height="60"/>
  </objectgroup>
  <objectgroup id="7" name="Moving Objects">
   <object id="5" name="helicopter" x="440" y="881" width="16" height="140">
@@ -296,7 +296,7 @@
     <property name="bottom_limit" value="200"/>
     <property name="death_border_bottom" value="0"/>
     <property name="horizon_line" value="600"/>
-    <property name="level_unlock" value="1"/>
+    <property name="level_unlock" value="4"/>
     <property name="top_limit" value="0"/>
    </properties>
   </object>
