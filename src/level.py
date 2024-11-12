@@ -72,26 +72,21 @@ class Level:
 
     def setup(self, tmx_map, level_frames):
         # tiles
-        # for layer in ['Background', 'Terrain', 'FG', 'Platforms']:
         for layer in ['Background', 'Terrain', 'FG']:
             for x, y, surf in tmx_map.get_layer_by_name(layer).tiles():
                 group_sprites = [self.all_sprites]
                 if layer == 'Terrain': group_sprites.append(self.collision_sprites)
-                # if layer == 'Platforms': group_sprites.append(self.semi_collision_sprites)
                 z_layer = {
                     'FG': Z_LAYERS['bg tiles'],
                     'Background': Z_LAYERS['bg tiles'],
                 }
-                tile_width = surf.get_width()
-                tile_height = surf.get_height()
 
-                # print(f'Layer: {layer}, Tile position: ({x}, {y}), Tile size: ({tile_width}x{tile_height})')
                 z = z_layer.get(layer, Z_LAYERS['main'])
                 Sprite((x * TILE_SIZE, y * TILE_SIZE), surf, group_sprites, z)
 
         # Object
         for obj in tmx_map.get_layer_by_name('Objects'):
-            Sprite((obj.x, obj.y), obj.image, (self.all_sprites, self.all_sprites))
+            Sprite((obj.x, obj.y), obj.image, (self.all_sprites))
 
         # Player
         for obj in tmx_map.get_layer_by_name('Players'):

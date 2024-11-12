@@ -35,10 +35,9 @@ class Tooth(pygame.sprite.Sprite):
         self.image = pygame.transform.flip(self.image, True, False) if self.direction < 0 else self.image
 
         # Movement
-
         self.rect.x += self.direction * self.speed * dt
 
-        if not self.is_on_terrain():
+        if not self.is_on_terrain() or self.is_hit_wall():
             self.direction *= -1
 
     def is_on_terrain(self):
@@ -53,6 +52,18 @@ class Tooth(pygame.sprite.Sprite):
 
         # Nếu không có va chạm nào, trả về False (không tiếp xúc với terrain)
         return False
+
+    def is_hit_wall(self):
+        wall_rect = pygame.Rect(
+            self.rect.right if self.direction > 0 else self.rect.left,
+            self.rect.top,
+            5,
+            self.rect.height // 2
+        )
+
+        hit_wall = wall_rect.collidelist(self.collision_rects) != -1
+
+        return hit_wall
 
 class Skeleton(pygame.sprite.Sprite):
     def __init__(self, pos, frames, groups, collision_sprites, health):
@@ -87,22 +98,32 @@ class Skeleton(pygame.sprite.Sprite):
         # Movement
         self.rect.x += self.direction * self.speed * dt
 
+        print(self.is_on_terrain())
         # Kiểm tra xem có terrain dưới chân hay không
-        if self.is_on_terrain() == False:
+        if self.is_on_terrain() or self.is_hit_wall():
             self.direction *= -1
 
     def is_on_terrain(self):
-        for rect in self.collision_rects:
-            if(self.direction == 1):
-                left_rect = self.rect.move(self.rect.width / 2, self.rect.height)
-            else:
-                left_rect = self.rect.move(-self.rect.width / 2, self.rect.height)
+        floor_rect_right = pygame.Rect(self.rect.bottomright, (1, 1))
+        floor_rect_left = pygame.Rect(self.rect.bottomleft, (-1, 1))
 
-            if left_rect.colliderect(rect):
-                return True
+        if floor_rect_right.collidelist(self.collision_rects) < 0 and self.direction > 0 or \
+                floor_rect_left.collidelist(self.collision_rects) < 0 and self.direction < 0:
+            return True
 
-        # Nếu không có va chạm nào, trả về False (không tiếp xúc với terrain)
         return False
+
+    def is_hit_wall(self):
+        wall_rect = pygame.Rect(
+            self.rect.right if self.direction > 0 else self.rect.left,
+            self.rect.top,
+            5,
+            self.rect.height // 2
+        )
+
+        hit_wall = wall_rect.collidelist(self.collision_rects) != -1
+
+        return hit_wall
 
 class Bear(pygame.sprite.Sprite):
     def __init__(self, pos, frames, groups):

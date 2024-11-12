@@ -254,14 +254,14 @@
   <object id="63" name="hp" gid="424" x="267" y="1973.67" width="35" height="38"/>
   <object id="107" name="hp" gid="424" x="657.667" y="1895" width="35" height="38"/>
   <object id="205" name="buff" gid="432" x="1323" y="575" width="24" height="30"/>
-  <object id="206" name="hp" gid="424" x="991" y="703" width="35" height="38"/>
+  <object id="206" name="hp" gid="424" x="991" y="680.333" width="35" height="38"/>
   <object id="207" name="dame" gid="425" x="640" y="615" width="33" height="33"/>
-  <object id="208" name="hp" gid="428" x="644" y="770" width="18" height="30"/>
+  <object id="208" name="hp" gid="428" x="645.333" y="738" width="18" height="30"/>
   <object id="209" name="hp" gid="428" x="948" y="536" width="18" height="30"/>
   <object id="210" name="hp" gid="424" x="1176" y="160" width="35" height="38"/>
  </objectgroup>
  <objectgroup id="3" name="Players">
-  <object id="1" name="1" gid="84" x="527.21" y="192.516" width="56" height="60"/>
+  <object id="1" name="1" gid="84" x="524.543" y="188.516" width="56" height="60"/>
  </objectgroup>
  <objectgroup id="7" name="Moving Objects">
   <object id="5" name="helicopter" x="440" y="881" width="16" height="140">
