@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="25" nextobjectid="200">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="60" height="11" tilewidth="64" tileheight="64" infinite="0" nextlayerid="26" nextobjectid="200">
  <tileset firstgid="1" source="../tilesets/background/bg_underground.tsx"/>
  <tileset firstgid="257" source="../tilesets/terrain/terrain_background.tsx"/>
  <tileset firstgid="305" source="../tilesets/items.tsx"/>
  <tileset firstgid="316" source="../tilesets/player.tsx"/>
  <tileset firstgid="322" source="../tilesets/objects.tsx"/>
- <tileset firstgid="354" source="../tilesets/enemies.tsx"/>
- <tileset firstgid="356" source="../tilesets/traps.tsx"/>
- <tileset firstgid="359" source="../tilesets/fg_underground.tsx"/>
+ <tileset firstgid="381" source="../tilesets/enemies.tsx"/>
+ <tileset firstgid="383" source="../tilesets/traps.tsx"/>
+ <tileset firstgid="386" source="../tilesets/fg_underground.tsx"/>
  <layer id="1" name="Background" width="60" height="11">
   <data encoding="csv">
 33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,33,34,35,36,37,38,39,40,41,42,43,44,45,
@@ -42,15 +42,15 @@
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,395,396,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,377,378,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,401,402,0,0,0,0,0,0,0,395,396,0,0,0,0,0,0,0,0,0,0,383,384,0,0,0,1073742195,1073742196,1073742197,1073742198,1073742199,1073742200,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,407,408,0,0,0,0,0,0,0,401,402,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073742189,1073742190,1073742191,1073742192,1073742193,1073742194,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,413,414,0,0,0,377,378,0,0,407,408,0,0,0,0,0,0,0,395,396,0,0,0,0,0,0,1073742183,1073742184,1073742185,1073742186,1073742187,1073742188,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,383,384,0,0,413,414,0,0,0,0,0,0,0,401,402,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,407,408,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,413,414,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,409,410,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,409,410,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,409,410,0,
-0,0,0,415,416,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,415,416,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,415,416,0
+0,0,0,0,0,0,422,423,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,404,405,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,428,429,0,0,0,0,0,0,0,422,423,0,0,0,0,0,0,0,0,0,0,410,411,0,0,0,1073742222,1073742223,1073742224,1073742225,1073742226,1073742227,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,434,435,0,0,0,0,0,0,0,428,429,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1073742216,1073742217,1073742218,1073742219,1073742220,1073742221,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,440,441,0,0,0,404,405,0,0,434,435,0,0,0,0,0,0,0,422,423,0,0,0,0,0,0,1073742210,1073742211,1073742212,1073742213,1073742214,1073742215,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,410,411,0,0,440,441,0,0,0,0,0,0,0,428,429,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,434,435,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,440,441,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,436,437,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,436,437,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,436,437,0,
+0,0,0,442,443,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,442,443,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,442,443,0
 </data>
  </layer>
  <objectgroup id="9" name="Moving Objects">
@@ -91,49 +91,34 @@
   </object>
   <object id="194" name="snake" gid="351" x="212.667" y="512" width="85" height="64"/>
  </objectgroup>
- <objectgroup id="8" name="Objects">
-  <object id="93" name="cord" gid="327" x="879" y="581.5" width="30" height="70"/>
-  <object id="94" name="cord" gid="327" x="878.5" y="636" width="30" height="70"/>
-  <object id="97" name="cord" gid="327" x="1691" y="705" width="30" height="66"/>
-  <object id="125" name="static_chain" gid="326" x="1808.67" y="648.333" width="29" height="70"/>
-  <object id="126" name="static_chain" gid="326" x="1808.67" y="705.667" width="29" height="56"/>
-  <object id="127" name="static_chain" gid="326" x="2184.67" y="485.667" width="29" height="70"/>
-  <object id="128" name="static_chain" gid="326" x="2184.67" y="558.333" width="29" height="70"/>
-  <object id="129" name="static_chain" gid="326" x="2184.67" y="631" width="29" height="70"/>
-  <object id="130" name="static_chain" gid="326" x="2185.33" y="703" width="29" height="70"/>
-  <object id="133" name="static_chain" gid="326" x="129.667" y="484" width="29" height="70"/>
-  <object id="134" name="static_chain" gid="326" x="130" y="517" width="29" height="70"/>
-  <object id="135" name="static_chain" gid="326" x="357.667" y="484.333" width="29" height="70"/>
-  <object id="137" name="static_chain" gid="326" x="357.667" y="518.333" width="29" height="70"/>
- </objectgroup>
  <objectgroup id="11" name="Players">
   <object id="197" name="player" gid="319" x="94.94" y="317.97" width="62" height="64"/>
  </objectgroup>
  <objectgroup id="16" name="Enemies">
-  <object id="114" name="skeleton" gid="354" x="2816.29" y="582.243" width="64" height="78">
+  <object id="114" name="skeleton" gid="381" x="2816.29" y="582.243" width="64" height="78">
    <properties>
     <property name="health" value="36"/>
    </properties>
   </object>
-  <object id="117" name="skeleton" gid="354" x="3713.33" y="519" width="64" height="78">
+  <object id="117" name="skeleton" gid="381" x="3713.33" y="519" width="64" height="78">
    <properties>
     <property name="health" value="36"/>
    </properties>
   </object>
-  <object id="167" name="bear" gid="356" x="3641.2" y="204.727" width="125" height="88"/>
-  <object id="168" name="bear" gid="356" x="1618.05" y="268.727" width="125" height="88"/>
-  <object id="169" name="bear" gid="356" x="1394.41" y="589.091" width="125" height="88"/>
-  <object id="188" name="tooth" gid="355" x="2872.8" y="576.394" width="67" height="64">
+  <object id="167" name="bear" gid="383" x="3641.2" y="204.727" width="125" height="88"/>
+  <object id="168" name="bear" gid="383" x="1618.05" y="268.727" width="125" height="88"/>
+  <object id="169" name="bear" gid="383" x="1394.41" y="589.091" width="125" height="88"/>
+  <object id="188" name="tooth" gid="382" x="2872.8" y="576.394" width="67" height="64">
    <properties>
     <property name="health" value="24"/>
    </properties>
   </object>
-  <object id="195" name="skeleton" gid="354" x="2326.67" y="389" width="64" height="78">
+  <object id="195" name="skeleton" gid="381" x="2326.67" y="389" width="64" height="78">
    <properties>
     <property name="health" value="36"/>
    </properties>
   </object>
-  <object id="196" name="tooth" gid="355" x="731.167" y="448.166" width="67" height="64">
+  <object id="196" name="tooth" gid="382" x="731.167" y="448.166" width="67" height="64">
    <properties>
     <property name="health" value="12"/>
    </properties>
@@ -165,4 +150,5 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup id="25" name="Objects"/>
 </map>
