@@ -10,6 +10,7 @@ import os
 from button import Button
 from alert import Alert
 from gameOverMenu import GameOverMenu
+from gameWinnerMenu import GameWinnerMenu
 
 
 class Main:
@@ -46,6 +47,7 @@ class Main:
         self.alert_duration = 2000  # Thời gian hiển thị mặc định là 2 giây
         self.alert = Alert()
         self.game_over_menu = GameOverMenu(self.display_surface)
+        self.game_winner_menu = GameWinnerMenu(self.display_surface)
         self.restart_menu_flag = False
 
     def import_assets(self):
@@ -86,6 +88,8 @@ class Main:
             'small_fire': import_folder(join(base_path, '..', 'graphics', 'objects', 'small_fire')),
             'candle': import_folder(join(base_path, '..', 'graphics', 'objects', 'candle')),
             'red_flag': import_folder(join(base_path, '..', 'graphics', 'objects', 'red_flag')),
+            'bat': import_folder(join(base_path, '..', 'graphics', 'objects', 'bat')),
+            'winner': import_folder(join(base_path, '..', 'graphics', 'objects', 'dragonball')),
 
         }
 
@@ -354,6 +358,11 @@ class Main:
         if self.data.health <= 0 or self.current_stage.player_is_off_screen():
             return True
         return False
+    
+    def check_game_winner(self):
+        if self.current_stage.check_winner_collision():
+            return True
+        return False
 
     def restart_game(self):
         self.data = Data(self.display)
@@ -365,6 +374,7 @@ class Main:
 
     def run(self):
         game_over = False
+        game_winner = False
 
         while True:
             dt = self.clock_tick.tick(60) / 100
@@ -385,6 +395,18 @@ class Main:
                         game_over = False
                         self.restart_menu_flag = True
                         self.menu()
+                if game_winner:
+                    # Kiểm tra nếu người dùng nhấn nút restart
+                    if self.game_winner_menu.check_restart_click(event):
+                        self.audio_files['bg_music'].play(-1)
+                        pygame.quit()
+                        sys.exit()
+                        game_winner = False
+                    if self.game_winner_menu.check_back_click(event):
+                        self.audio_files['bg_music'].play(-1)
+                        game_winner = False
+                        self.restart_menu_flag = True
+                        self.menu()
                 else:
                     # Xử lý các sự kiện game khác khi chưa game over
                     pass
@@ -399,6 +421,16 @@ class Main:
                 if self.check_game_over():
                     game_over = True
 
+            if game_winner:
+                self.audio_files['bg_music'].stop()
+                self.game_winner_menu.draw()
+            else:
+                self.current_stage.run(dt)
+                self.display.update(dt)
+                if self.check_game_winner():
+                    game_winner = True
+                
+                
             self.alert.update_alert()
             pygame.display.update()
 

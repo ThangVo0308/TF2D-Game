@@ -19,6 +19,7 @@ class Level:
         self.switch_map = switch_map
         self.selected_player = selected_player
         self.key_quantity = 0
+        self.tmx_map = tmx_map
 
         # level data
         self.level_width = tmx_map.width * TILE_SIZE
@@ -114,6 +115,9 @@ class Level:
             elif obj.name == 'snake':
                 AnimatedSprite((obj.x, obj.y), level_frames['snake'], self.all_sprites, Z_LAYERS['main'],
                                ANIMATION_SPEED, reverse=False)
+            elif obj.name == 'winner':
+                AnimatedSprite((obj.x, obj.y), level_frames['winner'], self.all_sprites, Z_LAYERS['main'],
+                               ANIMATION_SPEED, reverse=False)
             elif obj.name == 'vine':
                 AnimatedSprite((obj.x, obj.y), level_frames['vine'], self.all_sprites, Z_LAYERS['main'],
                                ANIMATION_SPEED, reverse=False)
@@ -156,6 +160,15 @@ class Level:
                         top, bottom = int(start_pos[1]), int(end_pos[1])
                         for y in range(top, bottom, 20):
                             Sprite((x, y), level_frames['saw_chain'], self.all_sprites, z=Z_LAYERS['bg details'])
+                            
+                if obj.name == 'bat':
+                    if move_direction == 'x':
+                        y = start_pos[1] - level_frames['saw_chain'].get_height() / 2
+                        left, right = int(start_pos[0]), int(end_pos[0])
+                        
+                    else:
+                        x = start_pos[0] - level_frames['saw_chain'].get_height() / 2
+                        top, bottom = int(start_pos[1]), int(end_pos[1])
 
         # Enemies
         for obj in tmx_map.get_layer_by_name('Enemies'):
@@ -285,6 +298,13 @@ class Level:
 
     def player_is_off_screen(self):
         return self.player.is_off_screen(self.all_sprites.height)
+    
+    def check_winner_collision(self):
+        for obj in self.tmx_map.get_layer_by_name('Moving Objects'):
+            if obj.name == 'winner':  # Kiểm tra tên sprite
+                if self.player.is_colliderect_winner(obj):
+                    return True
+        return False
 
     def run(self, dt):
         self.display_surface.fill('black')

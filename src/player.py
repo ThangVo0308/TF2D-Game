@@ -245,6 +245,11 @@ class Player(pygame.sprite.Sprite):
         if self.rect.bottom > map_height:
             return True
         return False
+    
+    def is_colliderect_winner(self, obj):
+        if self.rect.x - 41 == obj.x and self.rect.y + 34 == obj.y :
+            return True
+        return False
 
     def update(self, dt):
         self.old_rect = self.rect.copy()
