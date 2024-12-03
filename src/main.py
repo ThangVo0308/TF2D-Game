@@ -359,11 +359,6 @@ class Main:
             return True
         return False
     
-    def check_game_winner(self):
-        if self.current_stage.check_winner_collision():
-            return True
-        return False
-
     def restart_game(self):
         self.data = Data(self.display)
         dt = self.clock_tick.tick(60) / 100
@@ -416,24 +411,23 @@ class Main:
                 self.game_over_menu.draw()
             else:
                 # Cập nhật trạng thái game nếu chưa game over
-                self.current_stage.run(dt)
-                self.display.update(dt)
                 if self.check_game_over():
                     game_over = True
-
+                    
             if game_winner:
                 self.audio_files['bg_music'].stop()
                 self.game_winner_menu.draw()
             else:
+                if self.current_stage.check_winner_collision():
+                    game_winner = True
+            
+            if game_over == False and game_winner == False:
                 self.current_stage.run(dt)
                 self.display.update(dt)
-                if self.check_game_winner():
-                    game_winner = True
-                
                 
             self.alert.update_alert()
             pygame.display.update()
-
+    
 if __name__ == "__main__":    
     main = Main()
     main.menu()

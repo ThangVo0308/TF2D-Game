@@ -19,7 +19,7 @@ class Level:
         self.switch_map = switch_map
         self.selected_player = selected_player
         self.key_quantity = 0
-        self.tmx_map = tmx_map
+        self.winner = None
 
         # level data
         self.level_width = tmx_map.width * TILE_SIZE
@@ -116,6 +116,7 @@ class Level:
                 AnimatedSprite((obj.x, obj.y), level_frames['snake'], self.all_sprites, Z_LAYERS['main'],
                                ANIMATION_SPEED, reverse=False)
             elif obj.name == 'winner':
+                self.winner = pygame.Rect((obj.x, obj.y), (obj.width, obj.height))
                 AnimatedSprite((obj.x, obj.y), level_frames['winner'], self.all_sprites, Z_LAYERS['main'],
                                ANIMATION_SPEED, reverse=False)
             elif obj.name == 'vine':
@@ -163,11 +164,10 @@ class Level:
                             
                 if obj.name == 'bat':
                     if move_direction == 'x':
-                        y = start_pos[1] - level_frames['saw_chain'].get_height() / 2
+                        y = start_pos[1] - level_frames['bat'][0].get_height() / 2
                         left, right = int(start_pos[0]), int(end_pos[0])
-                        
                     else:
-                        x = start_pos[0] - level_frames['saw_chain'].get_height() / 2
+                        x = start_pos[0] - level_frames['bat'][0].get_height() / 2
                         top, bottom = int(start_pos[1]), int(end_pos[1])
 
         # Enemies
@@ -300,9 +300,10 @@ class Level:
         return self.player.is_off_screen(self.all_sprites.height)
     
     def check_winner_collision(self):
-        for obj in self.tmx_map.get_layer_by_name('Moving Objects'):
-            if obj.name == 'winner':  # Kiểm tra tên sprite
-                if self.player.is_colliderect_winner(obj):
+        if self.winner is not None and isinstance(self.winner, pygame.Rect):
+            if isinstance(self.player.hitbox_rect, pygame.Rect):
+                if self.player.hitbox_rect.colliderect(self.winner):
+                    self.player.speed = 0
                     return True
         return False
 
@@ -316,5 +317,6 @@ class Level:
         self.attack_collision()
         self.next_level()
         self.map_check()
+        self.check_winner_collision()
 
         self.all_sprites.draw(self.player.hitbox_rect.center, dt)
