@@ -105,7 +105,11 @@ class Level:
 
         # Moving Objects
         for obj in tmx_map.get_layer_by_name('Moving Objects'):
-            if obj.name == 'moving_chain':
+            if obj.name == 'flag':
+                self.finish_rect = pygame.Rect((obj.x + self.flag_rect, obj.y), (obj.width, obj.height))
+                AnimatedSprite((obj.x, obj.y), level_frames['flag'], self.all_sprites, Z_LAYERS['bg tiles'],
+                               ANIMATION_SPEED, reverse=True)
+            elif obj.name == 'moving_chain':
                 AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'],
                                ANIMATION_SPEED, reverse=False)
             elif obj.name == 'flag':
@@ -134,11 +138,11 @@ class Level:
             elif obj.name == 'red_flag':
                 AnimatedSprite((obj.x, obj.y), level_frames['red_flag'], self.all_sprites, Z_LAYERS['bg tiles'], 0.4,
                                reverse=False)
-
             else:
                 frames = level_frames[obj.name]
                 groups = (self.all_sprites, self.semi_collision_sprites) if obj.properties['platform'] \
-                    else (self.all_sprites, self.damage_sprites)
+                    else (self.all_sprites, self.damage_sprites) if obj.name == 'saw' \
+                    else (self.all_sprites)
                 if obj.width > obj.height:  # horizontal move
                     move_direction = 'x'
                     start_pos = (obj.x, obj.y + obj.height / 2)
@@ -161,14 +165,7 @@ class Level:
                         top, bottom = int(start_pos[1]), int(end_pos[1])
                         for y in range(top, bottom, 20):
                             Sprite((x, y), level_frames['saw_chain'], self.all_sprites, z=Z_LAYERS['bg details'])
-                            
-                if obj.name == 'bat':
-                    if move_direction == 'x':
-                        y = start_pos[1] - level_frames['bat'][0].get_height() / 2
-                        left, right = int(start_pos[0]), int(end_pos[0])
-                    else:
-                        x = start_pos[0] - level_frames['bat'][0].get_height() / 2
-                        top, bottom = int(start_pos[1]), int(end_pos[1])
+
 
         # Enemies
         for obj in tmx_map.get_layer_by_name('Enemies'):
