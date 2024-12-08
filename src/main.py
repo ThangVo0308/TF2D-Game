@@ -28,7 +28,7 @@ class Main:
         self.selectedPlayer = "player_knight"
 
         self.tmx_maps = {
-            0: load_pygame(join(base_path, '..', 'data', 'levels', 'outsite.tmx')),
+            0: load_pygame(join(base_path, '..', 'data', 'levels', 'underground.tmx')),
             1: load_pygame(join(base_path, '..', 'data', 'levels', 'underwater.tmx')),
             2: load_pygame(join(base_path, '..', 'data', 'levels', 'outsite.tmx')),
             3: load_pygame(join(base_path, '..', 'data', 'levels', 'skyland.tmx'))
@@ -99,7 +99,7 @@ class Main:
             'damage': pygame.mixer.Sound(join(base_path, '..', 'audio', 'damage.wav')),
             'hit': pygame.mixer.Sound(join(base_path, '..', 'audio', 'hit.wav')),
             'jump': pygame.mixer.Sound(join(base_path, '..', 'audio', 'jump.wav')),
-            'bg_music': pygame.mixer.Sound(join(base_path, '..', 'audio', 'sontungmtp.mp3')),
+            'bg_music': pygame.mixer.Sound(join(base_path, '..', 'audio', 'background.mp3')),
             'click_button': pygame.mixer.Sound(join(base_path, '..', 'audio', 'click_button.mp3'))
         }
 
