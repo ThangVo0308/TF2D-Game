@@ -89,7 +89,7 @@ class Main:
             'candle': import_folder(join(base_path, '..', 'graphics', 'objects', 'candle')),
             'red_flag': import_folder(join(base_path, '..', 'graphics', 'objects', 'red_flag')),
             'bat': import_folder(join(base_path, '..', 'graphics', 'objects', 'bat')),
-            'winner': import_folder(join(base_path, '..', 'graphics', 'objects', 'dragonball')),
+            'winner': import_folder(join(base_path, '..', 'graphics', 'objects', 'crown')),
         }
 
         self.audio_files = {
