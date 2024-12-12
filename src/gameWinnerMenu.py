@@ -38,7 +38,7 @@ class GameWinnerMenu:
             pygame.draw.line(self.display, color, (0, i), (self.display.get_width(), i))
             
         # Hiển thị hình ảnh
-        image = pygame.image.load("graphics/objects/crown/0.png")  # Thay đường dẫn tới ảnh của bạn
+        image = pygame.image.load("../graphics/objects/crown/0.png")  # Thay đường dẫn tới ảnh của bạn
         image = pygame.transform.scale(image, (150, 150))  # Thay đổi kích thước ảnh nếu cần
         image_rect = image.get_rect(center=(self.screen_width / 2, self.screen_height / 2 - 170))
         self.display.blit(image, image_rect)
