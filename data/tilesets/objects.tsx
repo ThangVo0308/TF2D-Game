@@ -149,6 +149,6 @@
   <image source="../../graphics/objects/decor/43.png" width="370" height="181"/>
  </tile>
  <tile id="60">
-  <image source="../../graphics/objects/dragonball/0.png" width="64" height="64"/>
+  <image source="../../graphics/objects/crown/0.png" width="75" height="64"/>
  </tile>
 </tileset>
