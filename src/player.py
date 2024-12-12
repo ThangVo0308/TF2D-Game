@@ -94,7 +94,9 @@ class Player(pygame.sprite.Sprite):
 
     def move(self, dt):
         # horizontal
-        self.hitbox_rect.x += self.direction.x * self.speed * dt
+        if not (self.on_surface['left'] and self.direction.x < 0 or
+                self.on_surface['right'] and self.direction.x > 0):
+            self.hitbox_rect.x += self.direction.x * self.speed * dt
         self.collision('horizontal')
 
         # vertical
@@ -259,4 +261,3 @@ class Player(pygame.sprite.Sprite):
         self.get_state()
         self.animate(dt)
         self.flicker()
-
