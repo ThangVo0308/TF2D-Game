@@ -49,7 +49,7 @@ class Player(pygame.sprite.Sprite):
             'jump': Timer(300),
             'platform skip': Timer(300),
             'attack block': Timer(500),
-            'delay enemy damage': Timer(400)
+            'delay enemy damage': Timer(1000)
         }
 
         # sound
@@ -159,7 +159,7 @@ class Player(pygame.sprite.Sprite):
 
     def platform_move(self, dt):
         if self.platform:  # if player is standing on the platform > moving the player by the direction of the platform at current frame rate
-            self.hitbox_rect.topleft += self.platform.direction * int(self.platform.speed) * dt        
+            self.hitbox_rect.topleft += self.platform.direction * int(self.platform.speed) * dt
 
     def check_contact(self):
         # floor check
@@ -237,7 +237,8 @@ class Player(pygame.sprite.Sprite):
     def flicker(self):  # animation when player gets hit
         self.original_image = self.image.copy()
 
-        if self.timers['delay enemy damage'].active and sin(pygame.time.get_ticks() * 35) >= 0:
+        if (self.timers['delay enemy damage'].active
+                and pygame.time.get_ticks() - self.timers['delay enemy damage'].start_time <= 200):
             self.state = 'Hurt'
             self.image = self.frames[self.state][int(self.frame_index % len(self.frames[self.state]))]
         else:
