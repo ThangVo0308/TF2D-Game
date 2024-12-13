@@ -182,22 +182,22 @@
  <objectgroup id="8" name="Enemies">
   <object id="15" name="skeleton" gid="435" x="1240.5" y="2183.5" width="64" height="78">
    <properties>
-    <property name="health" value="16"/>
+    <property name="health" value="72"/>
    </properties>
   </object>
   <object id="16" name="skeleton" gid="435" x="790" y="1415" width="64" height="78">
    <properties>
-    <property name="health" value="16"/>
+    <property name="health" value="72"/>
    </properties>
   </object>
   <object id="18" name="tooth" gid="436" x="513.667" y="2240" width="67" height="64">
    <properties>
-    <property name="health" value="12"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="19" name="tooth" gid="436" x="73" y="832" width="67" height="64">
    <properties>
-    <property name="health" value="12"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="94" name="bear" gid="533" x="391.667" y="1102.67" width="111" height="88"/>
@@ -205,42 +205,42 @@
   <object id="102" name="floor_spike" gid="534" x="637.333" y="1791" width="64" height="32"/>
   <object id="108" name="tooth" gid="436" x="524.333" y="1985.33" width="67" height="64">
    <properties>
-    <property name="health" value="8"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="109" name="skeleton" gid="435" x="752" y="1992.33" width="64" height="78">
    <properties>
-    <property name="health" value="12"/>
+    <property name="health" value="72"/>
    </properties>
   </object>
   <object id="198" name="tooth" gid="436" x="686.333" y="768" width="67" height="64">
    <properties>
-    <property name="health" value="8"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="199" name="tooth" gid="436" x="848.667" y="768" width="67" height="64">
    <properties>
-    <property name="health" value="8"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="200" name="skeleton" gid="435" x="1055.25" y="711.5" width="64" height="78">
    <properties>
-    <property name="health" value="12"/>
+    <property name="health" value="72"/>
    </properties>
   </object>
   <object id="201" name="skeleton" gid="435" x="1333.33" y="712.333" width="64" height="78">
    <properties>
-    <property name="health" value="8"/>
+    <property name="health" value="72"/>
    </properties>
   </object>
   <object id="202" name="tooth" gid="436" x="985.25" y="255.25" width="67" height="64">
    <properties>
-    <property name="health" value="12"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="222" name="skeleton" gid="435" x="528" y="1416" width="64" height="78">
    <properties>
-    <property name="health" value="16"/>
+    <property name="health" value="72"/>
    </properties>
   </object>
  </objectgroup>

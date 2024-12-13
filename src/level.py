@@ -288,8 +288,8 @@ class Level:
     def map_check(self):
         if self.player.hitbox_rect.left < 0:
             self.player.hitbox_rect.left = 0
-        elif self.player.hitbox_rect.top < 0:
-            self.player.hitbox_rect.top = 0
+        # elif self.player.hitbox_rect.top < 0:
+        #     self.player.hitbox_rect.top = 0
         elif self.player.hitbox_rect.right > self.level_width:
             self.player.hitbox_rect.right = self.level_width
 

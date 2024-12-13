@@ -152,22 +152,22 @@
  <objectgroup id="7" name="Enemies">
   <object id="59" name="tooth" gid="553" x="1307" y="448" width="67" height="64">
    <properties>
-    <property name="health" value="24"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="63" name="skeleton" gid="552" x="102" y="1160.67" width="64" height="78">
    <properties>
-    <property name="health" value="36"/>
+    <property name="health" value="72"/>
    </properties>
   </object>
   <object id="79" name="tooth" gid="553" x="1191.83" y="1149.33" width="67" height="64">
    <properties>
-    <property name="health" value="24"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="80" name="tooth" gid="553" x="3639.83" y="1089.33" width="67" height="64">
    <properties>
-    <property name="health" value="24"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="81" name="tooth" gid="553" x="2798.5" y="706.667" width="67" height="64">
@@ -177,17 +177,17 @@
   </object>
   <object id="165" name="tooth" gid="553" x="2798.5" y="706.667" width="67" height="64">
    <properties>
-    <property name="health" value="24"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="82" name="skeleton" gid="552" x="1168" y="454.333" width="64" height="78">
    <properties>
-    <property name="health" value="36"/>
+    <property name="health" value="72"/>
    </properties>
   </object>
   <object id="83" name="skeleton" gid="552" x="3629.94" y="196.636" width="64" height="78">
    <properties>
-    <property name="health" value="36"/>
+    <property name="health" value="72"/>
    </properties>
   </object>
   <object id="84" name="tooth" gid="553" x="1057.17" y="126.667" width="67" height="64">
@@ -197,7 +197,7 @@
   </object>
   <object id="166" name="tooth" gid="553" x="2503.5" y="1154" width="67" height="64">
    <properties>
-    <property name="health" value="24"/>
+    <property name="health" value="48"/>
    </properties>
   </object>
   <object id="179" name="floor_spike" gid="515" x="1473" y="1152" width="64" height="32"/>

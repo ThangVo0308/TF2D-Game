@@ -196,7 +196,7 @@ class Main:
             SCREEN.blit(MUSIC_VOL_LABEL, MUSIC_VOL_LABEL_RECT)
 
             # Render the percentage value separately
-            MUSIC_VOL_VALUE = self.get_font(30).render(f"{int(volume_music * 100)}%", True, "Black")
+            MUSIC_VOL_VALUE = self.get_font(30).render(f"{round(volume_music * 100)}%", True, "Black")
             MUSIC_VOL_VALUE_RECT = MUSIC_VOL_VALUE.get_rect(center=(880, 280))  # Position this next to the label
             SCREEN.blit(MUSIC_VOL_VALUE, MUSIC_VOL_VALUE_RECT)
 
@@ -205,7 +205,7 @@ class Main:
             EFFECTS_VOL_RECT = EFFECTS_VOL_TEXT.get_rect(center=(540, 340))
             SCREEN.blit(EFFECTS_VOL_TEXT, EFFECTS_VOL_RECT)
 
-            EFFECTS_VOL_VALUE = self.get_font(30).render(f"{int(volume_effects * 100)}%", True, "Black")
+            EFFECTS_VOL_VALUE = self.get_font(30).render(f"{round(volume_effects * 100)}%", True, "Black")
             EFFECTS_VOL_VALUE_RECT = EFFECTS_VOL_VALUE.get_rect(center=(880, 340))  # Position this next to the label
             SCREEN.blit(EFFECTS_VOL_VALUE, EFFECTS_VOL_VALUE_RECT)
 
@@ -239,9 +239,6 @@ class Main:
                         volume_music = min(1.0, volume_music + 0.1)
                         self.audio_files['bg_music'].set_volume(volume_music)
                         self.audio_files['click_button'].play()
-                        self.alert.display_alert("Nobody got you the way i do. Whatever demons you fighting through. " +
-                                                 "When you need somebody to turn to. Nobody got you the way i do.",
-                                                 2000)
 
                     if MUSIC_DOWN_BUTTON.checkForInput(OPTIONS_MOUSE_POS):
                         volume_music = max(0.0, volume_music - 0.1)

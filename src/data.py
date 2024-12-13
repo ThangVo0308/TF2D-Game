@@ -3,7 +3,7 @@ from display import display
 class Data:
     def __init__(self, display):
         self.display = display
-        self._health = 5 # private attribute
+        self._health = 6 # private attribute
         self._keys = 0 # private attribute
         self._damage = 1
 
