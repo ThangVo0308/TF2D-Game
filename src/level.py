@@ -217,7 +217,7 @@ class Level:
     def attack_collision(self):
         sprites = self.tooth_sprites.sprites() + self.skeleton_sprites.sprites()
         for target in sprites:
-            if target.rect.colliderect(self.player.hitbox_rect) and self.player.attacking \
+            if target.rect.move(-25, 0).colliderect(self.player.hitbox_rect) and self.player.attacking \
                     and not self.timers['delay enemy health'].active:
                 print(target.health)
                 target.health -= self.data.damage
