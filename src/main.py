@@ -29,7 +29,7 @@ class Main:
 
         self.tmx_maps = {
             0: load_pygame(join(base_path, '..', 'data', 'levels', 'underground.tmx')),
-            1: load_pygame(join(base_path, '..', 'data', 'levels', 'skyland.tmx')),
+            1: load_pygame(join(base_path, '..', 'data', 'levels', 'underwater.tmx')),
             2: load_pygame(join(base_path, '..', 'data', 'levels', 'outsite.tmx')),
             3: load_pygame(join(base_path, '..', 'data', 'levels', 'skyland.tmx'))
         }

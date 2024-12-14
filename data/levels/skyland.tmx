@@ -182,7 +182,7 @@
  <objectgroup id="8" name="Enemies">
   <object id="15" name="skeleton" gid="435" x="1240.5" y="2183.5" width="64" height="78">
    <properties>
-    <property name="health" value="72"/>
+    <property name="health" value="36"/>
    </properties>
   </object>
   <object id="16" name="skeleton" gid="435" x="790" y="1415" width="64" height="78">
@@ -192,72 +192,64 @@
   </object>
   <object id="18" name="tooth" gid="436" x="513.667" y="2240" width="67" height="64">
    <properties>
-    <property name="health" value="48"/>
+    <property name="health" value="24"/>
    </properties>
   </object>
   <object id="19" name="tooth" gid="436" x="73" y="832" width="67" height="64">
    <properties>
-    <property name="health" value="48"/>
+    <property name="health" value="24"/>
    </properties>
   </object>
   <object id="94" name="bear" gid="533" x="390.334" y="1121.34" width="111" height="88"/>
   <object id="95" name="bear" gid="533" x="340.667" y="226.333" width="111" height="88"/>
   <object id="102" name="floor_spike" gid="534" x="637.333" y="1791" width="64" height="32"/>
-  <object id="108" name="tooth" gid="436" x="524.333" y="1985.33" width="67" height="64">
-   <properties>
-    <property name="health" value="48"/>
-   </properties>
-  </object>
   <object id="109" name="skeleton" gid="435" x="752" y="1992.33" width="64" height="78">
    <properties>
-    <property name="health" value="72"/>
+    <property name="health" value="36"/>
    </properties>
   </object>
   <object id="198" name="tooth" gid="436" x="686.333" y="768" width="67" height="64">
    <properties>
-    <property name="health" value="48"/>
+    <property name="health" value="24"/>
    </properties>
   </object>
   <object id="199" name="tooth" gid="436" x="848.667" y="768" width="67" height="64">
    <properties>
-    <property name="health" value="48"/>
+    <property name="health" value="24"/>
    </properties>
   </object>
   <object id="200" name="skeleton" gid="435" x="1055.25" y="711.5" width="64" height="78">
    <properties>
-    <property name="health" value="72"/>
+    <property name="health" value="36"/>
    </properties>
   </object>
   <object id="201" name="skeleton" gid="435" x="1333.33" y="712.333" width="64" height="78">
    <properties>
-    <property name="health" value="72"/>
+    <property name="health" value="36"/>
    </properties>
   </object>
   <object id="202" name="tooth" gid="436" x="985.25" y="255.25" width="67" height="64">
    <properties>
-    <property name="health" value="48"/>
+    <property name="health" value="24"/>
    </properties>
   </object>
   <object id="222" name="skeleton" gid="435" x="528" y="1416" width="64" height="78">
    <properties>
-    <property name="health" value="72"/>
+    <property name="health" value="36"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="9" name="Items">
   <object id="8" name="buff" gid="434" x="1227.39" y="1115" width="24" height="30"/>
   <object id="10" name="buff" gid="434" x="209.212" y="160.455" width="24" height="30"/>
-  <object id="12" name="dame" gid="427" x="723.394" y="1271.55" width="33" height="33"/>
+  <object id="12" name="dame" gid="427" x="235.394" y="1291.55" width="33" height="33"/>
   <object id="13" name="hp_animate" gid="430" x="21.6666" y="546.515" width="18" height="30"/>
   <object id="14" name="dame" gid="427" x="817.333" y="2213.97" width="33" height="33"/>
-  <object id="58" name="hp_animate" gid="430" x="92" y="1515.33" width="18" height="30"/>
-  <object id="205" name="buff" gid="434" x="1323" y="575" width="24" height="30"/>
   <object id="207" name="dame" gid="427" x="640" y="615" width="33" height="33"/>
   <object id="208" name="hp_animate" gid="430" x="645.333" y="738" width="18" height="30"/>
   <object id="209" name="hp_animate" gid="430" x="948" y="536" width="18" height="30"/>
   <object id="211" name="buff" gid="434" x="1157.7" y="1891.06" width="24" height="30"/>
   <object id="218" name="hp_animate" gid="430" x="997.667" y="679" width="18" height="30"/>
-  <object id="219" name="hp_animate" gid="430" x="271" y="1967" width="18" height="30"/>
   <object id="220" name="hp_animate" gid="430" x="651" y="1890.33" width="18" height="30"/>
  </objectgroup>
  <objectgroup id="3" name="Players">
@@ -287,7 +279,7 @@
   <object id="164" name="small_fire" gid="410" x="785.75" y="768.25" width="37" height="64"/>
   <object id="196" name="candle" gid="414" x="1212.64" y="567.727" width="7" height="30"/>
   <object id="197" name="candle" gid="414" x="1282.64" y="567.182" width="7" height="30"/>
-  <object id="212" name="helicopter" x="1381.33" y="265.333" width="9.33333" height="184">
+  <object id="212" name="helicopter" x="1381.33" y="265.333" width="9.33333" height="281.333">
    <properties>
     <property name="flip" type="bool" value="false"/>
     <property name="platform" type="bool" value="true"/>
