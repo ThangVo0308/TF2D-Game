@@ -8,7 +8,7 @@ from sprites import Sprite, movingSprite, AnimatedSprite, ParticleEffectSprite, 
 from player import Player
 from groups import AllSprite
 from enemies import Tooth, Bear, Skeleton, FloorSpike
-
+from timer import Timer
 
 class Level:
     def __init__(self, tmx_map, level_frames, audio_files, data, switch_map, selected_player, alert):
@@ -69,6 +69,11 @@ class Level:
 
         self.damage_sound.set_volume(0.3)
 
+        # timer
+        self.timers = {
+            'delay enemy health': Timer(50)
+        }
+
         self.alert = alert
         self.flag = False
 
@@ -109,35 +114,16 @@ class Level:
                 self.finish_rect = pygame.Rect((obj.x + self.flag_rect, obj.y), (obj.width, obj.height))
                 AnimatedSprite((obj.x, obj.y), level_frames['flag'], self.all_sprites, Z_LAYERS['bg tiles'],
                                ANIMATION_SPEED, reverse=True)
-            elif obj.name == 'moving_chain':
-                AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'],
-                               ANIMATION_SPEED, reverse=False)
-            elif obj.name == 'flag':
-                self.finish_rect = pygame.Rect((obj.x + self.flag_rect, obj.y), (obj.width, obj.height))
-                AnimatedSprite((obj.x, obj.y), level_frames['flag'], self.all_sprites, Z_LAYERS['bg tiles'],
-                               ANIMATION_SPEED, reverse=True)
-            elif obj.name == 'snake':
-                AnimatedSprite((obj.x, obj.y), level_frames['snake'], self.all_sprites, Z_LAYERS['main'],
-                               ANIMATION_SPEED, reverse=False)
             elif obj.name == 'winner':
                 self.winner = pygame.Rect((obj.x, obj.y), (obj.width, obj.height))
                 AnimatedSprite((obj.x, obj.y), level_frames['winner'], self.all_sprites, Z_LAYERS['main'],
                                ANIMATION_SPEED, reverse=False)
-            elif obj.name == 'vine':
-                AnimatedSprite((obj.x, obj.y), level_frames['vine'], self.all_sprites, Z_LAYERS['main'],
+            elif obj.name in ['moving_chain', 'snake', 'vine', 'big_cloud', 'small_fire', 'candle']:
+                AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['bg tiles'],
                                ANIMATION_SPEED, reverse=False)
-            elif obj.name == 'big_cloud':
-                AnimatedSprite((obj.x, obj.y), level_frames['big_cloud'], self.all_sprites, Z_LAYERS['main'], 0.3,
-                               reverse=False)
-            elif obj.name == 'small_fire':
-                AnimatedSprite((obj.x, obj.y), level_frames['small_fire'], self.all_sprites, Z_LAYERS['bg tiles'],
-                               ANIMATION_SPEED, reverse=False)
-            elif obj.name == 'candle':
-                AnimatedSprite((obj.x, obj.y), level_frames['candle'], self.all_sprites, Z_LAYERS['bg tiles'],
-                               ANIMATION_SPEED, reverse=False)
-            elif obj.name == 'red_flag':
-                AnimatedSprite((obj.x, obj.y), level_frames['red_flag'], self.all_sprites, Z_LAYERS['bg tiles'], 0.4,
-                               reverse=False)
+            elif obj.name in ['big_cloud', 'red_flag']:
+                AnimatedSprite((obj.x, obj.y), level_frames[obj.name], self.all_sprites, Z_LAYERS['main'],
+                               0.4, reverse=False)
             else:
                 frames = level_frames[obj.name]
                 groups = (self.all_sprites, self.semi_collision_sprites) if obj.properties['platform'] \
@@ -231,30 +217,35 @@ class Level:
     def attack_collision(self):
         sprites = self.tooth_sprites.sprites() + self.skeleton_sprites.sprites()
         for target in sprites:
-            if target.rect.colliderect(self.player.hitbox_rect) and self.player.attacking:
+            if target.rect.move(-25, 0).colliderect(self.player.hitbox_rect) and self.player.attacking \
+                    and not self.timers['delay enemy health'].active:
+                print(target.health)
                 target.health -= self.data.damage
                 self.hit_sound.play()
-                self.player.attacking = True
+                self.timers['delay enemy health'].activate()  # Activate timer
 
                 if target.health <= 0:
                     item_type = random.choice(['boom', 'dame', 'none'])
-
                     if item_type == 'boom':
-                        Item(item_type=item_type,
-                             pos=target.rect.center,
-                             frames=self.boom_frames,
-                             groups=(self.all_sprites, self.boom_sprites),
-                             data=self.data,
-                             player=self.player,
-                             visible=True)
+                        Item(
+                            item_type=item_type,
+                            pos=target.rect.center,
+                            frames=self.boom_frames,
+                            groups=(self.all_sprites, self.boom_sprites),
+                            data=self.data,
+                            player=self.player,
+                            visible=True
+                        )
                     elif item_type == 'dame':
-                        Item(item_type=item_type,
-                             pos=target.rect.center,
-                             frames=self.sword,
-                             groups=(self.all_sprites, self.item_sprites),
-                             data=self.data,
-                             player=self.player,
-                             visible=True)
+                        Item(
+                            item_type=item_type,
+                            pos=target.rect.center,
+                            frames=self.sword,
+                            groups=(self.all_sprites, self.item_sprites),
+                            data=self.data,
+                            player=self.player,
+                            visible=True
+                        )
 
                     target.kill()
 
@@ -304,11 +295,16 @@ class Level:
                     return True
         return False
 
+    def update_timer(self):
+        for timer in self.timers.values():
+            timer.update()
+
     def run(self, dt):
         self.display_surface.fill('black')
 
         self.all_sprites.update(dt)
         self.hit_collision()
+        self.update_timer()
 
         self.item_collision()
         self.attack_collision()
