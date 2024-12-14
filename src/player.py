@@ -24,7 +24,7 @@ class Player(pygame.sprite.Sprite):
             self.image = self.frames[self.state][self.frame_index]
             # rects
             self.rect = self.image.get_rect(topleft=pos)
-            self.hitbox_rect = self.rect.inflate(-10, 0)
+            self.hitbox_rect = self.rect.inflate(5, 0)
             self.old_rect = self.hitbox_rect.copy()
             self.hitbox_rect.topleft = self.rect.topleft
 
