@@ -5,7 +5,7 @@ class Data:
         self.display = display
         self._health = 6 # private attribute
         self._keys = 0 # private attribute
-        self._damage = 1
+        self._damage = 2
 
         self.update_display()
 
